@@ -132,7 +132,6 @@ public class JDBC1
 		// If no name is entered leave function
 		if( last.trim().isEmpty() && first.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No name was entered.");
 			return;
 		}
@@ -160,7 +159,6 @@ public class JDBC1
 		else
 			photo_url = "'" + photo_url + "'";
 		
-		scan.close();
 		
 		// Insert star into database
 		Statement insert = connection.createStatement();
@@ -184,7 +182,6 @@ public class JDBC1
 		// If no name is entered leave function
 		if( last.trim().isEmpty() && first.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No name was entered.");
 			return;
 		}
@@ -205,7 +202,6 @@ public class JDBC1
 		cc_id  = scan.nextLine();
 		if( cc_id.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No Credit card was entered.");
 			return;
 		}
@@ -217,7 +213,6 @@ public class JDBC1
 		address  = scan.nextLine();
 		if( cc_id.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No address was entered.");
 			return;
 		}
@@ -229,7 +224,6 @@ public class JDBC1
 		email  = scan.nextLine();
 		if( email.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No email was entered..");
 			return;
 		}
@@ -241,14 +235,12 @@ public class JDBC1
 		password  = scan.nextLine();
 		if( cc_id.trim().isEmpty() )
 		{
-			scan.close();
 			System.out.println("ERROR: No password was entered..");
 			return;
 		}
 		else
 			password = "'" + password + "'";
 		
-		scan.close();
 		
 		// Check if cc_id is in the database. If found add customer to database, else do not add customer
 		Statement select = connection.createStatement();
@@ -271,7 +263,6 @@ public class JDBC1
 		Scanner scan = new Scanner( System.in );
 		System.out.print("Enter customer id: ");
 		String id = scan.nextLine();
-		scan.close();
        		Statement update = connection.createStatement();
         	int retID = update.executeUpdate("delete from customers where id = " + id);
         	System.out.println("Number of customers deleted = " + retID);
@@ -298,7 +289,6 @@ public class JDBC1
 		// Get SQL command from user
 		System.out.print("Enter SQL command: ");
 		String command = scan.nextLine();
-		scan.close();
 		
 		String temp = command.trim();
 		temp = temp.toLowerCase();
