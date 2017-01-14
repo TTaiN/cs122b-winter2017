@@ -292,20 +292,14 @@ public class JDBC1
 		
 		String temp = command.trim();
 		temp = temp.toLowerCase();
-		try
+
+		if( temp.startsWith("select") )
+			run_select(connection, command);
+		else
 		{
-			if( temp.startsWith("select") )
-				run_select(connection, command);
-			else
-			{
-				Statement statement = connection.createStatement();
-				int retID = statement.executeUpdate(command);
-				System.out.println("Number of records modified = " + retID);
-			}
-		}
-		catch( SQLException e)
-		{
-			System.out.println(e.getMessage());
+			Statement statement = connection.createStatement();
+			int retID = statement.executeUpdate(command);
+			System.out.println("Number of records modified = " + retID);
 		}
 	}
 	
