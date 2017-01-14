@@ -19,26 +19,39 @@ public class JDBC1
                Connection connection = DriverManager.getConnection("jdbc:mysql://ttain.tk/moviedb?autoReconnect=true&useSSL=false","pupplayer", "pupplayer");
               
                Scanner s = new Scanner(System.in);
-               while(true) {
-        		   printMenu();
-        		   String input = s.nextLine();
-        		   if (input.equals("1")) {
-        			   printMovie(connection);
-        		   } else if (input.equals("2")) {
-        			   
-        		   } else if (input.equals("3")) {
-        			   
-        		   } else if (input.equals("4")) {
-        			   
-        		   } else if (input.equals("5")) {
-        			   
-        		   } else if (input.equals("6")) {
-        			   
-        		   } else if (input.equals("7")) {
-        			   break;
-        		   } else {
-        			   System.out.println("Invalid command");
-        		   }      	   
+               while(true) 
+	       {
+		       try
+		       {
+			       printMenu();
+			       String input = s.nextLine();
+			       if (input.equals("1")) 
+				       printMovie(connection);
+			       
+			       else if (input.equals("2")) 
+				       insert_new_star(connection);
+			       
+			       else if (input.equals("3")) 
+				       insert_new_customer(connection);
+				       
+			       else if (input.equals("4")) 
+				       delete_customer(connection);
+			       
+			       else if (input.equals("5")) 
+				       print_metadata(connection);
+			       
+			       else if (input.equals("6"))
+				       run_sql_command(connection);
+				       
+			       else if (input.equals("7")) 
+				       break; 
+			       else 
+				       System.out.println("Invalid command");  
+		       }
+		       catch( SQLException e)
+		       {
+			       System.out.println(e.getMessage());
+		       }
                }
                s.close();
                
@@ -104,5 +117,233 @@ public class JDBC1
                    System.out.println();
            }
        }
+	
+	// insert_new_star
+	public static void insert_new_star( Connection connection ) throws SQLException
+	{
+		String first, last, dob, photo_url;
+		Scanner scan = new Scanner( System.in );
+		// Get first and last names
+		System.out.print("Enter star's first name: ");
+		first = scan.nextLine();
+		System.out.print("Enter star's last name: ");
+		last = scan.nextLine();
+		
+		// If no name is entered leave function
+		if( last.trim().isEmpty() && first.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No name was entered.");
+			return;
+		}
+		
+		// If only first name is entered, change last name to first name and set first name to empty string
+		if( last.trim().isEmpty() )
+		{
+			last = first;
+			first = "";
+		}
+		
+		// Get dob
+		System.out.print("Enter star's date of birth: ");
+		dob = scan.nextLine();
+		if( dob.trim().isEmpty() )
+			dob = "NULL";
+		else
+			dob = "'" + dob + "'";
+		
+		// Get photo url
+		System.out.print("Enter star's photo url: ");
+		photo_url = scan.nextLine();
+		if( photo_url.trim().isEmpty() )
+			photo_url = "NULL";
+		else
+			photo_url = "'" + photo_url + "'";
+		
+		scan.close();
+		
+		// Insert star into database
+		Statement insert = connection.createStatement();
+        	int retID = insert.executeUpdate("insert into stars values(NULL, '" + first + "', '" + last
+        		+ "', " + dob + ", " + photo_url + ")");
+        	System.out.println("Number of stars added = " + retID);
+	}
+	
+	// insert_new_customer
+	public static void insert_new_customer( Connection connection ) throws SQLException
+	{
+		String first, last, cc_id, address, email, password;
+		Scanner scan = new Scanner( System.in );
+
+		// Get first and last names
+		System.out.print("Enter customer's first name: ");
+		first = scan.nextLine();
+		System.out.print("Enter customer's last name: ");
+		last = scan.nextLine();
+			
+		// If no name is entered leave function
+		if( last.trim().isEmpty() && first.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No name was entered.");
+			return;
+		}
+		// If only first name is entered, change last name to first name and set first name to empty string
+		if( last.trim().isEmpty() )
+		{
+			last = "'" + first + "'";
+			first = "''";
+		}
+		else
+		{
+			first = "'" + first + "'";
+			last = "'" + last + "'";
+		}
+		
+		// Get cc_id
+		System.out.print("Enter customer's credit card number: ");
+		cc_id  = scan.nextLine();
+		if( cc_id.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No Credit card was entered.");
+			return;
+		}
+		else
+			cc_id = "'" + cc_id + "'";
+		
+		// Get address
+		System.out.print("Enter customer's address: ");
+		address  = scan.nextLine();
+		if( cc_id.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No address was entered.");
+			return;
+		}
+		else
+			address = "'" + address + "'";
+		
+		// Get email
+		System.out.print("Enter customer's email: ");
+		email  = scan.nextLine();
+		if( email.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No email was entered..");
+			return;
+		}
+		else
+			email = "'" + email + "'";
+		
+		// Get password
+		System.out.print("Enter customer's password: ");
+		password  = scan.nextLine();
+		if( cc_id.trim().isEmpty() )
+		{
+			scan.close();
+			System.out.println("ERROR: No password was entered..");
+			return;
+		}
+		else
+			password = "'" + password + "'";
+		
+		scan.close();
+		
+		// Check if cc_id is in the database. If found add customer to database, else do not add customer
+		Statement select = connection.createStatement();
+		ResultSet result = select.executeQuery("Select id from creditcards where id = " + cc_id);
+		if( result.next() )
+		{
+			Statement insert = connection.createStatement();
+			int retID = insert.executeUpdate("insert into customers values(NULL, " + first + "," + last + "," +
+			cc_id + "," + address + "," + email + "," + password + ")");
+			System.out.println("Number of customers added = " + retID);
+		}
+		else
+			System.out.println("ERROR: Credit card is not in the database.");
+
+	}
+	
+	// delete_customer
+	public static void delete_customer( Connection connection ) throws SQLException
+	{
+		Scanner scan = new Scanner( System.in );
+		System.out.print("Enter customer id: ");
+		String id = scan.nextLine();
+		scan.close();
+       		Statement update = connection.createStatement();
+        	int retID = update.executeUpdate("delete from customers where id = " + id);
+        	System.out.println("Number of customers deleted = " + retID);
+	}
+	
+	// run_select
+	public static void run_select( Connection connection,  String command ) throws SQLException
+	{
+		Statement select = connection.createStatement();
+        	ResultSet result = select.executeQuery( command );
+        	ResultSetMetaData metadata = result.getMetaData();
+        	while( result.next() )
+        	{
+        		for( int i = 1; i <= metadata.getColumnCount(); i++ )
+        		System.out.println(metadata.getColumnName(i) + ": " + result.getString(i));
+        		System.out.println();
+        	}
+	}
+	
+	// run_sql_command
+	public static void run_sql_command( Connection connection ) 
+	{
+		Scanner scan = new Scanner( System.in );
+		// Get SQL command from user
+		System.out.print("Enter SQL command: ");
+		String command = scan.nextLine();
+		scan.close();
+		
+		String temp = command.trim();
+		temp = temp.toLowerCase();
+		try
+		{
+			if( temp.startsWith("select") )
+				run_select(connection, command);
+			else
+			{
+				Statement statement = connection.createStatement();
+				int retID = statement.executeUpdate(command);
+				System.out.println("Number of records modified = " + retID);
+			}
+		}
+		catch( SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	// print_metadata
+	public static void print_metadata( Connection connection ) throws SQLException
+	{
+        	Statement select = connection.createStatement();
+        	ResultSet result = select.executeQuery("Select table_name "
+        		+ "from information_schema.tables where table_schema = 'moviedb'" );
+        
+        	int j = 1;
+        	while (result.next())
+        	{
+        		select = connection.createStatement();
+            		String table = result.getString(1);            
+            		ResultSet result2 = select.executeQuery("Select * from " + table);
+            
+            		System.out.println("Table " + j++ + ": " + table);
+            
+            		ResultSetMetaData metadata = result2.getMetaData();
+            		System.out.println("Attributes:");
+            
+           		 for (int i = 1; i <= metadata.getColumnCount(); i++)
+                    		System.out.println( i + ". " + metadata.getColumnName(i) +
+                    			" Type: " + metadata.getColumnTypeName(i));
+            		System.out.println();
+        	}
+	}
+	
        
 }
