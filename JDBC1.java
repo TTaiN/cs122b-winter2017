@@ -283,7 +283,7 @@ public class JDBC1
 	}
 	
 	// run_sql_command
-	public static void run_sql_command( Connection connection ) 
+	public static void run_sql_command( Connection connection ) throws SQLException
 	{
 		Scanner scan = new Scanner( System.in );
 		// Get SQL command from user
