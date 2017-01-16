@@ -2,24 +2,46 @@
 // Coded by Chen Li/Kirill Petrov Winter, 2005
 // Slightly revised for ICS185 Spring 2005, by Norman Jacobson
 
-
-import java.sql.*;                              // Enable SQL processing
+import java.sql.*; // Enable SQL processing
 import java.util.Scanner;
 
 public class JDBC1
 {
-	
        public static void main(String[] arg) throws Exception
        {
-
-               // Incorporate mySQL driver
-               Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-                // Connect to the test database
-               Connection connection = DriverManager.getConnection("jdbc:mysql://ttain.tk/moviedb?autoReconnect=true&useSSL=false","pupplayer", "pupplayer");
-              
-               Scanner s = new Scanner(System.in);
-               while(true) 
+           // Incorporate mySQL driver
+           Class.forName("com.mysql.jdbc.Driver").newInstance();
+           
+           Scanner s = new Scanner(System.in);
+           Connection connection;
+           String username, password;
+           
+    	   System.out.println("Welcome to the database access program. Please enter the database credentials.");
+    	   
+    	   /* Begin Credentials */
+    	   while(true)
+    	   {
+    		   System.out.print("Username: ");
+    		   username = s.nextLine();
+    		   System.out.print("Password: ");
+    		   password = s.nextLine();
+    		   System.out.println("\nConnecting...\n");
+    		   try
+    		   {
+    			   connection = DriverManager.getConnection("jdbc:mysql://35.167.240.46/moviedb?autoReconnect=true&useSSL=false", username, password);
+    		   }
+    		   catch (Exception e) // TODO: rework this part for requirement - If access is not allowed, it says why (e.g., the database is not present, the password is wrong).
+    		   {
+    			   System.out.println(e.getMessage()); // prints out error, not always correct though
+    			   System.out.println("Please re-enter the database credentials.\n");
+    			   continue;
+    		   }
+        	   System.out.println("Access granted. Showing menu...\n");
+        	   break;
+    	   }
+    	   
+    	   /* Begin Menu */
+           while(true) 
 	       {
 		       try
 		       {
@@ -44,7 +66,7 @@ public class JDBC1
 				       run_sql_command(connection);
 				       
 			       else if (input.equals("7")) 
-				       break; 
+				       break; // TODO: say "goodbye" or some effect
 			       else 
 				       System.out.println("Invalid command");  
 		       }
@@ -52,13 +74,12 @@ public class JDBC1
 		       {
 			       System.out.println(e.getMessage());
 		       }
-               }
-               s.close();
-               
-               
+	       }
+               s.close();               
        }
        
-       public static void printMenu() {
+       public static void printMenu() 
+       {
     	   System.out.println("Select a menu:");
     	   System.out.println("1: Print movie featuring a given star");
     	   System.out.println("2: Insert new star");
@@ -69,7 +90,8 @@ public class JDBC1
     	   System.out.println("7: Exit menu");
        }
        
-       public static  void printMovie(Connection connection) throws SQLException{
+       public static  void printMovie(Connection connection) throws SQLException
+       {
     	   Statement select = connection.createStatement();
     	   Scanner s = new Scanner(System.in);
            System.out.println("Enter a N to look up by name or I to look up by id");
@@ -328,6 +350,4 @@ public class JDBC1
             		System.out.println();
         	}
 	}
-	
-       
 }
