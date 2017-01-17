@@ -26,14 +26,14 @@ public class JDBC1
     		   System.out.print("Password: ");
     		   password = s.nextLine();
     		   System.out.println("\nConnecting...\n");
+    		   	   
     		   try
     		   {
     			   connection = DriverManager.getConnection("jdbc:mysql://35.167.240.46/moviedb?autoReconnect=true&useSSL=false", username, password);
     		   }
-    		   catch (Exception e) // TODO: rework this part for requirement - If access is not allowed, it says why (e.g., the database is not present, the password is wrong).
+    		   catch (Exception e) 
     		   {
-    			   System.out.println(e.getMessage()); // prints out error, not always correct though
-    			   System.out.println("Please re-enter the database credentials.\n");
+    			   System.out.println(e.getCause()); 
     			   continue;
     		   }
         	   System.out.println("Access granted. Showing menu...\n");
@@ -66,7 +66,10 @@ public class JDBC1
 				       run_sql_command(connection);
 				       
 			       else if (input.equals("7")) 
-				       break; // TODO: say "goodbye" or some effect
+			       {
+			    	   System.out.println("Goodbye!");
+				       break;
+			       }
 			       else 
 				       System.out.println("Invalid command");  
 		       }
@@ -75,7 +78,7 @@ public class JDBC1
 			       System.out.println(e.getMessage());
 		       }
 	       }
-               s.close();               
+           s.close();               
        }
        
        public static void printMenu() 
