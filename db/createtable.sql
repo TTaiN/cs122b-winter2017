@@ -4,10 +4,6 @@
   Project Database Script
 */
 
-CREATE DATABASE IF NOT EXISTS moviedb;
-
-USE moviedb;
-
 CREATE TABLE movies(id INTEGER AUTO_INCREMENT NOT NULL, title VARCHAR(100) NOT NULL, year INTEGER NOT NULL,
   director VARCHAR(100) NOT NULL, banner_url VARCHAR(200) DEFAULT '', trailer_url VARCHAR(200) DEFAULT '',
   PRIMARY KEY (id));
