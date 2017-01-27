@@ -2,6 +2,17 @@
 nbproject/**
 .idea/**
 
+
+./fablix/workspace/RemoteSystemsTempFiles/**
+./fablix/workspace/Servers/**
+./fablix/workspace/.metadata/**
+./fablix/workspace/CS122B/.settings/**
+./fablix/workspace/CS122B/.classpath
+./fablix/workspace/CS122B/.project
+
+
+
+
 # Created by https://www.gitignore.io/api/osx,windows,jetbrains,eclipse,netbeans
 
 ### OSX ###
