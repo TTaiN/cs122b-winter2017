@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HelloWorld
+ * Servlet implementation class HelloWorld (autogen)
  */
 @WebServlet("/HelloWorld")
 public class HelloWorld extends HttpServlet {
