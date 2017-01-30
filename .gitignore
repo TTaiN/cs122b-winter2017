@@ -6,10 +6,10 @@ nbproject/**
 ./fablix/workspace/RemoteSystemsTempFiles/**
 ./fablix/workspace/Servers/**
 ./fablix/workspace/.metadata/**
-./fablix/workspace/CS122B/.settings/**
-./fablix/workspace/CS122B/.classpath
-./fablix/workspace/CS122B/.project
-
+./.settings/**
+./.classpath
+./.project
+./build/**
 
 
 
