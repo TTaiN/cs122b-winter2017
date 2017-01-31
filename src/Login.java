@@ -33,7 +33,8 @@ public class Login extends HttpServlet
         }
         else 
         {
-        	response.getWriter().println("You're already logged in.");
+        	request.getRequestDispatcher("./Main").include(request, response);
+        	//response.getWriter().println("You're already logged in.");
         }
     }
     
@@ -71,7 +72,8 @@ public class Login extends HttpServlet
                    //String m_LN = rs.getString("last_name");
                    //out.println("<BODY>Welcome " + m_FN + " " + m_LN + "!");
                    session.setAttribute("username", email);
-                   out.println("CONGRATS!");
+                  //out.println("CONGRATS!");
+                   response.sendRedirect("./main");
                }
                else
                {
