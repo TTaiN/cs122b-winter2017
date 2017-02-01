@@ -3,6 +3,7 @@
 
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Movie" %>
+<%@ page import="util.TopMenu" %>
 
 <%
 	if (session.getAttribute("username") == null)
@@ -20,17 +21,9 @@
 	<title>Cart</title>
 </head>
 <body>
-	<div class="topmenu">
-		<table>
-		<caption class='topmenu_caption'>Fabflix Menu</caption>
-			<tr>
-				<td class='topmenu_button'><a href="./main">Main Page</a></td>
-				<td class='topmenu_button'><a href="./browse">Browse</a></td>
-				<td class='topmenu_button'><a href="./search">Search</a></td>
-				<td class='topmenu_button'><a href="./cart">Cart/Checkout</a></td>
-			</tr>
-		</table>
-	</div>
+	<%
+		TopMenu.print(response.getWriter());
+	%>
 
 	<div class="focus">
 		<h1 class='text'>Cart</h1>
