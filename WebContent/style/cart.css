@@ -1,4 +1,34 @@
-table, th
+table
 {
    border: 1px solid black;
+   text-align:center;
 }
+ 
+.info
+ {
+   border: 1px solid black;
+   text-align:center;
+   padding:10px;
+ }
+
+.banner
+{
+    height: 150px;
+    width: 150px;
+}
+
+.quantity 
+{
+    display: inline-block;
+    text-align: center;
+}
+
+.submit
+{
+	text-align:center;
+}
+
+input[type=number]
+{
+    width: 80px;
+} 
