@@ -1,6 +1,5 @@
 
-
-import java.io.IOException;
+import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -35,7 +34,13 @@ public class Main extends HttpServlet {
 		}
 		else
 		{
-			response.getWriter().println("MAIN PAGE NTO DONE YET");
+			PrintWriter out = response.getWriter();
+		    out.println("<BODY BGCOLOR=\"#FDF5E6\"><br><br>\n" +
+		                "<H1 ALIGN=\"CENTER\">Main Page</H1><br>\n" +
+		                "<H2 ALIGN=\"CENTER\">Welcome to FabFlix</H2><br><br><br>\n" +
+		                "<H4 ALIGN=\"CENTER\">Click to Search</H4>\n" +		//link to search here - add hyperlink
+		                "<a href=\"./browse\"><H4 ALIGN=\"CENTER\">Click to browse</H4></a>\n </BODY>");
+		                
 		}
 		
 	}

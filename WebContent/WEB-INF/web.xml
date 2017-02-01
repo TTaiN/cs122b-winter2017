@@ -13,8 +13,24 @@
     <servlet-name>Login</servlet-name>
     <servlet-class>Login</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Main</servlet-name>
+    <servlet-class>Main</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Browse</servlet-name>
+    <servlet-class>Browse</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Main</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Browse</servlet-name>
+    <url-pattern>/browse</url-pattern>
   </servlet-mapping>
 </web-app>
