@@ -4,7 +4,7 @@
  * 	Parameters to pass to movielist servlet:
  * 		- genre
  * 		- title	
- * 	Look at the google doc (original genre list in the database, our genre list on this servlet) to check
+ * 	Look at the google doc (original genre list in the database, our genre list on browse servlet) to check
  * 		for different cases of genres
  * 		- when doing LIKE query in movielist servlet watch out for scifi variations, james bond (two words), 
  * 			adventure/advanture typo, comedy/commedy typo, lower case, roman vs romance, etc.
