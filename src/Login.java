@@ -33,7 +33,7 @@ public class Login extends HttpServlet
         }
         else 
         {
-        	request.getRequestDispatcher("./main").include(request, response);
+        	response.sendRedirect("./main");
         	//response.getWriter().println("You're already logged in.");
         }
     }
@@ -59,10 +59,6 @@ public class Login extends HttpServlet
 
  	          String email = request.getParameter("email");
  	          String pwd = request.getParameter("pwd");
- 	          
- 	          // TO REMOVE - for automatic login
- 	          email = "bb@netzero.net";
- 	          pwd = "1234";
  	        		  
                String query = "SELECT * from customers where email = '" + email + "'" + 
              		  " and password = '" + pwd + "'";
