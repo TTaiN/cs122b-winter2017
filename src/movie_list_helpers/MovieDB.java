@@ -73,11 +73,13 @@ public class MovieDB {
 		List<Movie> movieList = new ArrayList<Movie>();
 		try
 		{
+			String where = Where.getWhere(genre, "name");
+			
 			Connection connection = getConnection();
 			PreparedStatement query = 
 					connection.prepareStatement("select * from movies where id =some"
 							+ " (select movie_id from genres_in_movies where genre_id=some"
-							+ " (select id from genres where name = '" + genre + "')) "
+							+ " (select id from genres where " + where + ")) "
 							+ " order by " + sort + " limit " + limit + " offset " + offset);
 			ResultSet rs = query.executeQuery();
 			while(rs.next())
