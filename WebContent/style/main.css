@@ -1,7 +1,14 @@
+
 .topmenu
 {
      margin: 0 auto;
      width: 300px; 
+}
+
+.topmenu_table
+{
+   border: 1px solid black;
+   text-align:center;
 }
 
 .topmenu_button
@@ -14,8 +21,7 @@
  
  .topmenu_caption
  {
-     font-weight: bold;
-     font-size:140%;
+     font-size:110%;
  }
 
 body 

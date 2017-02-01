@@ -64,6 +64,7 @@ public class Browse extends HttpServlet {
 			    // connect to db
 				Connection dbcon;
 				dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);	//do we need to connect in every servlet??
+				// @Yolie: i get this error sometimes http://ttain.tk/upload/eclipse_2017-02-01_00-11-03.png
 				Statement statement = dbcon.createStatement();
 				
 				//TODO: figure out the layout to make it print prettier
