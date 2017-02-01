@@ -33,7 +33,7 @@ public class Login extends HttpServlet
         }
         else 
         {
-        	request.getRequestDispatcher("./Main").include(request, response);
+        	request.getRequestDispatcher("./main").include(request, response);
         	//response.getWriter().println("You're already logged in.");
         }
     }
