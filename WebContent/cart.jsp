@@ -26,8 +26,8 @@
 	%>
 
 	<div class="focus">
-		<h1 class='text'>Cart</h1>
-		<p class='text'>Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
+		<h1 >Cart</h1>
+		<p >Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
 		<table>
 			<tr>
 			    <th class='info'>Movie ID</th>
@@ -41,19 +41,19 @@
 		
 				if (cart == null || cart.isEmpty())
 				{
-					out.println("<td><span class='text'>You currently have nothing in your cart. Purchase something!</span></td>");
+					out.println("<td><span>You currently have nothing in your cart. Purchase something!</span></td>");
 				}
 				else
 				{
 					for (Movie current : cart.keySet())
 					{
 						out.println("<tr>");
-						out.println("<td class='info'><span class='text'>" + current.getId() + "</span></td>");
-						out.println("<td class='info'><span class='text'><img class='banner' src='" + current.getBannerUrl() + "'/></span></td>");
-						out.println("<td class='info'><span class='text'>" + current.getTitle() + " (" + current.getYear() + ")" + "</span></td>");
-						out.println("<td class='info'><span class='text'>" + current.getDirector() + "</span></td>");
+						out.println("<td class='info'><span>" + current.getId() + "</span></td>");
+						out.println("<td class='info'><span><img class='banner' src='" + current.getBannerUrl() + "'/></span></td>");
+						out.println("<td class='info'><span>" + current.getTitle() + " (" + current.getYear() + ")" + "</span></td>");
+						out.println("<td class='info'><span>" + current.getDirector() + "</span></td>");
 						out.println("<td class='info'>");
-						out.println("<span class='text'>" + cart.get(current) + " order(s)</span><br><br>");
+						out.println("<span>" + cart.get(current) + " order(s)</span><br><br>");
 						out.println("<form class='quantity' action='./cart' method='post'>");
 						out.println("<input type='number' name='quantity" + current.getId() + "'min='0' value='" + cart.get(current) + "'/>");
 						out.println("<input class='submit' type='submit' value='Update Quantity'/>");
