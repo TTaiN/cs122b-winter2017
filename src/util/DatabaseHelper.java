@@ -1,0 +1,54 @@
+package util;
+
+/*
+ * Example Usage:
+	 * DatabaseHelper db = new DatabaseHelper(); // connects for you automatically
+	 * ResultSet results = db.executeSQL("SELECT * FROM stars");
+	 * if (results == null) // no results
+	 * 		doSomething1(); // do something
+	 * else doSomething2(); // do something else
+	 * db.close(); // disconnects
+ */
+
+import java.sql.*;
+
+public class DatabaseHelper 
+{
+	Connection connection;
+
+	final static String ip = "35.167.240.46";
+	final static String user = "cs122b";
+    final static String password = "cs122bgroup42";
+    final static String database = "moviedb";
+	
+	public DatabaseHelper() throws SQLException
+	{
+		openConnection();
+	}
+	
+	public ResultSet executeSQL(String SQL) throws SQLException
+	{
+		ResultSet result = null;
+		Statement newStatement = connection.createStatement();
+		result = newStatement.executeQuery(SQL);
+		return result;
+	}
+	
+	public void openConnection() throws SQLException
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (ClassNotFoundException e) // highly unlikely but could still happen.
+		{
+			return;
+		}
+		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database, user, password);
+	}
+	
+	public void closeConnection() throws SQLException
+	{
+		connection.close();
+	}
+}

@@ -1,4 +1,49 @@
-table, th
+table
 {
    border: 1px solid black;
+   text-align:center;
 }
+ 
+.focus 
+{
+  width: 800px ;
+  margin-left: auto ;
+  margin-right: auto ;
+  
+}
+
+.text 
+{
+   color:"white";
+}
+
+.info
+ {
+   border: 1px solid black;
+   text-align:center;
+   padding:10px;
+   text-color:"white";
+ }
+
+.banner
+{
+    height: 50px;
+    width: 50px;
+}
+
+.quantity 
+{
+    display: inline-block;
+    text-align: center;
+}
+
+.submit
+{
+	text-align:center;
+}
+
+input[type=number]
+{
+    width: 80px;
+} 
+

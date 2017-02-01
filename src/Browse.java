@@ -21,6 +21,8 @@ import java.sql.Statement;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import util.TopMenu;
+
 
 
 /**
@@ -58,12 +60,15 @@ public class Browse extends HttpServlet {
 			try {
 				//browse logic here
 				PrintWriter out = response.getWriter();
-			    out.println("<BODY BGCOLOR=\"#FDF5E6\">\n" +
-			                "<H1 ALIGN=\"CENTER\">Browse Page</H1>\n\n" +
+				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Browse</title></head>");
+			    out.println("<BODY>");
+			    TopMenu.print(out);
+			    out.println("<H1 ALIGN=\"CENTER\">Browse Page</H1>\n\n" +
 			                "<H4 ALIGN=\"CENTER\">Browse by Genre</H4>\n");
 			    // connect to db
 				Connection dbcon;
 				dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);	//do we need to connect in every servlet??
+				// @Yolie: i get this error sometimes http://ttain.tk/upload/eclipse_2017-02-01_00-11-03.png
 				Statement statement = dbcon.createStatement();
 				
 				//TODO: figure out the layout to make it print prettier
