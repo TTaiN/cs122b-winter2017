@@ -16,6 +16,20 @@ table
 	text-align:center;
 }
 
+.quantity 
+{
+	margin-left:auto;
+	margin-right:auto;
+    text-align: center;
+}
+
+.ad 
+{
+	margin-left:auto;
+	margin-right:auto;
+    text-align: center;
+}
+
 .field
 {
    border: 1px solid black;

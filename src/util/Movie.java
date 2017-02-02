@@ -16,7 +16,9 @@ public class Movie
 	private String trailer;
 	private LinkedHashMap <Integer, String> stars;
 	private List<String> genres;
-
+	private double price = 14.99;
+	private int quantity = 0;
+	
 	public Movie() { }
 	
 	public Movie(int id, String title, int year, String director, String banner, String trailer)
@@ -29,6 +31,17 @@ public class Movie
 		this.trailer = trailer;
 	}
 	
+	public Movie(int id, String title, int year, String director, String banner, String trailer, int quantity)
+	{
+		this.id = id;
+		this.title = title;
+		this.year = year;
+		this.director = director;
+		this.banner = banner;
+		this.trailer = trailer;
+		this.quantity = quantity;
+	}
+
 	@Override
 	public boolean equals(Object other) 
 	{
@@ -120,6 +133,26 @@ public class Movie
 	}
 	public void setGenres(List<String> genres) {
 		this.genres = genres;
+	}
+	
+	public double getPrice() 
+	{
+		return price;
+	}
+
+	public void setPrice(double price) 
+	{
+		this.price = price;
+	}
+
+	public int getQuantity() 
+	{
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) 
+	{
+		this.quantity = quantity;
 	}
 	
 	/* Begin Useful Functions */

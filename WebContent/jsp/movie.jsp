@@ -9,6 +9,7 @@
 <%@ page import="layout_helpers.TopMenu" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="ecommerce_helpers.ShoppingCart" %>
 
 <%
 	if (session.getAttribute("username") == null || request.getParameter("id") == null)
@@ -20,20 +21,26 @@
 		response.sendRedirect("./main");
 	}
 
+	ShoppingCart cart = new ShoppingCart(session);
 	Movie movie = null;
 	Integer movie_id = Integer.parseInt(request.getParameter("id"));
+	int quantity = cart.getQuantity(movie_id);
 	
-	try
+	if (quantity == 0) // movie isnt in cart
 	{
-		MovieViewDB db = new MovieViewDB();
-		movie = db.getMovie(movie_id);
-		movie.setStars(db.getStarsForMovie(movie_id));
+		try
+		{
+			MovieViewDB db = new MovieViewDB();
+			movie = db.getMovie(movie_id);
+			movie.setStars(db.getStarsForMovie(movie_id));
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			response.getWriter().println("SQL Error: " + e.getMessage());
+		}
 	}
-	catch (SQLException e)
-	{
-		e.printStackTrace();
-		response.getWriter().println("SQL Error: " + e.getMessage());
-	}
+	else movie = cart.getMovie(movie_id); // cached, movie already in cart, performance optimization
 %>
 
 <!DOCTYPE html>
@@ -86,6 +93,12 @@
 				</td>
 			</tr>
 		</table>
+		<p class='ad'><%= quantity == 0 ? "Want to purchase this item? Add it to your cart!" : "You already have this item in your cart. Want more? Update the quantity!" %></p>
+		<form class='quantity' action='./cart' method='post'>
+			<input type='number' name='number" "'min='1' value='<%= quantity == 0 ? 1 : quantity %>'/>
+			<input class='submit' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Update Quantity" %>'/>
+		</form>
+		<p class ='ad'>You currently have <%= quantity %> order(s) of this movie in your cart.</p>
 	</div>
 </body>
 </html>

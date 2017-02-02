@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedHashMap;
 import util.Movie;
 
+import single_view_helpers.MovieViewDB;
+import ecommerce_helpers.ShoppingCart;
 
 @WebServlet("/cart")
 
@@ -32,16 +34,28 @@ public class Cart extends HttpServlet
 			response.sendRedirect("./login");
 		}
 		
-		LinkedHashMap<Movie, Integer> cart = (LinkedHashMap<Movie, Integer>) session.getAttribute("cart");
-		
-		if (cart == null)
+		ShoppingCart cart = new ShoppingCart(session);
+				
+		if (!cart.exists())
 		{
-			session.setAttribute("cart", new LinkedHashMap<Movie, Integer>());
-			cart = (LinkedHashMap<Movie, Integer>) session.getAttribute("cart");
-			cart.put(new Movie(1, "JSPs Are Awesome", 2017, "Thomas T Nguyen", "http://ia.imdb.com/media/imdb/01/I/95/71/38m.jpg", "http://ia.imdb.com/media/imdb/01/I/95/71/38m.jpg"), 1);
-			cart.put(new Movie(2, "Donald Trump: The Dictator", 2015, "Akito T Nguyen", "http://ia.imdb.com/media/imdb/01/I/94/55/51m.jpg", "http://ia.imdb.com/media/imdb/01/I/94/55/51m.jpg"), 1);
-			cart.put(new Movie(4, "United States Doomed Forever?!", 2016, "TTaiN T Nguyen", "http://ia.imdb.com/media/imdb/01/I/47/24/43m.jpg", "http://ia.imdb.com/media/imdb/01/I/47/24/43m.jpg"), 1);
-			cart.put(new Movie(3, "Why I Hate Project Courses 101", 2014, "Pupcorn T Nguyen", "http://ia.imdb.com/media/imdb/01/I/34/82/91m.jpg", "http://ia.imdb.com/media/imdb/01/I/34/82/91m.jpg"), 1);
+			/* Testing Only */
+			LinkedHashMap<Integer, Movie> newCart = new LinkedHashMap<Integer, Movie>(); 
+			session.setAttribute("cart", newCart);
+			cart.setCart(newCart);
+			try
+			{
+				MovieViewDB db = new MovieViewDB();
+				Movie test = db.getMovie(135004);
+				test.setQuantity(3);
+				Movie test2 = db.getMovie(326006);
+				test2.setQuantity(4);
+				newCart.put(135004, test);
+				newCart.put(326006, test2);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		request.getRequestDispatcher("./jsp/cart.jsp").include(request, response);

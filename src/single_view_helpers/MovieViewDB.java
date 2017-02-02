@@ -20,7 +20,7 @@ public class MovieViewDB
 		ResultSet rs = db.executePreparedStatement("SELECT * FROM movies WHERE id = " + movie_id);
 		if (rs.next())
 		{
-			return new Movie(rs.getInt("id"), rs.getString("title"), rs.getInt("year"), rs.getString("director"), rs.getString("banner_url"), rs.getString("trailer_url"));
+			return new Movie(rs.getInt("id"), rs.getString("title"), rs.getInt("year"), rs.getString("director"), rs.getString("banner_url"), rs.getString("trailer_url"), 0);
 		}
 		else throw new SQLException();
 	}
