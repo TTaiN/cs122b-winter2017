@@ -80,12 +80,12 @@
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Trailer</td>
-							<td class='info'><span><%= movie.getTrailer().equals("(none)") ? "(none)" : "<a href='"+movie.getTrailer()+"'>Click here to watch the trailer</a>"%></span><br></td>
+							<td class='info'><span><%= movie.getTrailer().equals("(none)") ? "(none)" : "<a href='"+movie.getTrailer()+"'>Click here to watch the trailer</a>" %></span><br></td>
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Stars</td>
-							<td class='info'><span><%=movie.getStarsHTMLString()%></span></td>
-						<tr class='border_bottom'>
+							<td class='info'><span><%= movie.getStarsHTMLString() %></span></td>
+						<tr class='border_bottom/'>
 							<td class='field'>Price</td>
 							<td class='info'><span>$14.99 per copy</span></td>
 						</tr>
@@ -95,8 +95,9 @@
 		</table>
 		<p class='ad'><%= quantity == 0 ? "Want to purchase this item? Add it to your cart!" : "You already have this item in your cart. Want more? Update the quantity!" %></p>
 		<form class='quantity' action='./cart' method='post'>
-			<input type='number' name='number" "'min='1' value='<%= quantity == 0 ? 1 : quantity %>'/>
-			<input class='submit' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Update Quantity" %>'/>
+			<input type="hidden" name="movie_id" value='<%= movie_id %>'>
+			<input type='number' name='quantity' min='1' value='<%= quantity == 0 ? 1 : quantity %>'/>
+			<input class='submit' name='action' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Update Quantity" %>'/>
 		</form>
 		<p class ='ad'>You currently have <%= quantity %> order(s) of this movie in your cart.</p>
 	</div>

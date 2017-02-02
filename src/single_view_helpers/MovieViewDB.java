@@ -38,4 +38,16 @@ public class MovieViewDB
 		}
 		return result;
 	}
+	
+	public void close()
+	{
+		try
+		{
+			db.closeConnection();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

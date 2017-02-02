@@ -50,6 +50,31 @@ public class ShoppingCart
 	}
 	
 	// Begin Useful Functions
+	public boolean addToCart(Movie movie, int quantity) // lets me handle null cases better
+	{
+		if (!exists() || contains(movie.getId()))
+		{
+			return false;
+		}
+		else
+		{
+			movie.setQuantity(quantity);
+			cart.put(movie.getId(), movie);
+			return true;
+		}
+	}
+	
+	public boolean removeMovie(int movie_id) // lets me handle null cases better
+	{
+		if (exists() && contains(movie_id))
+		{
+			cart.remove(movie_id);
+			return true;
+		}
+		else return false;
+	}
+	
+	
 	public Movie getMovie(int movie_id) // lets me handle null cases better
 	{
 		if (exists() && contains(movie_id))
@@ -62,6 +87,18 @@ public class ShoppingCart
 	public Set<Integer> getMovies()
 	{
 		return cart.keySet();
+	}
+	
+	public int updateQuantity(int movie_id, int quantity) // lets me handle null cases better
+	{
+		if (exists() && contains(movie_id))
+		{
+			Movie movie = getMovie(movie_id);
+			Integer previousQuantity = movie.getQuantity();
+			movie.setQuantity(quantity);
+			return previousQuantity;
+		}
+		else return 0;
 	}
 	
 	public int getQuantity(int movie_id) // lets me handle null cases better

@@ -5,6 +5,7 @@
 <%@ page import="util.Movie" %>
 <%@ page import="layout_helpers.TopMenu" %>
 <%@ page import="ecommerce_helpers.ShoppingCart" %>
+<%@ page import="java.text.NumberFormat" %>
 
 <%
 	if (session.getAttribute("username") == null)
@@ -29,6 +30,7 @@
 	<div class="focus">
 		<h1>Cart</h1>
 		<p >Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
+		<span><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
 		<table>
 			<tr>
 			    <th class='info'>Movie ID</th>
@@ -46,7 +48,8 @@
 					out.println("<td><span>You currently have nothing in your cart. Purchase something!</span></td>");
 				}
 				else
-				{
+				{						
+					NumberFormat formatter = NumberFormat.getCurrencyInstance(); // Credit: http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
 					for (Integer id : cart.getMovies())
 					{
 						Movie current = cart.getMovie(id);
@@ -58,12 +61,13 @@
 						out.println("<td class='info'>");
 						out.println("<span>" + current.getQuantity() + " order(s)</span><br><br>");
 						out.println("<form class='quantity' action='./cart' method='post'>");
-						out.println("<input type='number' name='quantity" + current.getId() + "'min='0' value='" + current.getQuantity() + "'/>");
-						out.println("<input class='submit' type='submit' value='Update Quantity'/>");
+						out.println("<input type='hidden' name='movie_id' value='" + id + "'/>");
+						out.println("<input type='number' name='quantity' min='0' value='" + current.getQuantity() + "'/>");
+						out.println("<input type='submit' name='action' value='Update Quantity'/>");
 						out.println("</form>");
 						out.println("</td>");
 						out.println("<td class='info'>");
-						out.println("$" +  current.getQuantity() * current.getPrice());
+						out.println(formatter.format(current.getQuantity() * current.getPrice()));
 						out.println("</td>");
 					}
 				}
