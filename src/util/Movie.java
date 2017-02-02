@@ -3,6 +3,8 @@ package util;
 import java.util.HashMap;
 import java.util.List;
 
+// Note to Mo: We both had movie classes. To avoid duplicate I just merged it here.
+
 public class Movie
 {
 	private int id;
