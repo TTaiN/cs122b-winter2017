@@ -1,39 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<!-- Usage: ./star?id=star_id  (note to self: might want to switch to param usage for serv ) -->
+<!-- Usage: ./star?id=star_id  -->
 
-<%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="single_view_helpers.StarViewDB" %>
-<%@ page import="util.Star" %>
 <%@ page import="layout_helpers.TopMenu" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ page import="util.Star" %>
 
 <%
-	if (session.getAttribute("username") == null || request.getParameter("id") == null)
+	if (session.getAttribute("username") == null || request.getAttribute("star") == null)
 	{
 		response.sendRedirect("./login");
 	}
-	else if (request.getParameter("id") == null)
-	{
-		response.sendRedirect("./main");
-	}
-
-	Star star = null;
-	Integer star_id = Integer.parseInt(request.getParameter("id"));
-	
-	try
-	{
-		StarViewDB db = new StarViewDB();
-		star = db.getStar(star_id);
-		star.setMovies(db.getMoviesForStar(star_id));
-	}
-	catch (SQLException e)
-	{
-		e.printStackTrace();
-		response.getWriter().println("SQL Error: " + e.getMessage());
-	}
+	Star star = (Star) request.getAttribute("star");
 %>
 
 <!DOCTYPE html>
@@ -69,7 +47,7 @@
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Movies</td>
-							<td class='info'><span><%=star.getMoviesHTMLString()%></span></td>
+							<td class='info'><span><%= star.getMoviesHTMLString() %></span></td>
 					</table>
 				</td>
 			</tr>

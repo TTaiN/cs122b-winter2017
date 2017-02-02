@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-<%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="util.Movie" %>
 <%@ page import="layout_helpers.TopMenu" %>
+<%@ page import="util.Movie" %>
 <%@ page import="ecommerce_helpers.ShoppingCart" %>
 <%@ page import="java.text.NumberFormat" %>
 

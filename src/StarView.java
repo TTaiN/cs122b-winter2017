@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.Star;
+import java.sql.SQLException;
+import single_view_helpers.StarViewDB;
 
 @WebServlet("/star")
 
@@ -21,19 +24,32 @@ public class StarView extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
-		
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		Integer star_id = Integer.parseInt(request.getParameter("id"));
-		
-		if (username == null || star_id == null)
+
+		if (session.getAttribute("username") == null || request.getParameter("id") == null)
 		{
 			response.sendRedirect("./login");
+			return;
 		}
-		else
+		
+		Integer star_id = Integer.parseInt(request.getParameter("id"));
+		Star star = null;
+
+		try
 		{
-			request.getRequestDispatcher("./jsp/star.jsp").include(request, response);
+			StarViewDB db = new StarViewDB();
+			star = db.getStar(star_id);
+			star.setMovies(db.getMoviesForStar(star_id));
+			db.close();
 		}
+		catch (SQLException e)
+		{
+			response.sendRedirect("./main"); // need to specify behavior when sql error.
+			return;		
+		}
+		
+		request.setAttribute("star", star);
+		request.getRequestDispatcher("./jsp/star.jsp").include(request, response);
 	}
 
 

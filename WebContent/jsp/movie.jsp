@@ -1,46 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<!-- Usage: ./movie?id=movie_id  (note to self: might want to switch to param usage for serv ) -->
+<!-- Usage: ./movie?id=movie_id -->
 
-<%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="single_view_helpers.MovieViewDB" %>
-<%@ page import="util.Movie" %>
 <%@ page import="layout_helpers.TopMenu" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="ecommerce_helpers.ShoppingCart" %>
+<%@ page import="util.Movie" %>
 
 <%
-	if (session.getAttribute("username") == null || request.getParameter("id") == null)
+	if (session.getAttribute("username") == null || request.getAttribute("movie") == null)
 	{
 		response.sendRedirect("./login");
 	}
-	else if (request.getParameter("id") == null)
-	{
-		response.sendRedirect("./main");
-	}
-
-	ShoppingCart cart = new ShoppingCart(session);
-	Movie movie = null;
-	Integer movie_id = Integer.parseInt(request.getParameter("id"));
-	int quantity = cart.getQuantity(movie_id);
-	
-	if (quantity == 0) // movie isnt in cart
-	{
-		try
-		{
-			MovieViewDB db = new MovieViewDB();
-			movie = db.getMovie(movie_id);
-			movie.setStars(db.getStarsForMovie(movie_id));
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-			response.getWriter().println("SQL Error: " + e.getMessage());
-		}
-	}
-	else movie = cart.getMovie(movie_id); // cached, movie already in cart, performance optimization
+	Movie movie = (Movie) request.getAttribute("movie");
+	Integer quantity = movie.getQuantity();
+	Integer movie_id = movie.getId();
 %>
 
 <!DOCTYPE html>
@@ -64,7 +37,7 @@
 						<caption>Movie Information</caption>
 						<tr class='border_bottom'>
 							<td class='field'><span>Movie ID</span></td>
-							<td class='info'><span><%= movie.getId() %></span><br></td>
+							<td class='info'><span><%= movie_id %></span><br></td>
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'><span>Movie Title</span></td>
@@ -87,7 +60,7 @@
 							<td class='info'><span><%= movie.getStarsHTMLString() %></span></td>
 						<tr class='border_bottom/'>
 							<td class='field'>Price</td>
-							<td class='info'><span>$14.99 per copy</span></td>
+							<td class='info'><span>$<%= movie.getPrice() %> per copy</span></td>
 						</tr>
 					</table>
 				</td>
@@ -96,7 +69,7 @@
 		<p class='ad'><%= quantity == 0 ? "Want to purchase this item? Add it to your cart!" : "You already have this item in your cart. Want more? Update the quantity!" %></p>
 		<form class='quantity' action='./cart' method='post'>
 			<input type="hidden" name="movie_id" value='<%= movie_id %>'>
-			<input type='number' name='quantity' min='1' value='<%= quantity == 0 ? 1 : quantity %>'/>
+			<input type='number' name='quantity' min='<%= quantity == 0 ? 1 : 0 %>' value='<%= quantity == 0 ? 1 : quantity %>'/>
 			<input class='submit' name='action' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Update Quantity" %>'/>
 		</form>
 		<p class ='ad'>You currently have <%= quantity %> order(s) of this movie in your cart.</p>
