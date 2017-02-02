@@ -8,10 +8,11 @@ import javax.servlet.http.*;
 
 public class Login extends HttpServlet
 {
+	private static final long serialVersionUID = 1L;
 	
-    String loginUser = "cs122b";
-    String loginPasswd = "cs122bgroup42";
-    String loginUrl = "jdbc:mysql://35.167.240.46/moviedb";
+    private static final String loginUser = "cs122b";
+    private static final String loginPasswd = "cs122bgroup42";
+    private static final String loginUrl = "jdbc:mysql://35.167.240.46/moviedb";
 
 	public String getServletInfo()
     {

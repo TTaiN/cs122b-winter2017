@@ -1,10 +1,11 @@
 package single_view_helpers;
 
-import util.DatabaseHelper;
-import util.Movie;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
+
+import general_helpers.DatabaseHelper;
+import general_helpers.Movie;
 
 public class MovieViewDB 
 {

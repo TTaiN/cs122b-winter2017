@@ -4,7 +4,7 @@
 <!-- Usage: ./star?id=star_id  -->
 
 <%@ page import="layout_helpers.TopMenu" %>
-<%@ page import="util.Star" %>
+<%@ page import="general_helpers.Star" %>
 
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("star") == null)

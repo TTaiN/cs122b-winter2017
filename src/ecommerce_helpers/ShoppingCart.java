@@ -2,7 +2,9 @@ package ecommerce_helpers;
 
 import java.util.LinkedHashMap;
 import javax.servlet.http.HttpSession;
-import util.Movie;
+
+import general_helpers.Movie;
+
 import java.util.Set;
 
 public class ShoppingCart 

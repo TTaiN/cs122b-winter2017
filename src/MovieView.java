@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ecommerce_helpers.ShoppingCart;
-import util.Movie;
+import general_helpers.Movie;
 import single_view_helpers.MovieViewDB;
 import java.sql.SQLException;
 

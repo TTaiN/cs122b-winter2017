@@ -1,4 +1,3 @@
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,11 +5,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedHashMap;
-import util.Movie;
+import java.sql.SQLException;
+import java.io.IOException;
 
 import single_view_helpers.MovieViewDB;
 import ecommerce_helpers.ShoppingCart;
-import java.sql.SQLException;
+import general_helpers.Movie;
 
 @WebServlet("/cart")
 

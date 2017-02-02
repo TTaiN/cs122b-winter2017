@@ -2,7 +2,6 @@ package layout_helpers;
 
 import java.io.PrintWriter;
 
-
 public class TopMenu
 {
 	public static void print(PrintWriter out)

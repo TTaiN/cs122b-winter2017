@@ -1,4 +1,4 @@
-package util;
+package general_helpers;
 
 /*
  * Example Usage:

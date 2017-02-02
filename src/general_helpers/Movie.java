@@ -1,4 +1,4 @@
-package util;
+package general_helpers;
 
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -4,7 +4,7 @@
 <!-- Usage: ./movie?id=movie_id -->
 
 <%@ page import="layout_helpers.TopMenu" %>
-<%@ page import="util.Movie" %>
+<%@ page import="general_helpers.Movie" %>
 
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("movie") == null)

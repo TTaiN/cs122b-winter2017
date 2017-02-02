@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ page import="layout_helpers.TopMenu" %>
-<%@ page import="util.Movie" %>
+<%@ page import="general_helpers.Movie" %>
 <%@ page import="ecommerce_helpers.ShoppingCart" %>
 <%@ page import="java.text.NumberFormat" %>
 

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import util.Star;
+import general_helpers.Star;
 import java.sql.SQLException;
 import single_view_helpers.StarViewDB;
 

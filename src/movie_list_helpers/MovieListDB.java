@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import util.Movie;
+import general_helpers.Movie;
 
 public class MovieListDB {
 	
