@@ -44,11 +44,17 @@ public class DatabaseHelper
 	{
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver"); //newInstance()?
+			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
 		}
 		catch (ClassNotFoundException e) // highly unlikely but could still happen.
 		{
-			return;
+			e.printStackTrace();
+		} catch (InstantiationException e)  // highly unlikely but could still happen.
+		{
+			e.printStackTrace();
+		} catch (IllegalAccessException e)  // highly unlikely but could still happen.
+		{
+			e.printStackTrace();
 		}
 		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database, user, password);
 	}

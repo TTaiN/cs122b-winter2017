@@ -3,7 +3,7 @@
 
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Movie" %>
-<%@ page import="util.TopMenu" %>
+<%@ page import="layout_helpers.TopMenu" %>
 
 <%
 	if (session.getAttribute("username") == null)

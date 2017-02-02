@@ -47,6 +47,7 @@ public class Cart extends HttpServlet
 		}
 		request.getRequestDispatcher("/cart.jsp").include(request, response);
 
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
