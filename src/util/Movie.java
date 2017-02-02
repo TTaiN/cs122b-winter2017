@@ -130,7 +130,7 @@ public class Movie
 		{ 
 			for (Integer star_id : stars.keySet())
 			{
-				result.append("<a href='./star.jsp?id=" + star_id + "'>" + stars.get(star_id) + "</a><br>");
+				result.append("<a href='./star?id=" + star_id + "'>" + stars.get(star_id) + "</a><br>");
 			}
 			return result.toString();
 		}

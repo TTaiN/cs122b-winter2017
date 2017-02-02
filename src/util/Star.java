@@ -90,7 +90,7 @@ public class Star
 		{ 
 			for (Integer movie_id : movies.keySet())
 			{
-				result.append("<a href='./movie.jsp?id=" + movie_id + "'>" + movies.get(movie_id) + "</a><br>");
+				result.append("<a href='./movie?id=" + movie_id + "'>" + movies.get(movie_id) + "</a><br>");
 			}
 			//result.deleteCharAt(result.length()-1); // might need to be length-1
 			return result.toString();
