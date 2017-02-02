@@ -95,7 +95,7 @@ public class Movie
 	
 	public String getBanner()
 	{
-		if (banner == null || banner.equals(""))
+		if (banner == null || banner.equals("") || banner.equals("n/a"))
 		{
 			return "./images/no-image.jpg";
 		}
@@ -108,7 +108,11 @@ public class Movie
 	
 	public String getTrailer()
 	{
-		return trailer;
+		if (trailer == null || trailer.equals(""))
+		{
+			return "(none)";
+		}
+		else return trailer;
 	}
 	
 	public void setTrailer(String trailer) {

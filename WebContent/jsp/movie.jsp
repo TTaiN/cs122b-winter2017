@@ -80,7 +80,7 @@
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Trailer</td>
-							<td class='info'><span><a href='<%= movie.getTrailer() %>'>Click here to watch the trailer</a></span><br></td>
+							<td class='info'><span><%= movie.getTrailer().equals("(none)") ? "(none)" : "<a href='"+movie.getTrailer()+"'>Click here to watch the trailer</a>"%></span><br></td>
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Stars</td>
