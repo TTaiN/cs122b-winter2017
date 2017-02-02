@@ -1,0 +1,50 @@
+.container
+{
+   border: 1px solid black;
+   padding:	30px;
+}
+ 
+table
+{
+   border: 1px solid black;
+}
+
+.title
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+
+.field
+{
+   border: 1px solid black;
+}
+ 
+ .info
+{
+ 	padding:5px;
+ 	width: 260px;
+}
+
+tr.border_bottom td /* Credit: http://stackoverflow.com/questions/10040842/add-border-bottom-to-table-row-tr */
+{
+  border-bottom:1pt solid black;
+  padding:5px;
+}
+
+.focus 
+{
+  width: 800px ;
+  margin-left: auto ;
+  margin-right: auto ;
+  
+}
+
+.movie_detail
+{
+   border: 1px solid black;
+   margin-left: auto;
+   margin-right: auto;
+   align: center;
+}

@@ -29,9 +29,22 @@
 		if (rs.next())
 		{
 			movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getInt("year"), rs.getString("director"), rs.getString("banner_url"), rs.getString("trailer_url"));
-			System.out.println("Created new movie!");
 		}
 		else throw new SQLException();
+		
+		ResultSet star_list = db.executeSQL("SELECT * FROM stars_in_movies WHERE movie_id = " + movie.getId());
+		
+		while (star_list.next())
+		{
+			System.out.println("Executing..");
+			ResultSet star = db.executeSQL("SELECT * FROM stars WHERE id = " + star_list.getInt("star_id"));
+			System.out.println("Finished!");
+			while (star.next())
+			{
+				movie.addStar(star.getInt("id"), star.getString("first_name") + " " + star.getString("last_name"));
+			}
+			System.out.println("Added star!");
+		}
 	}
 	catch (SQLException e)
 	{
@@ -42,7 +55,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="./style/cart.css"/> 
+	<link rel="stylesheet" type="text/css" href="./style/movie.css"/> 
 	<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
 	
 	<title>Movie</title>
@@ -50,26 +63,53 @@
 <body>
 	<% TopMenu.print(response.getWriter()); %>
 	<div class="focus">
-		<h1>Movie Information</h1>
-		<p ><%= movie.getTitle() %></p> <!--  Change to FirstName,LastName later  -->
-		<table>
-			<tr>
-			    <th class='info'>Movie ID</th>
-			    <th class='info'>Image</th>
-			    <th class='info'>Title</th>
-			    <th class='info'>Year</th>
-			    <th class='info'>Director</th>
-			    <th class='info'>Trailer</th>
-			</tr>
-			<tr>
-				<td class='info'><span><%= movie.getId() %></span></td>
-				<td class='info'><span><img class='banner' src='<%= movie.getBannerUrl() %>'/></span></td>
-				<td class='info'><span><%= movie.getTitle() %></span></td>
-				<td class='info'><span><%= movie.getYear() %></span></td>
-				<td class='info'><span><%= movie.getDirector() %></span></td>
-				<td class='info'><span><%= movie.getTrailerUrl() %></span></td>
-			</tr>
+		<h1 class='title'><%= movie.getTitle() %></h1>
+		<table class='movie_detail'>
+		<tr>
+			<td class='container'><img src='<%= movie.getBanner() %>'/></td>
+			<td class='container'>
+				<table>
+					<caption>Movie Information</caption>
+					<tr class='border_bottom'>
+						<td class='field'><span>Movie ID</span></td>
+						<td class='info'><span><%= movie.getId() %></span><br></td>
+					</tr>
+					<tr class='border_bottom'>
+						<td class='field'><span>Movie Title</span></td>
+						<td class='info'><span><%= movie.getTitle() %></span><br></td>
+					</tr>
+					<tr class='border_bottom'>
+						<td class='field'>Year</td>
+						<td class='info'><span><%= movie.getYear() %></span><br></td>
+					</tr>
+					<tr class='border_bottom'>
+						<td class='field'>Director</td>
+						<td class='info'><span><%= movie.getDirector() %></span><br></td>
+					</tr>
+					<tr class='border_bottom'>
+						<td class='field'>Trailer</td>
+						<td class='info'><span><a href='<%= movie.getTrailer() %>'>Click here to watch the trailer</a></span><br></td>
+					</tr>
+					<tr class='border_bottom'>
+						<td class='field'>Stars</td>
+						<td class='info'>
+							<%
+								for (Integer star_id : movie.getStars().keySet())
+								{
+									response.getWriter().print("<a href='./star.jsp?id=" + star_id + "'>" + movie.getStars().get(star_id) + "</a>, ");
+								}
+							%>
+						</td>
+					<tr class='border_bottom'>
+						<td class='field'>Price</td>
+						<td class='info'><span>$14.99 per copy</span></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
 		</table>
+
 	</div>
 </body>
 </html>

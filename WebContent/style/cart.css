@@ -1,7 +1,16 @@
-table
+.table_default
 {
    border: 1px solid black;
    text-align:center;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.movie_detail
+{
+   border: 1px solid black;
+   text-align:center;
+   align: center;
 }
  
 .focus 
@@ -9,7 +18,6 @@ table
   width: 800px ;
   margin-left: auto ;
   margin-right: auto ;
-  
 }
 
 .text 

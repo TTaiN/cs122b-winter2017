@@ -1,4 +1,5 @@
 package movie_list_helpers;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MovieDB {
+import util.Movie;
+
+public class MovieListDB {
 	
     private static String loginUser = "cs122b";
     private static String loginPasswd = "cs122bgroup42";

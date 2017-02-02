@@ -49,7 +49,7 @@
 					{
 						out.println("<tr>");
 						out.println("<td class='info'><span>" + current.getId() + "</span></td>");
-						out.println("<td class='info'><span><img class='banner' src='" + current.getBannerUrl() + "'/></span></td>");
+						out.println("<td class='info'><span><img class='banner' src='" + current.getBanner() + "'/></span></td>");
 						out.println("<td class='info'><span>" + current.getTitle() + " (" + current.getYear() + ")" + "</span></td>");
 						out.println("<td class='info'><span>" + current.getDirector() + "</span></td>");
 						out.println("<td class='info'>");
