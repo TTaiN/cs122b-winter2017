@@ -6,7 +6,7 @@
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="single_view_helpers.MovieViewDB" %>
 <%@ page import="util.Movie" %>
-<%@ page import="util.TopMenu" %>
+<%@ page import="layout_helpers.TopMenu" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.ResultSet" %>
 
