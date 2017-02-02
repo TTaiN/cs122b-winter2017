@@ -26,7 +26,7 @@
 	%>
 
 	<div class="focus">
-		<h1 >Cart</h1>
+		<h1>Cart</h1>
 		<p >Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
 		<table>
 			<tr>

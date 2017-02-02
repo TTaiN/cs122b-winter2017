@@ -2,6 +2,7 @@ package util;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.lang.StringBuilder;
 
 // Note to Mo: We both had movie classes. To avoid duplicate I just merged it here.
 
@@ -81,8 +82,13 @@ public class Movie
 	
 	public String getBanner()
 	{
-		return banner;
+		if (banner == null || banner.equals(""))
+		{
+			return "./images/no-image.jpg";
+		}
+		else return banner;
 	}
+	
 	public void setBanner(String banner) {
 		this.banner = banner;
 	}
@@ -117,7 +123,19 @@ public class Movie
 	}
 	
 	/* Begin Useful Functions */
-	
+	public String getStarsHTMLString()
+	{
+		StringBuilder result = new StringBuilder("");
+		if (stars != null && !stars.isEmpty())
+		{ 
+			for (Integer star_id : stars.keySet())
+			{
+				result.append("<a href='./star.jsp?id=" + star_id + "'>" + stars.get(star_id) + "</a><br>");
+			}
+			return result.toString();
+		}
+		else return "(none)";
+	}
 	
 }
 
