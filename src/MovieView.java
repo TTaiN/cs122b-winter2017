@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/movie")
 
-public class Movie extends HttpServlet 
+public class MovieView extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
        
-    public Movie() 
+    public MovieView() 
     {
         super();
     }

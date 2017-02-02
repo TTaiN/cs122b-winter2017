@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/star")
 
-public class Star extends HttpServlet 
+public class StarView extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
        
-    public Star() 
+    public StarView() 
     {
         super();
     }
