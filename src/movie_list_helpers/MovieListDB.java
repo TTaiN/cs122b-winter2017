@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import util.Movie;
@@ -42,7 +42,7 @@ public class MovieListDB {
 		m.setTrailer(rs.getString(6));
 		
 		// Get stars of the movie
-		HashMap <Integer, String> stars = new HashMap<Integer, String>();
+		LinkedHashMap <Integer, String> stars = new LinkedHashMap<Integer, String>(); // note to Mo: here we should use LinkedHashMap to preserve any ordering
 		PreparedStatement query = connection.prepareStatement(
 				"select id, first_name, last_name from stars where id =some "
 				+ "(select star_id from stars_in_movies where movie_id= " + m.getId() + ")");

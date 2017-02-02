@@ -1,6 +1,6 @@
 package util;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 // Note to Mo: We both had movie classes. To avoid duplicate I just merged it here.
@@ -13,7 +13,7 @@ public class Movie
 	private String director;
 	private String banner;
 	private String trailer;
-	private HashMap <Integer, String> stars;
+	private LinkedHashMap <Integer, String> stars;
 	private List<String> genres;
 
 	public Movie() { }
@@ -26,7 +26,6 @@ public class Movie
 		this.director = director;
 		this.banner = banner;
 		this.trailer = trailer;
-		this.stars = new HashMap<Integer, String>();
 	}
 	
 	@Override
@@ -102,12 +101,12 @@ public class Movie
 		stars.put(id, name);
 	}
 	
-	public HashMap<Integer, String> getStars()
+	public LinkedHashMap<Integer, String> getStars()
 	{
 		return stars;
 	}
 	
-	public void setStars(HashMap<Integer, String> stars) {
+	public void setStars(LinkedHashMap<Integer, String> stars) {
 		this.stars = stars;
 	}
 	public List<String> getGenres() {

@@ -34,11 +34,17 @@ public class DatabaseHelper
 		return result;
 	}
 	
+	public ResultSet executePreparedStatement(String SQL) throws SQLException // prefer to use this one than executeSQL, more secure
+	{
+		PreparedStatement statement = connection.prepareStatement(SQL);
+		return statement.executeQuery();
+	}
+	
 	public void openConnection() throws SQLException
 	{
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver"); //newInstance()?
 		}
 		catch (ClassNotFoundException e) // highly unlikely but could still happen.
 		{

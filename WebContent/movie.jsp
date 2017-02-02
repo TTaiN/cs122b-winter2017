@@ -6,7 +6,7 @@
 <%@ page import="java.util.LinkedHashMap" %>
 <%@ page import="util.Movie" %>
 <%@ page import="util.TopMenu" %>
-<%@ page import="util.DatabaseHelper" %>
+<%@ page import="single_view_helpers.MovieViewDB" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.sql.ResultSet" %>
 
@@ -21,30 +21,13 @@
 	}
 
 	Movie movie = null;
+	Integer movie_id = Integer.parseInt(request.getParameter("id"));
 	
 	try
 	{
-		DatabaseHelper db = new DatabaseHelper();
-		ResultSet rs = db.executeSQL("SELECT * FROM movies WHERE id = " + request.getParameter("id"));
-		if (rs.next())
-		{
-			movie = new Movie(rs.getInt("id"), rs.getString("title"), rs.getInt("year"), rs.getString("director"), rs.getString("banner_url"), rs.getString("trailer_url"));
-		}
-		else throw new SQLException();
-		
-		ResultSet star_list = db.executeSQL("SELECT * FROM stars_in_movies WHERE movie_id = " + movie.getId());
-		
-		while (star_list.next())
-		{
-			System.out.println("Executing..");
-			ResultSet star = db.executeSQL("SELECT * FROM stars WHERE id = " + star_list.getInt("star_id"));
-			System.out.println("Finished!");
-			while (star.next())
-			{
-				movie.addStar(star.getInt("id"), star.getString("first_name") + " " + star.getString("last_name"));
-			}
-			System.out.println("Added star!");
-		}
+		MovieViewDB db = new MovieViewDB();
+		movie = db.getMovie(movie_id);
+		movie.setStars(db.getStarsForMovie(movie_id));
 	}
 	catch (SQLException e)
 	{
