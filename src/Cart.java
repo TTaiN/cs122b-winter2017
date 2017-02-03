@@ -99,6 +99,7 @@ public class Cart extends HttpServlet
 			{
 				MovieViewDB db = new MovieViewDB();
 				Movie movie = db.getMovie(movie_id);
+				movie.setStars(db.getStarsForMovie(movie_id));
 				db.close();
 				Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 				cart.addToCart(movie, quantity);
@@ -126,6 +127,10 @@ public class Cart extends HttpServlet
 			{
 				cart.removeMovie(movie_id);
 				request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> was set to 0, so it was removed.");
+			}
+			else if (quantity > 500)
+			{
+				request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
 			}
 			else request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> is now " + quantity + ". (Previous: " + cart.updateQuantity(movie_id, quantity) + ")");
 		}

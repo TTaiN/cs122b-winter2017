@@ -29,7 +29,7 @@
 	<div class="focus">
 		<h1>Cart</h1>
 		<p >Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
-		<span><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
+		<span style='color: red;'><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
 		<table>
 			<tr>
 			    <th class='info'>Movie ID</th>

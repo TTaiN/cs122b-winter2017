@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import general_helpers.Movie;
+import ecommerce_helpers.ShoppingCart;
 import single_view_helpers.MovieViewDB;
 import java.sql.SQLException;
 
@@ -34,21 +35,30 @@ public class MovieView extends HttpServlet
 		
 		Integer movie_id = Integer.parseInt(request.getParameter("id"));
 		Movie movie = null;
-	
-		try
-		{
-			MovieViewDB db = new MovieViewDB();
-			movie = db.getMovie(movie_id);
-			movie.setStars(db.getStarsForMovie(movie_id));
-			db.close();
-		}
-		catch (SQLException e)
-		{
-			response.sendRedirect("./main"); // need to specify behavior when wrong id is entered.
-			return;
-		}
 		
-		request.setAttribute("movie", movie);
+		ShoppingCart cart = new ShoppingCart(session);
+		
+		if (cart.contains(movie_id))
+		{
+			request.setAttribute("movie", cart.getMovie(movie_id));
+		}
+		else
+		{
+			
+			try
+			{
+				MovieViewDB db = new MovieViewDB();
+				movie = db.getMovie(movie_id);
+				movie.setStars(db.getStarsForMovie(movie_id));
+				db.close();
+				request.setAttribute("movie", movie);
+			}
+			catch (SQLException e)
+			{
+				response.sendRedirect("./main"); // need to specify behavior when wrong id is entered.
+				return;
+			}
+		}
 		request.getRequestDispatcher("./jsp/movie.jsp").include(request, response);
 	}
 
