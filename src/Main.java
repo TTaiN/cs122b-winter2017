@@ -27,9 +27,9 @@ public class Main extends HttpServlet
 			PrintWriter out = response.getWriter();
 		    out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Main</title></head><body>");
 		    TopMenu.print(out);
-		    out.println("<H2 ALIGN=\"CENTER\">Welcome to Fabflix!</H2><br>\n" +
-		                "<a href=\"./search\"><H4 ALIGN=\"CENTER\">Click to Search</H4>\n" +
-		                "<a href=\"./browse\"><H4 ALIGN=\"CENTER\">Click to Browse</H4></a>\n</body>");
+		    out.println("<H1 ALIGN=\"CENTER\">Welcome to Fabflix!</H1><br>\n" +
+		                "<a href=\"./search\"><H3 ALIGN=\"CENTER\">Click to Search</H3>\n" +
+		                "<a href=\"./browse\"><H3 ALIGN=\"CENTER\">Click to Browse</H3></a>\n</body>");
 		}
 		
 	}
