@@ -79,11 +79,7 @@ public class Browse extends HttpServlet {
 			    out.println("<p ALIGN=\"CENTER\">");
 			    while (rs.next()) 
 			    {
-<<<<<<< HEAD
 			    	out.println("<a href=\"./movielist?firstchar=" + rs.getString(1) + "\">" + rs.getString(1) + "</a><br>");
-=======
-			    	out.println("<a href=\"./movielist?title=" + rs.getString(1) + "\">" + rs.getString(1) + "</a> ");
->>>>>>> refs/remotes/origin/master
 			    }
 			    out.println("</p></div>");
 				
