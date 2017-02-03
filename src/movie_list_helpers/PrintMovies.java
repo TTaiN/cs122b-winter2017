@@ -34,14 +34,28 @@ public class PrintMovies {
 		out.println("<tr class='border_bottom'><td class='field'><span>Stars</span></td>");
 		if( stars.isEmpty() )
 		{
-			out.println("<td class='info'><span>(none)</span></td></table></td></tr></table>");
+			out.println("<td class='info'><span>(none)</span></td></td></tr>");
 		}
 		else
 		{
 			out.println("<td class='info'><span>");
 			for (Map.Entry<Integer, String> star : stars.entrySet()) 
 				out.println("<a href='./star?id=" + star.getKey() + "'>" + star.getValue() + "</a><br>");
-			out.println("</span></td></table></td></tr></table>");
+			out.println("</span></td></td></tr>");
+		}
+		
+		List<String> genres = m.getGenres();
+		out.println("<tr class='border_bottom'><td class='field'><span>Genres</span></td>");
+		if( genres.isEmpty() )
+		{
+			out.println("<td class='info'><span>(none)</span></td></table></td></tr>");
+		}
+		else
+		{
+			out.println("<td class='info'><span>");
+			for (String g : genres) 
+				out.println(g + "</a><br>");
+			out.println("</span></td></table></td></tr>");
 		}
 		
 	}
