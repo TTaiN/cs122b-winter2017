@@ -6,6 +6,21 @@
    margin-right: auto;
 }
 
+.summary
+{
+	text-align:center;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.checkout
+{
+	display: inline-block;
+	width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .movie_detail
 {
    border: 1px solid black;

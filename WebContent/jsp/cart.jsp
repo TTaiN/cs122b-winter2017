@@ -11,6 +11,11 @@
 	{
 		response.sendRedirect("./login");
 	}
+
+	ShoppingCart cart = new ShoppingCart(session);
+	NumberFormat formatter = NumberFormat.getCurrencyInstance(); // Credit: http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
+	int totalQuantity = 0;
+	double totalPrice = 0;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,7 +45,7 @@
 			    <th class='info'>Subtotal</th>
 			</tr>
 			<%
-				ShoppingCart cart = new ShoppingCart(session);
+
 		
 				if (!cart.exists() || cart.isEmpty())
 				{
@@ -48,7 +53,6 @@
 				}
 				else
 				{						
-					NumberFormat formatter = NumberFormat.getCurrencyInstance(); // Credit: http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
 					for (Integer id : cart.getMovies())
 					{
 						Movie current = cart.getMovie(id);
@@ -68,10 +72,31 @@
 						out.println("<td class='info'>");
 						out.println(formatter.format(current.getQuantity() * current.getPrice()));
 						out.println("</td>");
+						totalQuantity += current.getQuantity();
+						totalPrice += (current.getQuantity() * current.getPrice());
 					}
 				}
 			%>
 		</table>
 	</div>
+	<table align="center">
+		<tr>
+			<td>
+				<table align="center">
+					<tr>
+						<th class='info'>Total Quantity</th>
+						<th class='info'>Total Price</th>
+					</tr>
+					<tr>
+						<td class='info'><%= totalQuantity %></td>
+						<td class='info'><%= formatter.format(totalPrice) %></td>
+					</tr>
+				</table>			
+			</td>
+			<td>
+				<span class='checkout'>Click here to checkout</span>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
