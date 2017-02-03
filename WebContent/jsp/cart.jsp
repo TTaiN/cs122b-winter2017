@@ -77,12 +77,11 @@
 					}
 				}
 			%>
-		</table>
-	</div>
-	<table align="center">
+		</table><br>
+		<table>
 		<tr>
 			<td>
-				<table align="center">
+				<table>
 					<tr>
 						<th class='info'>Total Quantity</th>
 						<th class='info'>Total Price</th>
@@ -94,9 +93,13 @@
 				</table>			
 			</td>
 			<td>
-				<span class='checkout'>Click here to checkout</span>
+				<span class='checkout'><%= cart.size() == 0 ? "" : "Ready to checkout?<br><br>" %></span>
+				<form class='checkout_button' action='./checkout' method='post'>
+					<%= cart.size() == 0 ? "" : "<input name='action' type='submit' value='Proceed to Checkout'/>" %>
+				</form>
 			</td>
 		</tr>
-	</table>
+		</table>
+	</div>
 </body>
 </html>

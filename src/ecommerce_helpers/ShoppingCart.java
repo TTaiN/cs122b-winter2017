@@ -52,6 +52,15 @@ public class ShoppingCart
 	}
 	
 	// Begin Useful Functions
+	
+	public int size()
+	{
+		if (!exists() || cart.isEmpty())
+		{
+			return 0;
+		}
+		else return cart.size();
+	}
 	public boolean addToCart(Movie movie, int quantity) // lets me handle null cases better
 	{
 		if (!exists() || contains(movie.getId()))
