@@ -128,7 +128,7 @@ public class MovieListDB {
 			Connection connection = getConnection();
 			PreparedStatement query = connection.prepareStatement("select * from movies where " +
 					titleWhere + " and " + directorWhere + " and " + yearWhere + " and id=some "
-					+ "(select movie_id from stras_in_movies where star_id=some"
+					+ "(select movie_id from stars_in_movies where star_id=some"
 					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
 					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + limit
 					+ " offset " + offset);
