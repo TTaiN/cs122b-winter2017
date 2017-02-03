@@ -58,73 +58,83 @@ public class Browse extends HttpServlet {
 		else
 		{
 			try {
-				//browse logic here
-				PrintWriter out = response.getWriter();
-				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Browse</title></head>");
-			    out.println("<BODY>");
-			    TopMenu.print(out);
-			    out.println("<H1 ALIGN=\"CENTER\">Browse Page</H1>\n\n" +
-			                "<H4 ALIGN=\"CENTER\">Browse by Genre</H4>\n");
-			    // connect to db
+				 // connect to db
 				Connection dbcon;
 				dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);	//do we need to connect in every servlet??
 				// @Yolie: i get this error sometimes http://ttain.tk/upload/eclipse_2017-02-01_00-11-03.png
 				Statement statement = dbcon.createStatement();
 				
-				//TODO: figure out the layout to make it print prettier
-				
-				//print out all genres
-				/*
-				 * NOTES TO MO: I commented the parameters that are not like what is printed to be used in the query in the movielist page
-				 */
-			    out.println("<p ALIGN=\"CENTER\"><a href=\"./movielist?genre=Action\">Action</a><br>" +
-			    		"<a href=\"./movielist?genre=Adventure\">Adventure</a><br>" +
-			    		"<a href=\"./movielist?genre=Animation\">Animation</a><br>" +
-			    		"<a href=\"./movielist?genre=Arts\">Arts</a><br>" +
-			    		"<a href=\"./movielist?genre=Classic\">Classic</a><br>" +
-			    		"<a href=\"./movielist?genre=Comedy\">Comedy</a><br>" +
-			    		"<a href=\"./movielist?genre=Crime\">Crime</a><br>" +
-			    		"<a href=\"./movielist?genre=Detective\">Detective</a><br>" +
-			    		"<a href=\"./movielist?genre=Documentary\">Documentary</a><br>" +
-			    		"<a href=\"./movielist?genre=Drama\">Drama</a><br>" +
-			    		"<a href=\"./movielist?genre=Epics\">Epics/Historical</a><br>" +	//parameter is Epics
-			    		"<a href=\"./movielist?genre=Family\">Family</a><br>" +
-			    		"<a href=\"./movielist?genre=Fantasy\">Fantasy</a><br>" +
-			    		"<a href=\"./movielist?genre=Noir\">Film-Noir</a><br>" +	//parameter is Noir
-			    		"<a href=\"./movielist?genre=Foreign\">Foreign</a><br>" +
-			    		"<a href=\"./movielist?genre=Gangester\">Gangster</a><br>" +
-			    		"<a href=\"./movielist?genre=Horror\">Horror</a><br>" +
-			    		"<a href=\"./movielist?genre=Indie\">Indie</a><br>" +
-			    		"<a href=\"./movielist?genre=James-Bond\">James Bond</a><br>" +	//parameter is James-Bond
-			    		"<a href=\"./movielist?genre=Kid\">Kid</a><br>" +
-			    		"<a href=\"./movielist?genre=Love\">Love</a><br>" +
-			    		"<a href=\"./movielist?genre=Musical\">Musical</a><br>" +
-			    		"<a href=\"./movielist?genre=Mystery\">Mystery</a><br>" +
-			    		"<a href=\"./movielist?genre=Roman\">Roman</a><br>" +
-			    		"<a href=\"./movielist?genre=Romance\">Romance</a><br>" +
-			    		"<a href=\"./movielist?genre=Sci-Fi\">Science Fiction</a><br>" + //parameter is Sci-Fi
-			    		"<a href=\"./movielist?genre=Short\">Short</a><br>" +
-			    		"<a href=\"./movielist?genre=Spy\">Spy</a><br>" +
-			    		"<a href=\"./movielist?genre=Suspense\">Suspense</a><br>" +
-			    		"<a href=\"./movielist?genre=Thriller\">Thriller</a><br>" +
-			    		"<a href=\"./movielist?genre=Tragedy\">Tragedy</a><br>" +
-			    		"<a href=\"./movielist?genre=War\">War</a><br>" +
-			    		"<a href=\"./movielist?genre=Western\">Western</a><br></p>");
-			    		
-			    //print out all title initials
+				PrintWriter out = response.getWriter();
+				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/browse.css'/><title>Browse</title></head>");
+			    out.println("<BODY>");
+			    TopMenu.print(out);
+			    out.println("<div class=\"wrapper\">");
+
+				//Browse by title
 			    out.println();
-			    out.println("<H4 ALIGN=\"CENTER\">Browse by Title</H4>\n </BODY>");	   
+			    out.println("<br><H1>Browse by Title</H1>\n </BODY>");	   
 			    String query = "SELECT left(title,1) from movies group by left(title,1) order by title";
 			    ResultSet rs = statement.executeQuery(query);
 
 			    out.println("<p ALIGN=\"CENTER\">");
 			    while (rs.next()) 
 			    {
-			    	out.println("<a href=\"./movielist?title=" + rs.getString(1) + "\">" + rs.getString(1) + "</a><br>");
+			    	out.println("<a href=\"./movielist?title=" + rs.getString(1) + "\">" + rs.getString(1) + "</a> ");
 			    }
-			    out.println("</p>");
-			    
-			    
+			    out.println("</p></div>");
+				
+			    //Browse by genre
+				/*
+				 * NOTES TO MO: I commented the parameters that are not like what is printed to be used in the query in the movielist page
+				 */
+			    out.println("<br><H1>Browse by Genre</H1>\n");
+			    out.println("<div class=\"wrapper\"><div id=\"cols\"><ul style=\"list-style: none;\">" + 
+				 
+			    		"<li><a href=\"./movielist?genre=Action\">Action</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Adventure\">Adventure</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Animation\">Animation</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Arts\">Arts</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Classic\">Classic</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Comedy\">Comedy</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Crime\">Crime</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Detective\">Detective</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Documentary\">Documentary</a></li>" +
+			    		
+			    		"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
+			    		
+			    		"<li><a href=\"./movielist?genre=Drama\">Drama</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Epics\">Epics/Historical</a></li>" +	//parameter is Epics
+			    		"<li><a href=\"./movielist?genre=Family\">Family</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Fantasy\">Fantasy</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Noir\">Film-Noir</a></li>" +	//parameter is Noir
+			    		"<li><a href=\"./movielist?genre=Foreign\">Foreign</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Gangester\">Gangster</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Horror\">Horror</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Indie\">Indie</a></li>" +
+			    		
+						"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
+
+			    		"<li><a href=\"./movielist?genre=James-Bond\">James Bond</a></li>" +	//parameter is James-Bond
+			    		"<li><a href=\"./movielist?genre=Kid\">Kid</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Love\">Love</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Musical\">Musical</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Mystery\">Mystery</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Roman\">Roman</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Romance\">Romance</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Sci-Fi\">Science Fiction</a></li>" + //parameter is Sci-Fi
+			    		"<li><a href=\"./movielist?genre=Short\">Short</a></li>" +
+
+						"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
+
+			    		"<li><a href=\"./movielist?genre=Spy\">Spy</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Suspense\">Suspense</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Thriller\">Thriller</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Tragedy\">Tragedy</a></li>" +
+			    		"<li><a href=\"./movielist?genre=War\">War</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Western\">Western</a></li>" +
+			    		
+			    		"</ul></div></div></div></body>");
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
