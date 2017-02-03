@@ -6,6 +6,8 @@ public class TopMenu
 {
 	public static void print(PrintWriter out)
 	{
+		out.println("<br><center><img src=\"./images/logo.png\" alt=\"logo\"></center><br>");
+		
 		out.println("<div class='topmenu'>");
 		//out.println("<span>Menu:</span>");
 		out.println("<table class='topmenu_table'>");
@@ -18,5 +20,6 @@ public class TopMenu
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</div>");
+
 	}
 }

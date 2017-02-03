@@ -65,14 +65,14 @@ public class Browse extends HttpServlet {
 				Statement statement = dbcon.createStatement();
 				
 				PrintWriter out = response.getWriter();
-				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Browse</title></head>");
+				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/browse.css'/><title>Browse</title></head>");
 			    out.println("<BODY>");
 			    TopMenu.print(out);
-			    out.println("<H1 ALIGN=\"CENTER\">Browse</H1>\n\n");
+			    out.println("<div class=\"wrapper\">");
 
 				//Browse by title
 			    out.println();
-			    out.println("<br><H2 ALIGN=\"CENTER\">Browse by Title</H2>\n </BODY>");	   
+			    out.println("<br><H1>Browse by Title</H1>\n </BODY>");	   
 			    String query = "SELECT left(title,1) from movies group by left(title,1) order by title";
 			    ResultSet rs = statement.executeQuery(query);
 
@@ -87,8 +87,8 @@ public class Browse extends HttpServlet {
 				/*
 				 * NOTES TO MO: I commented the parameters that are not like what is printed to be used in the query in the movielist page
 				 */
-			    out.println("<br><H2 ALIGN=\"CENTER\">Browse by Genre</H2>\n");
-			    out.println("<div style=\"float: left; width: 25%;\"><ul style=\"list-style: none;\">" + 
+			    out.println("<br><H1>Browse by Genre</H1>\n");
+			    out.println("<div class=\"wrapper\"><div id=\"cols\"><ul style=\"list-style: none;\">" + 
 				 
 			    		"<li><a href=\"./movielist?genre=Action\">Action</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Adventure\">Adventure</a></li>" +
@@ -100,7 +100,7 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=Detective\">Detective</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Documentary\">Documentary</a></li>" +
 			    		
-			    		"</ul></div><div style=\"float: left; width: 25%;\"><ul style=\"list-style: none;\">" +		    		
+			    		"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
 			    		
 			    		"<li><a href=\"./movielist?genre=Drama\">Drama</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Epics\">Epics/Historical</a></li>" +	//parameter is Epics
@@ -112,7 +112,7 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=Horror\">Horror</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Indie\">Indie</a></li>" +
 			    		
-						"</ul></div><div style=\"float: left; width: 25%;\"><ul style=\"list-style: none;\">" +		    		
+						"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
 
 			    		"<li><a href=\"./movielist?genre=James-Bond\">James Bond</a></li>" +	//parameter is James-Bond
 			    		"<li><a href=\"./movielist?genre=Kid\">Kid</a></li>" +
@@ -124,7 +124,7 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=Sci-Fi\">Science Fiction</a></li>" + //parameter is Sci-Fi
 			    		"<li><a href=\"./movielist?genre=Short\">Short</a></li>" +
 
-						"</ul></div><div style=\"float: left; width: 25%;\"><ul style=\"list-style: none;\">" +		    		
+						"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
 
 			    		"<li><a href=\"./movielist?genre=Spy\">Spy</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Suspense\">Suspense</a></li>" +
@@ -133,7 +133,7 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=War\">War</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Western\">Western</a></li>" +
 			    		
-			    		"</ul></div>");
+			    		"</ul></div></div></div></body>");
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
