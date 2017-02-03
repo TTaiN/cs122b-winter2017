@@ -121,7 +121,18 @@ public class Cart extends HttpServlet
 		}
 		else
 		{
-			Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+			Integer quantity;
+			
+			try
+			{
+				quantity = Integer.parseInt(request.getParameter("quantity"));
+			}
+			catch (NumberFormatException e)
+			{
+				request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
+				return;
+			}
+			
 			Movie movie = cart.getMovie(movie_id);
 			if (quantity == 0)
 			{
