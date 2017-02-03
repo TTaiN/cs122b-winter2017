@@ -1,12 +1,16 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import layout_helpers.TopMenu;
 
 /**
  * Servlet implementation class Search
@@ -37,6 +41,9 @@ public class Search extends HttpServlet {
 		}
 		else
 		{
+	        response.setContentType("text/html");
+	        PrintWriter out=response.getWriter();
+			TopMenu.print(out);
 			request.getRequestDispatcher("./Search.html").include(request, response);
 		}
 
