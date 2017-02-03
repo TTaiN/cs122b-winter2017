@@ -34,35 +34,36 @@ public class PrintMovies {
 		out.println("<tr class='border_bottom'><td class='field'><span>Stars</span></td>");
 		if( stars.isEmpty() )
 		{
-			out.println("<td class='info'><span>(none)</span></td></td></tr>");
+			out.println("<td class='info'><span>(none)</span></br></td></tr>");
 		}
 		else
 		{
 			out.println("<td class='info'><span>");
 			for (Map.Entry<Integer, String> star : stars.entrySet()) 
 				out.println("<a href='./star?id=" + star.getKey() + "'>" + star.getValue() + "</a><br>");
-			out.println("</span></td></td></tr>");
+			out.println("</span></br></td></tr>");
 		}
 		
 		List<String> genres = m.getGenres();
 		out.println("<tr class='border_bottom'><td class='field'><span>Genres</span></td>");
 		if( genres.isEmpty() )
 		{
-			out.println("<td class='info'><span>(none)</span></td></table></td></tr>");
+			out.println("<td class='info'><span>(none)</span></td></table></td></tr></table>");
 		}
 		else
 		{
 			out.println("<td class='info'><span>");
 			for (String g : genres) 
 				out.println(g + "</a><br>");
-			out.println("</span></td></table></td></tr>");
+			out.println("</span></td></table></td></tr></table>");
 		}
 		
 	}
-	public static void printSort(PrintWriter out, String genre, String firstChar, String title, String year, String director, String star, String sort)
+	
+	public static void printSort(PrintWriter out, String genre, String firstChar, String title, String year, String director, String star, String limit, String sort)
 	{
         out.println("<a href=\"./movielist?genre="+genre+"&firstChar="+firstChar+
-        		"&title="+title+"&year="+year+"&director="+director+"&star="+star+"&sort="+sort+"\" class=button>"+sort +"</a>");
+        		"&title="+title+"&year="+year+"&director="+director+"&star="+star+"&sort="+sort+"&limit="+limit+"\" class=button>"+sort +"</a>");
 	}
 	public static void printMovies(PrintWriter out, List<Movie> movieList, int page, int limit, String query)
 	{
@@ -109,6 +110,19 @@ public class PrintMovies {
 				
 			}
 		}
+	}
+	
+	public static void printDropDownMenu(PrintWriter out, String genre, String firstChar, String title, String year, String director, String star, String sort)
+	{
+		out.println("<div class=\"dropdown\"> <button class=\"dropbtn\">Results Per Page</button>"
+				+ "<div class=\"dropdown-content\">");
+		int[] n = {10, 25, 50, 100};
+		for(int i : n)
+		{
+			out.println("<a href=\"./movielist?genre="+genre+"&firstChar="+firstChar+
+        		"&title="+title+"&year="+year+"&director="+director+"&star="+star+"&sort="+sort+"&limit="+i+"\">"+i+"</a>");
+		}
+		out.println("</div></div>");
 	}
 
 }

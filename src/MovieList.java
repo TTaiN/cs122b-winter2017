@@ -56,14 +56,12 @@ public class MovieList extends HttpServlet {
 			List<Movie> movieList = new ArrayList<Movie>();
 	        String pageString = request.getParameter("page");
 	        int page;
-	        int limit = 15;
+	        int limit;
 	        if( pageString == null )
 				page = 1;
 	        else
 	        	page = Integer.parseInt(pageString);
 	        
-
-
 	        // Get all possible parameters
 	        String genre = request.getParameter("genre");
 	        String firstChar = request.getParameter("firstchar");
@@ -72,21 +70,32 @@ public class MovieList extends HttpServlet {
 	        String director = request.getParameter("director");
 	        String star = request.getParameter("star");
 	        String sort = request.getParameter("sort");
+	        String lim = request.getParameter("limit");
+	        if(lim == null || lim == "")
+	        	limit = 10;
+	        else
+	        	limit = Integer.parseInt(lim);
 	        
 	        out.println("<div align=center>Sort by: ");
 	        PrintMovies.printSort(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
-	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), "Title ASC");
+	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(lim), "Title ASC");
 	        PrintMovies.printSort(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
-	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), "Title DESC");
+	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(lim), "Title DESC");
 	        PrintMovies.printSort(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
-	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), "Year ASC");
+	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(lim), "Year ASC");
 	        PrintMovies.printSort(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
-	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), "Year DESC");
+	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(lim), "Year DESC");
 	        out.println("</div>");
+	        
+	        out.println("<div align=center>");
+	        PrintMovies.printDropDownMenu(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
+	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(sort));
+	        out.println("<div>");
+
 
 	        
 	        // If not specified sort by title by default
-	        if(sort == null)
+	        if(sort == null || sort == "")
 	        {
 	        	sort = "title";
 	        }
