@@ -48,13 +48,14 @@ public class MovieView extends HttpServlet
 			try
 			{
 				MovieViewDB db = new MovieViewDB();
-				movie = db.getMovie(movie_id);
-				movie.setStars(db.getStarsForMovie(movie_id));
+				movie = db.getCompleteMovie(movie_id);
 				db.close();
 				request.setAttribute("movie", movie);
+				System.out.println("Movie Title: " + movie.getTitle());
 			}
 			catch (SQLException e)
 			{
+				e.printStackTrace();
 				response.sendRedirect("./main"); // need to specify behavior when wrong id is entered.
 				return;
 			}

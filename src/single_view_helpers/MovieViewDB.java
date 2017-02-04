@@ -39,8 +39,8 @@ public class MovieViewDB
 	{
 		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();
 		
-		ResultSet genre_list = db.executePreparedStatement("SELECT * FROM genres WHERE genre.id IN "
-		+ "(SELECT genres_in_movies.genre_id FROM genre_in_movies WHERE movie_id = "+ movie_id + ");");
+		ResultSet genre_list = db.executePreparedStatement("SELECT * FROM genres WHERE genres.id IN "
+		+ "(SELECT genres_in_movies.genre_id FROM genres_in_movies WHERE movie_id = "+ movie_id + ");");
 		
 		while (genre_list.next())
 		{

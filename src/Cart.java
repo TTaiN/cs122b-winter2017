@@ -98,8 +98,7 @@ public class Cart extends HttpServlet
 			try
 			{
 				MovieViewDB db = new MovieViewDB();
-				Movie movie = db.getMovie(movie_id);
-				movie.setStars(db.getStarsForMovie(movie_id));
+				Movie movie = db.getCompleteMovie(movie_id);
 				db.close();
 				Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 				cart.addToCart(movie, quantity);
