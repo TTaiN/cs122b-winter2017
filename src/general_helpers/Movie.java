@@ -15,7 +15,7 @@ public class Movie
 	private String banner;
 	private String trailer;
 	private LinkedHashMap <Integer, String> stars;
-	private List<String> genres;
+	private LinkedHashMap<Integer, String> genres;
 	private double price = 14.99;
 	private int quantity = 0;
 	
@@ -132,10 +132,10 @@ public class Movie
 	public void setStars(LinkedHashMap<Integer, String> stars) {
 		this.stars = stars;
 	}
-	public List<String> getGenres() {
+	public LinkedHashMap<Integer, String> getGenres() {
 		return genres;
 	}
-	public void setGenres(List<String> genres) {
+	public void setGenres(LinkedHashMap<Integer, String> genres) {
 		this.genres = genres;
 	}
 	
