@@ -11,7 +11,7 @@ public class PrintMovies {
 	static private void printMovie(Movie m, PrintWriter out)
 	{
 		out.println("<table class='movie_detail'>");
-		out.println("<tr> <td class='container'><img src=" + m.getBanner() + "></td><td class='container'>");
+		out.println("<tr> <td class='container'><img class='banner' src=" + m.getBanner() + "></td><td class='container'>");
 		out.println("<table><caption><a href='./movie?id=" + m.getId() + "'>" + m.getTitle() + "</a></caption>");
 		
 		out.println("<tr class='border_bottom'><td class='field'><span>Movie ID</span></td>");
