@@ -30,31 +30,31 @@ public class PrintMovies {
 			out.println("<td class='info'><span> <a href='" + m.getTrailer() + "'>Click here to watch the trailer</a>" 
 					+ "</span><br></td></tr>");
 		
-		LinkedHashMap<Integer, String> stars = m.getStars();
-		out.println("<tr class='border_bottom'><td class='field'><span>Stars</span></td>");
-		if( stars.isEmpty() )
+		LinkedHashMap<Integer, String> genres = m.getGenres();
+		out.println("<tr class='border_bottom'><td class='field'><span>Genres</span></td>");
+		if( genres.isEmpty() )
 		{
 			out.println("<td class='info'><span>(none)</span></br></td></tr>");
 		}
 		else
 		{
 			out.println("<td class='info'><span>");
-			for (Map.Entry<Integer, String> star : stars.entrySet()) 
-				out.println("<a href='./star?id=" + star.getKey() + "'>" + star.getValue() + "</a><br>");
+			for (Map.Entry<Integer, String> genre : genres.entrySet()) 
+				out.println("<a href='./movielist?genre=" + genre.getValue() + "'>" + genre.getValue() + "</a><br>");
 			out.println("</span></br></td></tr>");
 		}
 		
-		LinkedHashMap<Integer, String> genres = m.getGenres();
-		out.println("<tr class='border_bottom'><td class='field'><span>Genres</span></td>");
-		if( genres.isEmpty() )
+		LinkedHashMap<Integer, String> stars = m.getStars();
+		out.println("<tr class='border_bottom'><td class='field'><span>Stars</span></td>");
+		if( stars.isEmpty() )
 		{
 			out.println("<td class='info'><span>(none)</span></td></table></td></tr></table>");
 		}
 		else
 		{
 			out.println("<td class='info'><span>");
-			for (String g : genres.values()) 
-				out.println(g + "</a><br>");
+			for (Map.Entry<Integer, String> star : stars.entrySet()) 
+				out.println("<a href='./star?id=" + star.getKey() + "'>" + star.getValue() + "</a><br>");
 			out.println("</span></td></table></td></tr></table>");
 		}
 		
