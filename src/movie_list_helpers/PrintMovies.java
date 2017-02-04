@@ -99,14 +99,14 @@ public class PrintMovies {
 			}
 			if( page > 1)
 			{
-				out.println("<div align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) + "\">" 
+				out.println("<div class='page-div' align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) + "\">" 
 		        		+ "Prev</a> Page " + page + " ");
 				out.println("<a href=\"./movielist?" + query + "&page=" + (page+1) + "\">" 
 		    		 + "Next</a><br></td></div>");
 			}
 			else
 			{
-				out.println("<div align=center>Page " + page +" <a href=\"./movielist?" + query + "&page=" + (page+1) + "\">" 
+				out.println("<div class='page-div' align=center>Page " + page +" <a href=\"./movielist?" + query + "&page=" + (page+1) + "\">" 
 			    		 + "Next</a><br></td></div>");
 				
 			}
