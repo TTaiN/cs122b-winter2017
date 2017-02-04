@@ -113,3 +113,9 @@ a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+
+.banner
+{
+	max-height: 150px;
+	max-width: 150px;
+}
