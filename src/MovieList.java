@@ -92,7 +92,7 @@ public class MovieList extends HttpServlet {
 	        out.println("<div align=center>");
 	        PrintMovies.printDropDownMenu(out, nullToBlank(genre), nullToBlank(firstChar), nullToBlank(title),
 	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(sort));
-	        out.println("<div>");
+	        out.println("</div>");
 
 	        // If not specified sort by title by default
 	        if(sort == null || sort == "")
@@ -129,6 +129,7 @@ public class MovieList extends HttpServlet {
 	        	
 	        	movieList = mldb.getMovies(limit, (page-1)*limit, title, director, year, star, sort);
 	        	PrintMovies.printMovies(out, movieList, page, limit, query);
+
 	        }
 			}catch(Exception e){
 				response.sendRedirect("./main");
