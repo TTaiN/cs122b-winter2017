@@ -129,6 +129,7 @@ public class MovieList extends HttpServlet {
 	        	
 	        	movieList = mldb.getMovies(limit, (page-1)*limit, title, director, year, star, sort);
 	        	PrintMovies.printMovies(out, movieList, page, limit, query);
+	        	mldb.dbh.closeConnection();
 
 	        }
 			}catch(Exception e){
