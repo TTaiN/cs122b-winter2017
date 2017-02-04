@@ -10,6 +10,7 @@ import general_helpers.Movie;
 public class PrintMovies {
 	static private void printMovie(Movie m, PrintWriter out)
 	{
+		out.println("<div class='entry'>");
 		out.println("<table class='movie_detail'>");
 		out.println("<tr> <td class='container'><img class='banner' src=" + m.getBanner() + "></td><td class='container'>");
 		out.println("<table><caption><a href='./movie?id=" + m.getId() + "'>" + m.getTitle() + "</a></caption>");
@@ -57,7 +58,7 @@ public class PrintMovies {
 				out.println("<a href='./star?id=" + star.getKey() + "'>" + star.getValue() + "</a><br>");
 			out.println("</span></td></table></td></tr></table>");
 		}
-		
+		out.println("</div>");		
 	}
 	
 	public static void printSort(PrintWriter out, String genre, String firstChar, String title, String year, String director, String star, String limit, String sort)

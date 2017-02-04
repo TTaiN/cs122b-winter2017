@@ -4,6 +4,13 @@
    padding:	30px;
 }
  
+.entry
+{
+    float: left;
+    margin: 10px;
+    border: 3px solid black; 
+}
+
 table
 {
    border: 1px solid black;
@@ -38,7 +45,6 @@ table
  .info
 {
  	padding:5px;
- 	width: 260px;
 }
 
 tr.border_bottom td /* Credit: http://stackoverflow.com/questions/10040842/add-border-bottom-to-table-row-tr */
@@ -47,20 +53,9 @@ tr.border_bottom td /* Credit: http://stackoverflow.com/questions/10040842/add-b
   padding:5px;
 }
 
-.focus 
-{
-  width: 800px ;
-  margin-left: auto ;
-  margin-right: auto ;
-  
-}
-
 .movie_detail
 {
    border: 1px solid black;
-   margin-left: auto;
-   margin-right: auto;
-   align: center;
 }
 
 a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an-html-button-that-acts-like-a-link*/
