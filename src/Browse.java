@@ -10,7 +10,6 @@
  * 			adventure/advanture typo, comedy/commedy typo, lower case, roman vs romance, etc.
  */
 
-
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +21,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import layout_helpers.TopMenu;
+import general_helpers.DatabaseHelper;
 
 
 
@@ -31,10 +31,7 @@ import layout_helpers.TopMenu;
 
 public class Browse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String loginUser = "cs122b";
-    String loginPasswd = "cs122bgroup42";
-    String loginUrl = "jdbc:mysql://35.167.240.46/moviedb";
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,8 +45,10 @@ public class Browse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
+		DatabaseHelper db = null;
 		
 		if (username == null)
 		{
@@ -58,12 +57,7 @@ public class Browse extends HttpServlet {
 		else
 		{
 			try {
-				 // connect to db
-				Connection dbcon;
-				dbcon = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);	//do we need to connect in every servlet??
-				// @Yolie: i get this error sometimes http://ttain.tk/upload/eclipse_2017-02-01_00-11-03.png
-				Statement statement = dbcon.createStatement();
-				
+				db = new DatabaseHelper();
 				PrintWriter out = response.getWriter();
 				out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/browse.css'/><title>Browse</title></head>");
 			    out.println("<BODY>");
@@ -74,7 +68,7 @@ public class Browse extends HttpServlet {
 			    out.println();
 			    out.println("<br><H1>Browse by Title</H1>\n </BODY>");	   
 			    String query = "SELECT left(title,1) from movies group by left(title,1) order by title";
-			    ResultSet rs = statement.executeQuery(query);
+			    ResultSet rs = db.executeSQL(query);
 
 			    out.println("<p ALIGN=\"CENTER\">");
 			    while (rs.next()) 
@@ -88,11 +82,11 @@ public class Browse extends HttpServlet {
 			    out.println("<div class=\"wrapper\"><div id=\"cols\"><ul style=\"list-style: none;\">" + 
 				 
 			    		"<li><a href=\"./movielist?genre=Action\">Action</a></li>" +
-			    		"<li><a href=\"./movielist?genre=Adventure\">Adventure</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Adv nture\">Adventure</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Animation\">Animation</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Arts\">Arts</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Classic\">Classic</a></li>" +
-			    		"<li><a href=\"./movielist?genre=Comedy\">Comedy</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Com edy\">Comedy</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Crime\">Crime</a></li>" +
 			    		
 			    		"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
@@ -123,13 +117,18 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=War\">War</a></li>" +
 			    		
 			    		"</ul></div></div></div></body>");
-
-			} catch (SQLException e) {
+			    
+			} catch(SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
-		    
-		                
+			} finally {
+				try {
+					db.closeConnection();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
