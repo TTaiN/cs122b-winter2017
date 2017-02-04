@@ -9,6 +9,7 @@
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("movie") == null)
 	{
+		System.out.println("TEST");
 		response.sendRedirect("./login");
 	}
 	Movie movie = (Movie) request.getAttribute("movie");
@@ -56,8 +57,13 @@
 							<td class='info'><span><%= movie.getTrailer().equals("(none)") ? "(none)" : "<a href='"+movie.getTrailer()+"'>Click here to watch the trailer</a>" %></span><br></td>
 						</tr>
 						<tr class='border_bottom'>
+							<td class='field'>Genres</td>
+							<td class='info'><span><%= movie.getGenresHTMLString() %></span></td>
+						</tr>
+						<tr class='border_bottom'>
 							<td class='field'>Stars</td>
 							<td class='info'><span><%= movie.getStarsHTMLString() %></span></td>
+						</tr>
 						<tr class='border_bottom/'>
 							<td class='field'>Price</td>
 							<td class='info'><span>$<%= movie.getPrice() %> per copy</span></td>

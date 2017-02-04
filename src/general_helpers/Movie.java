@@ -174,6 +174,19 @@ public class Movie
 		else return "(none)";
 	}
 	
+	public String getGenresHTMLString()
+	{
+		StringBuilder result = new StringBuilder("");
+		if (genres != null && !genres.isEmpty())
+		{ 
+			for (Integer genre_id : genres.keySet())
+			{
+				result.append("<a href='./movielist?genre=" + genres.get(genre_id) + "'>" + genres.get(genre_id) + "</a><br>");
+			}
+			return result.toString();
+		}
+		else return "(none)";
+	}
 }
 
 
