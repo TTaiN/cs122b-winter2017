@@ -29,7 +29,7 @@
 		<h1 class='title'><%= star.getFirstName() + " " + star.getLastName() %></h1>
 		<table class='movie_detail'>
 			<tr>
-				<td class='container'><img src='<%= star.getPhoto() %>'/></td>
+				<td class='container'><img class='banner' src='<%= star.getPhoto() %>'/></td>
 				<td class='container'>
 					<table>
 						<caption>Star Information</caption>

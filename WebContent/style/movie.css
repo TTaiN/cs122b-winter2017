@@ -62,3 +62,9 @@ tr.border_bottom td /* Credit: http://stackoverflow.com/questions/10040842/add-b
    margin-right: auto;
    align: center;
 }
+
+.banner
+{
+	max-height: 150px;
+	max-width: 150px;
+}

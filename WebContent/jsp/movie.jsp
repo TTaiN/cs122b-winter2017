@@ -32,7 +32,7 @@
 		<h1 class='title'><%= movie.getTitle() %></h1>
 		<table class='movie_detail'>
 			<tr>
-				<td class='container'><img src='<%= movie.getBanner() %>'/></td>
+				<td class='container'><img class='banner' src='<%= movie.getBanner() %>'/></td>
 				<td class='container'>
 					<table>
 						<caption>Movie Information</caption>
