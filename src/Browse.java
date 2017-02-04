@@ -112,14 +112,12 @@ public class Browse extends HttpServlet {
 			    		"<li><a href=\"./movielist?genre=Bond\">James Bond</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Musical\">Musical</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Mystery\">Mystery</a></li>" +
-			    		"<li><a href=\"./movielist?genre=Roman\">Roman</a></li>" +
-			    		"<li><a href=\"./movielist?genre=Romance\">Romance</a></li>" +
-			    		
+			    		"<li><a href=\"./movielist?genre=Roman\">Romance</a></li>" +
+			    		"<li><a href=\"./movielist?genre=Sci\">Science Fiction</a></li>" + 
 
 						"</ul></div><div id=\"cols\"><ul style=\"list-style: none;\">" +		    		
 
-						"<li><a href=\"./movielist?genre=Sci\">Science Fiction</a></li>" + 
-			    		"<li><a href=\"./movielist?genre=Spy\">Spy</a></li>" +
+						"<li><a href=\"./movielist?genre=Spy\">Spy</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Suspense\">Suspense</a></li>" +
 			    		"<li><a href=\"./movielist?genre=Thriller\">Thriller</a></li>" +
 			    		"<li><a href=\"./movielist?genre=War\">War</a></li>" +
