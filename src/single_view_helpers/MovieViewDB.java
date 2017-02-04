@@ -26,6 +26,29 @@ public class MovieViewDB
 		else throw new SQLException();
 	}
 	
+	public Movie getCompleteMovie(int movie_id) throws SQLException
+	{
+		Movie movie = getMovie(movie_id);		
+		movie.setStars(getStarsForMovie(movie_id));
+		movie.setGenres(getGenresForMovie(movie_id));
+		return movie;
+		
+	}
+	
+	public LinkedHashMap<Integer, String> getGenresForMovie(int movie_id) throws SQLException
+	{
+		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();
+		
+		ResultSet genre_list = db.executePreparedStatement("SELECT * FROM genres WHERE genre.id IN "
+		+ "(SELECT genres_in_movies.genre_id FROM genre_in_movies WHERE movie_id = "+ movie_id + ");");
+		
+		while (genre_list.next())
+		{
+			result.put(genre_list.getInt("id"), genre_list.getString("name"));
+		}
+		return result;
+	}
+	
 	public LinkedHashMap<Integer, String> getStarsForMovie(int movie_id) throws SQLException
 	{
 		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();

@@ -44,7 +44,7 @@ public class PrintMovies {
 			out.println("</span></br></td></tr>");
 		}
 		
-		List<String> genres = m.getGenres();
+		LinkedHashMap<Integer, String> genres = m.getGenres();
 		out.println("<tr class='border_bottom'><td class='field'><span>Genres</span></td>");
 		if( genres.isEmpty() )
 		{
@@ -53,7 +53,7 @@ public class PrintMovies {
 		else
 		{
 			out.println("<td class='info'><span>");
-			for (String g : genres) 
+			for (String g : genres.values()) 
 				out.println(g + "</a><br>");
 			out.println("</span></td></table></td></tr></table>");
 		}
