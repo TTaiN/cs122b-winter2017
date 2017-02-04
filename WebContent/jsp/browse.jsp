@@ -30,11 +30,14 @@
 </head>
 <BODY>
 	<%
+	if ((request.getAttribute("inMain") == null))
+	{
 		TopMenu.print(response.getWriter());
+	}
 	%>
 <div class="wrapper">
-	<br>
-	<H1>Browse by Title</H1>
+	
+	<H2>Browse by title</H2>
 
 	<p ALIGN="CENTER">
 				    
@@ -50,7 +53,7 @@
 	</p>
 </div>
 
-<br><H1>Browse by Genre</H1>
+<br><H2>Browse by genre</H2>
 <div class="wrapper">
 	<div id="cols">
 		<ul style="list-style: none;"> 

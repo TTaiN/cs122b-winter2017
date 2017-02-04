@@ -24,12 +24,13 @@ public class Main extends HttpServlet
 		}
 		else
 		{
+			
 			PrintWriter out = response.getWriter();
 		    out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Main</title></head><body>");
 		    TopMenu.print(out);
-		    out.println("<H3 ALIGN=\"CENTER\">Welcome to Fabflix!</H3><br>\n" +
-		                "<a href=\"./search\"><H2 ALIGN=\"CENTER\">Click to Search</H2>\n" +
-		                "<a href=\"./browse\"><H2 ALIGN=\"CENTER\">Click to Browse</H2></a>\n</body>");
+		    out.println("<H2 ALIGN=\"CENTER\"><a href=\"./search\">Search for movies</a>   <img src=\"./images/searchlogo.png\" style=\"height:18px\"></H2><h4 align=\"center\">- or -</h4><body>");
+		    request.setAttribute("inMain", true);
+		    request.getRequestDispatcher("/browse").include(request, response);
 		}
 		
 	}
