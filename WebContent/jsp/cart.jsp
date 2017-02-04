@@ -68,6 +68,10 @@
 						out.println("<input type='number' name='quantity' min='0' value='" + current.getQuantity() + "'/>");
 						out.println("<input type='submit' name='action' value='Update Quantity'/>");
 						out.println("</form>");
+						out.println("<form action='./cart' method='post'>");
+						out.println("<input type='hidden' name='movie_id' value='" + id + "'/>");
+						out.println("<input type='submit' name='action' value='Remove'/>");
+						out.println("</form>");
 						out.println("</td>");
 						out.println("<td class='info'>");
 						out.println(formatter.format(current.getQuantity() * current.getPrice()));

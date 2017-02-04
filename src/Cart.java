@@ -43,21 +43,31 @@ public class Cart extends HttpServlet
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
+		String action = request.getParameter("action");
 		
 		if (username == null)
 		{
 			response.sendRedirect("./login");
 		}
-		else if (request.getParameter("action") != null)
+		else if (action != null)
 		{
 			ShoppingCart cart = new ShoppingCart(session);
-			if (request.getParameter("action").equals("Add to Cart"))
+			
+			if (action.equals("Add to Cart"))
 			{
 				addToCartHandler(cart, request);
 			}
-			else if (request.getParameter("action").equals("Update Quantity"))
+			else if (action.equals("Add More to Cart"))
+			{
+				
+			}
+			else if (action.equals("Update Quantity"))
 			{
 				updateQuantityHandler(cart, request);
+			}
+			else if (action.equals("Remove"))
+			{
+				removeFromCartHandler(cart, request);
 			}
 		}
 		
@@ -111,10 +121,26 @@ public class Cart extends HttpServlet
 		}
 	}
 	
+	
+	protected void removeFromCartHandler(ShoppingCart cart, HttpServletRequest request)
+	{
+		Integer movie_id = Integer.parseInt(request.getParameter("movie_id"));
+		if (!cart.contains(movie_id))
+		{
+			request.setAttribute("notice", "[NOTICE] You do not have that item in your cart.");
+		}
+		else
+		{
+			String movieTitle = cart.getMovie(movie_id).getTitle();
+			cart.removeMovie(movie_id);
+			request.setAttribute("notice", "[NOTICE] The item <a href='./movie?id=" + movie_id + "'>\"" + movieTitle + "\"</a> was removed from your cart.");
+		}
+	}
+	
 	protected void updateQuantityHandler(ShoppingCart cart, HttpServletRequest request)
 	{
 		Integer movie_id = Integer.parseInt(request.getParameter("movie_id"));
-		if (!cart.exists() || !cart.contains(movie_id))
+		if (!cart.contains(movie_id))
 		{
 			request.setAttribute("notice", "[NOTICE] You don't have this item in your cart, so updating the quantity failed.");
 		}

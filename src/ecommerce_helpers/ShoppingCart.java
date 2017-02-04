@@ -35,7 +35,7 @@ public class ShoppingCart
 	// Begin Checkers
 	public boolean contains(int movie_id) // again, cleaner null case
 	{
-		if (cart != null)
+		if (exists())
 		{
 			return cart.containsKey(movie_id);
 		}
@@ -44,7 +44,7 @@ public class ShoppingCart
 	
 	public boolean isEmpty() // lets me handle null cases better
 	{
-		if (cart != null)
+		if (exists())
 		{
 			return cart.isEmpty();
 		}
@@ -55,7 +55,7 @@ public class ShoppingCart
 	
 	public int size()
 	{
-		if (!exists() || cart.isEmpty())
+		if (isEmpty())
 		{
 			return 0;
 		}
@@ -63,7 +63,7 @@ public class ShoppingCart
 	}
 	public boolean addToCart(Movie movie, int quantity) // lets me handle null cases better
 	{
-		if (!exists() || contains(movie.getId()))
+		if (contains(movie.getId()))
 		{
 			return false;
 		}
@@ -77,7 +77,7 @@ public class ShoppingCart
 	
 	public boolean removeMovie(int movie_id) // lets me handle null cases better
 	{
-		if (exists() && contains(movie_id))
+		if (contains(movie_id))
 		{
 			cart.remove(movie_id);
 			return true;
@@ -88,7 +88,7 @@ public class ShoppingCart
 	
 	public Movie getMovie(int movie_id) // lets me handle null cases better
 	{
-		if (exists() && contains(movie_id))
+		if (contains(movie_id))
 		{
 			return cart.get(movie_id);
 		}
@@ -102,7 +102,7 @@ public class ShoppingCart
 	
 	public int updateQuantity(int movie_id, int quantity) // lets me handle null cases better
 	{
-		if (exists() && contains(movie_id))
+		if (contains(movie_id))
 		{
 			Movie movie = getMovie(movie_id);
 			Integer previousQuantity = movie.getQuantity();
@@ -114,7 +114,7 @@ public class ShoppingCart
 	
 	public int getQuantity(int movie_id) // lets me handle null cases better
 	{
-		if (exists() && contains(movie_id))
+		if (contains(movie_id))
 		{
 			return getMovie(movie_id).getQuantity();
 		}
