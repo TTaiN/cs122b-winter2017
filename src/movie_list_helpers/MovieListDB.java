@@ -1,35 +1,26 @@
 package movie_list_helpers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import general_helpers.DatabaseHelper;
 import general_helpers.Movie;
 
 public class MovieListDB {
 	
-    private static String loginUser = "cs122b";
-    private static String loginPasswd = "cs122bgroup42";
-    private static String loginUrl = "jdbc:mysql://35.167.240.46/moviedb";
+	public DatabaseHelper dbh; 
 	
-	// Connect to moviedb
-	public static Connection getConnection(){  
-		Connection connection=null;  
-        try{  
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            connection = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
-        }catch(Exception e){System.out.println(e);}  
-        return connection;  
-    }
+	public MovieListDB() throws SQLException
+	{
+		dbh = new DatabaseHelper();
+	}
 	
 	// getMovie
 	// Get one movie from current row
-	public static Movie getMovie(ResultSet rs, Connection connection) throws SQLException
+	public Movie getMovie(ResultSet rs) throws SQLException
 	{
 		Movie m = new Movie();
 
@@ -42,11 +33,9 @@ public class MovieListDB {
 		m.setTrailer(rs.getString(6));
 		
 		// Get stars of the movie
-		LinkedHashMap <Integer, String> stars = new LinkedHashMap<Integer, String>(); // note to Mo: here we should use LinkedHashMap to preserve any ordering
-		PreparedStatement query = connection.prepareStatement(
-				"select id, first_name, last_name from stars where id =some "
+		LinkedHashMap <Integer, String> stars = new LinkedHashMap<Integer, String>();
+		ResultSet rs2 = dbh.executePreparedStatement("select id, first_name, last_name from stars where id =some "
 				+ "(select star_id from stars_in_movies where movie_id= " + m.getId() + ")");
-		ResultSet rs2 = query.executeQuery();
 		while(rs2.next())
 		{
 			stars.put(rs2.getInt(1), rs2.getString(2) + " " + rs2.getString(3));
@@ -54,13 +43,12 @@ public class MovieListDB {
 		m.setStars(stars);
 		
 		// Get genres of the movie
-		List <String> genres = new ArrayList<String>();
-		PreparedStatement query2 = connection.prepareStatement("select name from genres where id =some "
+		LinkedHashMap <Integer, String> genres = new LinkedHashMap<Integer, String>();
+		ResultSet rs3 = dbh.executePreparedStatement("select id, name from genres where id =some "
 				+ "(select genre_id from genres_in_movies where movie_id= " + m.getId() + ")");
-		ResultSet rs3 = query2.executeQuery();
 		while(rs3.next())
 		{
-			genres.add(rs3.getString(1));
+			genres.put(rs3.getInt(1), rs3.getString(2));
 		}
 		m.setGenres(genres);
 
@@ -71,23 +59,20 @@ public class MovieListDB {
 	// Get a list of all Movies matching the search criteria
 	
 	// getMovies (Genre)
-	public static List<Movie> getMovies(int limit, int offset, String genre, String sort)
+	public List<Movie> getMovies(int limit, int offset, String genre, String sort)
 	{
 		List<Movie> movieList = new ArrayList<Movie>();
 		try
 		{
 			String where = Where.getWhere(genre, "name");
 			
-			Connection connection = getConnection();
-			PreparedStatement query = 
-					connection.prepareStatement("select * from movies where id =some"
-							+ " (select movie_id from genres_in_movies where genre_id=some"
-							+ " (select id from genres where " + where + ")) "
-							+ " order by " + sort + " limit " + limit + " offset " + offset);
-			ResultSet rs = query.executeQuery();
+			ResultSet rs = dbh.executePreparedStatement("select * from movies where id =some"
+					+ " (select movie_id from genres_in_movies where genre_id=some"
+					+ " (select id from genres where " + where + ")) "
+					+ " order by " + sort + " limit " + limit + " offset " + offset);
 			while(rs.next())
 			{
-				movieList.add(getMovie(rs, connection));
+				movieList.add(getMovie(rs));
 			}
 		}
 		catch(Exception e){System.out.println(e);}
@@ -95,19 +80,16 @@ public class MovieListDB {
 	}
 	
 	// getMovies (First character)
-	public static List<Movie> getMovies(int limit, int offset, char firstChar, String sort)
+	public List<Movie> getMovies(int limit, int offset, char firstChar, String sort)
 	{
 		List<Movie> movieList = new ArrayList<Movie>();
 		try
 		{
-			Connection connection = getConnection();
-			PreparedStatement query = 
-					connection.prepareStatement("select * from movies where left(title, 1) = '" + 
-							firstChar + "' order by " + sort + " limit " + limit + " offset " + offset);
-			ResultSet rs = query.executeQuery();
+			ResultSet rs = dbh.executePreparedStatement("select * from movies where left(title, 1) = '" + 
+					firstChar + "' order by " + sort + " limit " + limit + " offset " + offset);
 			while(rs.next())
 			{
-				movieList.add(getMovie(rs, connection));
+				movieList.add(getMovie(rs));
 			}
 		}
 		catch(Exception e){System.out.println(e);}
@@ -115,7 +97,7 @@ public class MovieListDB {
 	}
 	
 	// getMovies (Search)
-	public static List<Movie> getMovies(int limit, int offset, String title, String director,
+	public List<Movie> getMovies(int limit, int offset, String title, String director,
 			String year, String star, String sort)
 	{
 		List<Movie> movieList = new ArrayList<Movie>();
@@ -125,17 +107,16 @@ public class MovieListDB {
 			String titleWhere = Where.getWhere(title, "title");
 			String directorWhere = Where.getWhere(director, "director");
 			String yearWhere = Where.getWhere(year, "year");
-			Connection connection = getConnection();
-			PreparedStatement query = connection.prepareStatement("select * from movies where " +
+
+			ResultSet rs = dbh.executePreparedStatement("select * from movies where " +
 					titleWhere + " and " + directorWhere + " and " + yearWhere + " and id=some "
 					+ "(select movie_id from stars_in_movies where star_id=some"
 					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
 					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + limit
 					+ " offset " + offset);
-			ResultSet rs = query.executeQuery();
 			while(rs.next())
 			{
-				movieList.add(getMovie(rs, connection));
+				movieList.add(getMovie(rs));
 			}
 		}
 		catch(Exception e){System.out.println(e);}

@@ -46,6 +46,8 @@ public class MovieList extends HttpServlet {
 		}
 		else
 		{
+			try{
+			MovieListDB mldb = new MovieListDB();
 	        response.setContentType("text/html");  
 	        PrintWriter out=response.getWriter();
 			out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/>\n"
@@ -92,8 +94,6 @@ public class MovieList extends HttpServlet {
 	        		nullToBlank(year), nullToBlank(director), nullToBlank(star), nullToBlank(sort));
 	        out.println("<div>");
 
-
-	        
 	        // If not specified sort by title by default
 	        if(sort == null || sort == "")
 	        {
@@ -104,7 +104,7 @@ public class MovieList extends HttpServlet {
 	        if(genre != null && genre != "")
 	        {
 	        	String query = "genre=" + genre + "&sort=" + sort;
-	        	movieList = MovieListDB.getMovies(limit, (page-1)*limit, genre, sort);
+	        	movieList = mldb.getMovies(limit, (page-1)*limit, genre, sort);
 	        	PrintMovies.printMovies(out, movieList, page, limit, query);
 	        }
 	        
@@ -112,7 +112,7 @@ public class MovieList extends HttpServlet {
 	        else if(firstChar != null && firstChar != "")
 	        {
 	        	String query = "firstchar=" + firstChar + "&sort=" + sort;
-	        	movieList = MovieListDB.getMovies(limit, (page-1)*limit, firstChar.charAt(0), sort);
+	        	movieList = mldb.getMovies(limit, (page-1)*limit, firstChar.charAt(0), sort);
 	        	PrintMovies.printMovies(out, movieList, page, limit, query);
 	        }
 	        
@@ -127,10 +127,12 @@ public class MovieList extends HttpServlet {
 	        	String query = "title=" + title + "&year=" + year + "&director=" + director +
 	        			"&star=" + star + "&sort=" + sort;
 	        	
-	        	movieList = MovieListDB.getMovies(limit, (page-1)*limit, title, director, year, star, sort);
+	        	movieList = mldb.getMovies(limit, (page-1)*limit, title, director, year, star, sort);
 	        	PrintMovies.printMovies(out, movieList, page, limit, query);
 	        }
-
+			}catch(Exception e){
+				response.sendRedirect("./main");
+			}
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
