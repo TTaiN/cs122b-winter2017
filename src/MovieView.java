@@ -51,7 +51,6 @@ public class MovieView extends HttpServlet
 				movie = db.getCompleteMovie(movie_id);
 				db.close();
 				request.setAttribute("movie", movie);
-				System.out.println("Movie Title: " + movie.getTitle());
 			}
 			catch (SQLException e)
 			{
