@@ -1,9 +1,11 @@
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import layout_helpers.TopMenu;
 
+@WebServlet("/main")
 public class Main extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
