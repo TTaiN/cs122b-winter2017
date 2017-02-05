@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 
 import general_helpers.DatabaseHelper;
-import general_helpers.Movie;
 import general_helpers.Star;
 
 public class StarViewDB 
