@@ -3,13 +3,11 @@ Winter 2017 | Group 42
 
 # Team Members
 https://github.com/TTaiN
-
-# Project Slack
-()
+https://github.com/yolienic
+https://github.com/Moe202
 
 # Project Googledoc
 https://docs.google.com/a/uci.edu/document/d/1eHn-Axa_dowRwcM0BKsZRBeXInlQ3ouPXZoznl3ylBk/edit?usp=sharing
-(Requires UCI e-mail to edit/view)
 
 # Project 2 Resources
 Original genre list in the database
