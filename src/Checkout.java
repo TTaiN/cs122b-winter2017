@@ -27,9 +27,9 @@ public class Checkout extends HttpServlet
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		ShoppingCart cart = new ShoppingCart(session);
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		
-		if (username == null || cart.isEmpty())
+		if (username == null || cart == null || cart.isEmpty())
 		{
 			response.sendRedirect("./login");
 			return;
@@ -45,6 +45,16 @@ public class Checkout extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+		
+		if (username == null || cart == null || cart.isEmpty())
+		{
+			response.sendRedirect("./login");
+			return;
+		}
+				
 		ArrayList<String> messages = new ArrayList<String>();
 		String number = request.getParameter("number");
 		String firstName = request.getParameter("firstName");
@@ -56,38 +66,22 @@ public class Checkout extends HttpServlet
 			OrderDB newOrder = new OrderDB(number, firstName, lastName, date);
 			if (newOrder.validateInfo(messages)) // if order has valid info
 			{
-				printParameters(request, response);
+				cart.setCustomerInformation(number, firstName, lastName, date);
+				session.setAttribute("confirmation", true);
+				response.sendRedirect("./orderConfirmation");
 			}
 			else // order doesnt have valid info
 			{
 				request.setAttribute("reason", "Checkout");
 				request.setAttribute("messages", messages);
 				request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
-				return;
 			}
 			newOrder.close();
+			return;
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
-		
-		//doGet(request, response);
 	}
-	
-	protected void printParameters(HttpServletRequest request, HttpServletResponse response)
-	{
-		for (String parameter : request.getParameterMap().keySet())
-		{
-			try
-			{
-				response.getWriter().println("Parameter |" + parameter + "|:" + request.getParameter(parameter));
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
-
 }

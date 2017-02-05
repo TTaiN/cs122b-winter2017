@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@ page import="layout_helpers.TopMenu" %>
 <%@ page import="general_helpers.Movie" %>
@@ -13,10 +12,12 @@
 		return;
 	}
 
-	ShoppingCart cart = new ShoppingCart(session);
+	ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+	//ShoppingCart cart = new ShoppingCart(session);
 	NumberFormat formatter = NumberFormat.getCurrencyInstance(); // Credit: http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -46,7 +47,7 @@
 			<%
 
 		
-				if (!cart.exists() || cart.isEmpty())
+				if (cart.isEmpty())
 				{
 					out.println("<td><span>You currently have nothing in your cart. Purchase something!</span></td>");
 				}

@@ -35,6 +35,11 @@ public class Cart extends HttpServlet
 			response.sendRedirect("./login");
 			return;
 		}
+		else if (session.getAttribute("cart") == null)
+		{
+			ShoppingCart newCart = new ShoppingCart();
+			session.setAttribute("cart", newCart);
+		}
 		
 		request.setAttribute("jsp", true);
 		request.getRequestDispatcher("./jsp/cart.jsp").include(request, response);
@@ -51,18 +56,21 @@ public class Cart extends HttpServlet
 		if (username == null)
 		{
 			response.sendRedirect("./login");
+			return;
 		}
-		else if (action != null)
+		else if (session.getAttribute("cart") == null)
 		{
-			ShoppingCart cart = new ShoppingCart(session);
+			ShoppingCart newCart = new ShoppingCart();
+			session.setAttribute("cart", newCart);
+		}
+		
+		if (action != null)
+		{
+			ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 			
 			if (action.equals("Add to Cart"))
 			{
 				addToCartHandler(cart, request);
-			}
-			else if (action.equals("Add More to Cart"))
-			{
-				
 			}
 			else if (action.equals("Update Quantity"))
 			{
@@ -95,11 +103,10 @@ public class Cart extends HttpServlet
 	protected void addToCartHandler(ShoppingCart cart, HttpServletRequest request)
 	{
 		Integer movie_id = Integer.parseInt(request.getParameter("movie_id"));
-		if (!cart.exists())
+		if (cart == null)
 		{
-			LinkedHashMap<Integer, Movie> newCart = new LinkedHashMap<Integer, Movie>();
+			ShoppingCart newCart = new ShoppingCart();
 			request.getSession().setAttribute("cart", newCart);
-			cart.setCart(newCart);
 		}
 
 		if (cart.contains(movie_id))

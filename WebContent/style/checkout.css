@@ -75,3 +75,14 @@ input[type=number]
     width: 80px;
 } 
 
+
+.field
+{
+   border: 1px solid black;
+   padding:10px;
+}
+ 
+ .info
+{
+ 	padding:10px;
+}

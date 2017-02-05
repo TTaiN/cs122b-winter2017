@@ -1,7 +1,6 @@
 package ecommerce_helpers;
 
 import java.util.LinkedHashMap;
-import javax.servlet.http.HttpSession;
 
 import general_helpers.Movie;
 
@@ -9,46 +8,69 @@ import java.util.Set;
 
 public class ShoppingCart 
 {
-	LinkedHashMap<Integer, Movie> cart;
+	private LinkedHashMap<Integer, Movie> cart;
+
+	private String number;
+	private String firstName;
+	private String lastName;
+	private String date;
 	
-	public ShoppingCart (HttpSession session)
+	public ShoppingCart()
 	{
-		this.cart = (LinkedHashMap<Integer, Movie>) session.getAttribute("cart");
+		this.cart = new LinkedHashMap<Integer, Movie>();
 	}
 
-	// Begin Setter/Getters 
-	public LinkedHashMap<Integer, Movie> getCart() 
+	// Begin Setter/Getters
+	public void setCustomerInformation(String number, String firstName, String lastName, String date)
 	{
-		return cart;
-	}
-
-	public void setCart(LinkedHashMap<Integer, Movie> cart) 
-	{
-		this.cart = cart;
+		this.setNumber(number);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setDate(date);
 	}
 	
-	public boolean exists() // cleaner null case
-	{
-		return cart != null;
+	public String getNumber() {
+		return number;
 	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	
 	// Begin Checkers
-	public boolean contains(int movie_id) // again, cleaner null case
+	public boolean contains(int movie_id)
 	{
-		if (exists())
-		{
-			return cart.containsKey(movie_id);
-		}
-		else return false;
+		return cart.containsKey(movie_id);
 	}
 	
-	public boolean isEmpty() // lets me handle null cases better
+	public boolean isEmpty()
 	{
-		if (exists())
-		{
-			return cart.isEmpty();
-		}
-		else return true;
+		return cart.isEmpty();
 	}
 	
 	// Begin Useful Functions
@@ -86,7 +108,7 @@ public class ShoppingCart
 	
 	public int size()
 	{
-		if (!exists() || isEmpty())
+		if (isEmpty())
 		{
 			return 0;
 		}
@@ -128,11 +150,7 @@ public class ShoppingCart
 	
 	public Set<Integer> getMovies()
 	{
-		if (exists())
-		{
-			return cart.keySet();
-		}
-		else return null;
+		return cart.keySet();
 	}
 	
 	public int updateQuantity(int movie_id, int quantity) // lets me handle null cases better

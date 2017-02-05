@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     
 <!-- Usage: ./star?id=star_id  -->
 
@@ -9,7 +8,7 @@
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("star") == null)
 	{
-		response.sendRedirect("./login");
+		response.sendRedirect("../login");
 	}
 	Star star = (Star) request.getAttribute("star");
 %>

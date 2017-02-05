@@ -33,22 +33,19 @@ public class MovieView extends HttpServlet
 			return;
 		}
 		
-		Integer movie_id = Integer.parseInt(request.getParameter("id"));
-		Movie movie = null;
+		Integer movie_id = Integer.parseInt(request.getParameter("id"));		
+		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
 		
-		ShoppingCart cart = new ShoppingCart(session);
-		
-		if (cart.contains(movie_id))
+		if (cart != null && cart.contains(movie_id))
 		{
 			request.setAttribute("movie", cart.getMovie(movie_id));
 		}
 		else
 		{
-			
 			try
 			{
 				MovieViewDB db = new MovieViewDB();
-				movie = db.getCompleteMovie(movie_id);
+				Movie movie = db.getCompleteMovie(movie_id);
 				db.close();
 				request.setAttribute("movie", movie);
 			}
@@ -59,6 +56,7 @@ public class MovieView extends HttpServlet
 				return;
 			}
 		}
+
 		request.getRequestDispatcher("./jsp/movie.jsp").include(request, response);
 	}
 

@@ -7,8 +7,7 @@
 
 <%
 	ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-
-	if (session.getAttribute("username") == null || request.getAttribute("jsp") == null || cart == null || (cart.isEmpty()))
+	if (session.getAttribute("username") == null || request.getAttribute("jsp") == null || cart == null || cart.isEmpty())
 	{
 		response.sendRedirect("../login");
 		return;
@@ -23,7 +22,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="./style/checkout.css"/> 
 	<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
-	<title>Cart</title>
+	<title>Order Confirmation</title>
 </head>
 <body>
 	<%
@@ -31,9 +30,28 @@
 	%>
 
 	<div class="focus">
-		<h1>Checkout</h1>
-		<p>${sessionScope.username}'s Order Summary</p> <!--  Change to FirstName,LastName later  -->
-		<span style='color: red;'><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
+		<h1>Order Confirmation</h1>
+		<p style="color: green;">[NOTICE] ${sessionScope.username}, your order was successful!</p> <!--  Change to FirstName,LastName later  -->
+		<center><h3>Customer Information Summary</h3></center>
+		<table align="center">
+			<tr class='border_bottom'>
+				<td class='field'><span>Credit Card Number</span></td>
+				<td class='info'><span><%= cart.getNumber() %></span><br></td>
+			</tr>
+			<tr class='border_bottom'>
+				<td class='field'><span>Credit Card First Name</span></td>
+				<td class='info'><span><%= cart.getFirstName() %></span><br></td>
+			</tr>
+			<tr class='border_bottom'>
+				<td class='field'>Credit Card Last Name</td>
+				<td class='info'><span><%= cart.getLastName() %></span><br></td>
+			</tr>
+			<tr class='border_bottom'>
+				<td class='field'>Credit Card Expiration Date</td>
+				<td class='info'><span><%= cart.getDate() %></span><br></td>
+			</tr>
+		</table><br>
+		<center><h3>Order Summary</h3></center> <!--  Change to FirstName,LastName later  -->
 		<table align="center">
 			<tr>
 			    <th class='info'>Movie ID</th>
@@ -54,7 +72,7 @@
 					out.println("<td class='info'>" + formatter.format(current.getQuantity() * current.getPrice()) + "</td>");
 				}
 			%>
-		</table><br>
+		</table>
 		<table align="center">
 			<tr>
 				<th class='info'>Total Quantity</th>
@@ -64,15 +82,8 @@
 				<td class='info'><%= cart.getTotalQuantity() %></td>
 				<td class='info'><%= formatter.format(cart.getTotalPrice()) %></td>
 			</tr>
-		</table>
-		<h3>Customer Information</h3>
-		<form action="./checkout" method="POST">
-			Credit Card Number: <input type="text" name="number"/><br>
-			Credit Card First Name: <input type="text" name="firstName"/><br>
-			Credit Card Last Name: <input type="text" name="lastName"/><br>
-			Credit Card Expiration Date: <input type="date" name="date" name="firstName"/><br>
-			<center><input type="submit" name="action" value="Submit Order"/><br></center>
-		</form>		
+		</table><br>
 	</div>
+	<% session.removeAttribute("cart"); %>
 </body>
 </html>
