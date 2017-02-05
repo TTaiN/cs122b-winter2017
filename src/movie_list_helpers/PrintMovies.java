@@ -63,51 +63,44 @@ public class PrintMovies {
 	
 	public static void printSort(PrintWriter out, String genre, String firstChar, String title, String year, String director, String star, String limit, String sort)
 	{
-        out.println("<a href=\"./movielist?genre="+genre+"&firstChar="+firstChar+
+        out.println("<a href=\"./movielist?genre="+genre+"&firstchar="+firstChar+
         		"&title="+title+"&year="+year+"&director="+director+"&star="+star+"&sort="+sort+"&limit="+limit+"\" class=button>"+sort +"</a>");
 	}
 	public static void printMovies(PrintWriter out, List<Movie> movieList, int page, int limit, String query)
 	{
-		if(movieList.isEmpty() && page == 1)
+		if(movieList.isEmpty())
 		{
 			out.println("No results found.");
 		}
-		else if(movieList.isEmpty() && page > 1)
-		{
-			out.println("No more results");
-			//out.println("<a href=\"./movielist?genre=" + genre + "&page=" + (page-1) + "&sort=" + sort + "\">" 
-			//+ "Go back</a> a page<br>");
-			
-			out.println("<a href=\"./movielist?" + query + "&page=" + (page-1) + "\">" 
-					+ "Go back</a> to previous page<br>");
-		}
-		else if(movieList.size() < limit)
+		else if(movieList.size() < limit+1)
 		{
 			for( int i = 0; i < movieList.size(); i++ )
 			{
 				printMovie(movieList.get(i), out);
 			}
 			if( page > 1)
-				out.println("<td><a href=\"./movielist?" + query + "&page=" + (page-1) + "\">" 
-		        		+ "Prev</a><br></td>");
+				out.println("<div class='page-div' align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) 
+						+ "&limit=" + limit + "\">" + "Prev</a> Page " + page + "<br></td></div>");
+			else
+				out.println("<div class='page-div' align=center><td>Page " + page + "<br></td></div>");
 		}
 		else
 		{
-			for( int i = 0; i < movieList.size(); i++ )
+			for( int i = 0; i < movieList.size()-1; i++ )
 			{
 				printMovie(movieList.get(i), out);
 			}
 			if( page > 1)
 			{
-				out.println("<div class='page-div' align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) + "\">" 
-		        		+ "Prev</a> Page " + page + " ");
-				out.println("<a href=\"./movielist?" + query + "&page=" + (page+1) + "\">" 
+				out.println("<div class='page-div' align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) 
+						+ "&limit=" + limit + "\">" + "Prev</a> Page " + page + " ");
+				out.println("<a href=\"./movielist?" + query + "&page=" + (page+1) + "&limit=" + limit + "\">" 
 		    		 + "Next</a><br></td></div>");
 			}
 			else
 			{
-				out.println("<div class='page-div' align=center>Page " + page +" <a href=\"./movielist?" + query + "&page=" + (page+1) + "\">" 
-			    		 + "Next</a><br></td></div>");
+				out.println("<div class='page-div' align=center>Page " + page +" <a href=\"./movielist?" + query + "&page=" 
+						+ (page+1) + "&limit=" + limit + "\">" + "Next</a><br></td></div>");
 				
 			}
 		}
@@ -120,7 +113,7 @@ public class PrintMovies {
 		int[] n = {10, 25, 50, 100};
 		for(int i : n)
 		{
-			out.println("<a href=\"./movielist?genre="+genre+"&firstChar="+firstChar+
+			out.println("<a href=\"./movielist?genre="+genre+"&firstchar="+firstChar+
         		"&title="+title+"&year="+year+"&director="+director+"&star="+star+"&sort="+sort+"&limit="+i+"\">"+i+"</a>");
 		}
 		out.println("</div></div>");

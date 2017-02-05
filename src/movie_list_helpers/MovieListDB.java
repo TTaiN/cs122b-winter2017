@@ -34,7 +34,7 @@ public class MovieListDB {
 		
 		// Get stars of the movie
 		LinkedHashMap <Integer, String> stars = new LinkedHashMap<Integer, String>();
-		ResultSet rs2 = dbh.executePreparedStatement("select id, first_name, last_name from stars where id =some "
+		ResultSet rs2 = dbh.executePreparedStatement("select id, first_name, last_name from stars where id in "
 				+ "(select star_id from stars_in_movies where movie_id= " + m.getId() + ")");
 		while(rs2.next())
 		{
@@ -44,7 +44,7 @@ public class MovieListDB {
 		
 		// Get genres of the movie
 		LinkedHashMap <Integer, String> genres = new LinkedHashMap<Integer, String>();
-		ResultSet rs3 = dbh.executePreparedStatement("select id, name from genres where id =some "
+		ResultSet rs3 = dbh.executePreparedStatement("select id, name from genres where id in "
 				+ "(select genre_id from genres_in_movies where movie_id= " + m.getId() + ")");
 		while(rs3.next())
 		{
@@ -66,10 +66,10 @@ public class MovieListDB {
 		{
 			String where = Where.getWhere(genre, "name");
 			
-			ResultSet rs = dbh.executePreparedStatement("select * from movies where id =some"
-					+ " (select movie_id from genres_in_movies where genre_id=some"
+			ResultSet rs = dbh.executePreparedStatement("select * from movies where id in"
+					+ " (select movie_id from genres_in_movies where genre_id in"
 					+ " (select id from genres where " + where + ")) "
-					+ " order by " + sort + " limit " + limit + " offset " + offset);
+					+ " order by " + sort + " limit " + (limit+1) + " offset " + offset);
 			while(rs.next())
 			{
 				movieList.add(getMovie(rs));
@@ -86,7 +86,7 @@ public class MovieListDB {
 		try
 		{
 			ResultSet rs = dbh.executePreparedStatement("select * from movies where left(title, 1) = '" + 
-					firstChar + "' order by " + sort + " limit " + limit + " offset " + offset);
+					firstChar + "' order by " + sort + " limit " + (limit+1) + " offset " + offset);
 			while(rs.next())
 			{
 				movieList.add(getMovie(rs));
@@ -109,10 +109,10 @@ public class MovieListDB {
 			String yearWhere = Where.getWhere(year, "year");
 
 			ResultSet rs = dbh.executePreparedStatement("select * from movies where " +
-					titleWhere + " and " + directorWhere + " and " + yearWhere + " and id=some "
-					+ "(select movie_id from stars_in_movies where star_id=some"
+					titleWhere + " and " + directorWhere + " and " + yearWhere + " and id in "
+					+ "(select movie_id from stars_in_movies where star_id in"
 					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
-					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + limit
+					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + (limit+1)
 					+ " offset " + offset);
 			while(rs.next())
 			{
