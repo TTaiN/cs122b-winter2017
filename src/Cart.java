@@ -33,7 +33,10 @@ public class Cart extends HttpServlet
 		if (username == null)
 		{
 			response.sendRedirect("./login");
+			return;
 		}
+		
+		request.setAttribute("jsp", true);
 		request.getRequestDispatcher("./jsp/cart.jsp").include(request, response);
 	}
 
