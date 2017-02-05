@@ -60,6 +60,10 @@ tr.border_bottom td /* Credit: http://stackoverflow.com/questions/10040842/add-b
 .movie_detail
 {
    border: 1px solid black;
+   	max-height: 500px;
+	max-width: 500px;
+	min-height: 500px;
+	min-width: 500px;	
 }
 
 a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an-html-button-that-acts-like-a-link*/
@@ -119,4 +123,11 @@ a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an
 {
 	max-height: 150px;
 	max-width: 150px;
+}
+
+.centered {
+  position: relative;
+display: inline-block;
+text-align: center;
+    
 }

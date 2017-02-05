@@ -44,7 +44,7 @@ public class PrintMovies {
 			out.println("<td class='info'><span>");
 			for (Map.Entry<Integer, String> genre : genres.entrySet()) 
 				out.println("<a href='./movielist?genre=" + genre.getValue() + "'>" + genre.getValue() + "</a><br>");
-			out.println("</span></br></td></tr>");
+			out.println("</span></td></tr>");
 		}
 		
 		LinkedHashMap<Integer, String> stars = m.getStars();
@@ -78,7 +78,9 @@ public class PrintMovies {
 		{
 			for( int i = 0; i < movieList.size(); i++ )
 			{
+				out.println("<div class= 'centered'>");
 				printMovie(movieList.get(i), out);
+				out.println("</div>");
 			}
 			if( page > 1)
 				out.println("<div class='page-div' align=center><td><a href=\"./movielist?" + query + "&page=" + (page-1) 
@@ -90,7 +92,9 @@ public class PrintMovies {
 		{
 			for( int i = 0; i < movieList.size()-1; i++ )
 			{
+				out.println("<div class= 'centered'>");
 				printMovie(movieList.get(i), out);
+				out.println("</div>");
 			}
 			if( page > 1)
 			{
