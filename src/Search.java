@@ -37,7 +37,7 @@ public class Search extends HttpServlet {
 		
 		if (username == null)
 		{
-			request.getRequestDispatcher("./login").include(request, response);
+            response.sendRedirect("./login");
 		}
 		else
 		{
