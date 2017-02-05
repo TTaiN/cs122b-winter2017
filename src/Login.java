@@ -35,7 +35,6 @@ public class Login extends HttpServlet
     	 try
     	 {
     		 DatabaseHelper db = new DatabaseHelper();
-    		 Class.forName("com.mysql.jdbc.Driver").newInstance();
 
     		 String email = request.getParameter("email");
     		 String pwd = request.getParameter("pwd");
