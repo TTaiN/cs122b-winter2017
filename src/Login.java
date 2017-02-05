@@ -20,7 +20,8 @@ public class Login extends HttpServlet
         
         if (username == null)
         {
-            request.getRequestDispatcher("/index.html").include(request, response);
+			request.setAttribute("jsp", true);
+            request.getRequestDispatcher("/jsp/login.jsp").include(request, response);
         }
         else 
         {
