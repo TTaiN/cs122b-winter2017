@@ -34,7 +34,6 @@ public class OrderDB
 		if (this.firstName.equals(""))
 		{
 			messages.add("[ERROR] The Credit Card First Name was not entered.");
-
 		}
 		if (this.lastName.equals(""))
 		{
@@ -65,7 +64,7 @@ public class OrderDB
 			{
 				messages.add("[ERROR] The First Name (" + this.firstName + ") did not the match the first name for the Credit Card Number (" + this.number + ") in our records.");
 			}
-			if (!results.getString("last_name").equals(this.firstName))
+			if (!results.getString("last_name").equals(this.lastName))
 			{
 				messages.add("[ERROR] The Last Name (" + this.lastName + ") did not the match the last name for the Credit Card Number (" + this.number + ") in our records.");
 			}

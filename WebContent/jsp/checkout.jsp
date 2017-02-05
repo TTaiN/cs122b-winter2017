@@ -32,7 +32,7 @@
 
 	<div class="focus">
 		<h1>Checkout</h1>
-		<p>${sessionScope.username}'s Order Summary</p> <!--  Change to FirstName,LastName later  -->
+		<p>${sessionScope.username}'s Cart Summary</p> <!--  Change to FirstName,LastName later  -->
 		<span style='color: red;'><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
 		<table align="center">
 			<tr>
