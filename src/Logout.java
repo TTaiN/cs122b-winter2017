@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet("/logout")
 public class Logout extends HttpServlet 
 {
@@ -34,7 +33,6 @@ public class Logout extends HttpServlet
         	request.setAttribute("jsp", true);
         	request.setAttribute("error", "You have successfully logged out."); // not really an error, but hey, it works
         	request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
-        	return;
         }
 	}
 	

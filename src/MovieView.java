@@ -10,9 +10,9 @@ import general_helpers.Movie;
 import ecommerce_helpers.ShoppingCart;
 import single_view_helpers.MovieViewDB;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet("/movie")
-
 public class MovieView extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class MovieView extends HttpServlet
 				
 		if (session.getAttribute("username") == null || request.getParameter("id") == null)
 		{
-			response.sendRedirect("./login"); // if movie_id null login will redirect back to main
+			response.sendRedirect("./login");
 			return;
 		}
 		
@@ -51,12 +51,14 @@ public class MovieView extends HttpServlet
 			}
 			catch (SQLException e)
 			{
-				e.printStackTrace();
-				response.sendRedirect("./main"); // need to specify behavior when wrong id is entered.
+				ArrayList<String> messages = new ArrayList<String>();
+				messages.add(e.getMessage());
+				request.setAttribute("reason", "Movie");
+				request.setAttribute("messages", messages);
+				request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
 				return;
 			}
 		}
-
 		request.getRequestDispatcher("./jsp/movie.jsp").include(request, response);
 	}
 

@@ -4,7 +4,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import general_helpers.DatabaseHelper;
 
 public class Login extends HttpServlet
@@ -60,7 +63,11 @@ public class Login extends HttpServlet
     	 }
     	 catch (Exception e)
     	 {
-    		 e.printStackTrace();
+ 			ArrayList<String> messages = new ArrayList<String>();
+ 			messages.add(e.getMessage());
+ 			request.setAttribute("reason", "Login");
+ 			request.setAttribute("messages", messages);
+ 			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
     	 }
 	}
 }

@@ -13,7 +13,6 @@ import ecommerce_helpers.ShoppingCart;
 import general_helpers.Movie;
 
 @WebServlet("/cart")
-
 public class Cart extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -85,30 +84,10 @@ public class Cart extends HttpServlet
 		doGet(request, response);
 	}
 	
-	protected void printParameters(HttpServletRequest request, HttpServletResponse response)
-	{
-		for (String parameter : request.getParameterMap().keySet())
-		{
-			try
-			{
-				response.getWriter().println("Parameter |" + parameter + "|:" + request.getParameter(parameter));
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}
-	
 	protected void addToCartHandler(ShoppingCart cart, HttpServletRequest request)
 	{
 		Integer movie_id = Integer.parseInt(request.getParameter("movie_id"));
-		if (cart == null)
-		{
-			ShoppingCart newCart = new ShoppingCart();
-			request.getSession().setAttribute("cart", newCart);
-		}
-
+		
 		if (cart.contains(movie_id))
 		{
 			request.setAttribute("notice", "[NOTICE] The item <a href='./movie?id=" + movie_id + "'>\"" + cart.getMovie(movie_id).getTitle() + "\"</a> already exists in your cart.");
@@ -117,16 +96,35 @@ public class Cart extends HttpServlet
 		{
 			try
 			{
+				Integer quantity;
+				try
+				{
+					quantity = Integer.parseInt(request.getParameter("quantity"));
+				}
+				catch (NumberFormatException e)
+				{
+					request.setAttribute("notice", "[NOTICE] Please enter a valid integer from 0 to 500.");
+					return;
+				}
+				
+				if (quantity == 0)
+				{
+					request.setAttribute("notice", "[NOTICE] You cannot add 0 of an item to your cart. You must add 1 or more quantity.");
+				}
+				else if (quantity > 500)
+				{
+					request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
+				}
+				
 				MovieViewDB db = new MovieViewDB();
 				Movie movie = db.getCompleteMovie(movie_id);
-				db.close();
-				Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+				db.close();			
 				cart.addToCart(movie, quantity);
 				request.setAttribute("notice", "[NOTICE] The item <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> was added to your cart! (Quantity: " + quantity + ")");
 			}
 			catch (SQLException e)
 			{
-				request.setAttribute("notice", "[NOTICE] There was a database error when trying to add the item to your cart.");
+				request.setAttribute("notice", "[NOTICE] There was an error when trying to add the item to your cart.");
 			}
 		}
 	}
@@ -164,7 +162,7 @@ public class Cart extends HttpServlet
 			}
 			catch (NumberFormatException e)
 			{
-				request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
+				request.setAttribute("notice", "[NOTICE] Please enter a valid integer from 0 to 500.");
 				return;
 			}
 			

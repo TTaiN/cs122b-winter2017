@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import java.sql.SQLException;
 import single_view_helpers.StarViewDB;
 
 @WebServlet("/star")
-
 public class StarView extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -44,7 +44,11 @@ public class StarView extends HttpServlet
 		}
 		catch (SQLException e)
 		{
-			response.sendRedirect("./main"); // need to specify behavior when sql error.
+			ArrayList<String> messages = new ArrayList<String>();
+			messages.add(e.getMessage());
+			request.setAttribute("reason", "Star");
+			request.setAttribute("messages", messages);
+			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
 			return;		
 		}
 		

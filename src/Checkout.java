@@ -11,7 +11,6 @@ import ecommerce_helpers.ShoppingCart;
 import ecommerce_helpers.OrderDB;
 
 @WebServlet("/checkout")
-
 public class Checkout extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +31,6 @@ public class Checkout extends HttpServlet
 		if (username == null || cart == null || cart.isEmpty())
 		{
 			response.sendRedirect("./login");
-			return;
 		}
 		else
 		{
@@ -40,7 +38,6 @@ public class Checkout extends HttpServlet
 			request.getRequestDispatcher("./jsp/checkout.jsp").include(request, response);
 		}
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
