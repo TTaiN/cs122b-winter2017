@@ -139,6 +139,11 @@ public class Movie
 		this.genres = genres;
 	}
 	
+	public double getSubtotal()
+	{
+		return price * quantity;
+	}
+	
 	public double getPrice() 
 	{
 		return price;

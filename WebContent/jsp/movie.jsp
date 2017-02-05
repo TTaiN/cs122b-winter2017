@@ -9,9 +9,9 @@
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("movie") == null)
 	{
-		System.out.println("TEST");
-		response.sendRedirect("./login");
+		response.sendRedirect("../login");
 	}
+
 	Movie movie = (Movie) request.getAttribute("movie");
 	Integer quantity = movie.getQuantity();
 	Integer movie_id = movie.getId();

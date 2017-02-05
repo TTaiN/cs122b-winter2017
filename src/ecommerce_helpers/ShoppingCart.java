@@ -48,10 +48,41 @@ public class ShoppingCart
 		{
 			return cart.isEmpty();
 		}
-		else return false;
+		else return true;
 	}
 	
 	// Begin Useful Functions
+	
+	public int getTotalQuantity()
+	{
+		int totalQuantity = 0;
+		
+		if (!isEmpty())
+		{
+			for (Integer movie_id : cart.keySet())
+			{
+				totalQuantity += cart.get(movie_id).getQuantity();
+			}
+		}
+		
+		return totalQuantity;
+	}
+	
+	public double getTotalPrice()
+	{
+		double totalPrice = 0.00;
+		
+		if (!isEmpty())
+		{
+			for (Integer movie_id : cart.keySet())
+			{
+				Movie movie = cart.get(movie_id);
+				totalPrice += (movie.getPrice() * movie.getQuantity());
+			}
+		}
+		
+		return totalPrice;
+	}
 	
 	public int size()
 	{
@@ -97,7 +128,11 @@ public class ShoppingCart
 	
 	public Set<Integer> getMovies()
 	{
-		return cart.keySet();
+		if (exists())
+		{
+			return cart.keySet();
+		}
+		else return null;
 	}
 	
 	public int updateQuantity(int movie_id, int quantity) // lets me handle null cases better

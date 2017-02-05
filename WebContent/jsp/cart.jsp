@@ -7,15 +7,14 @@
 <%@ page import="java.text.NumberFormat" %>
 
 <%
-	if (session.getAttribute("username") == null)
+	if (session.getAttribute("username") == null || request.getAttribute("jsp") == null)
 	{
-		response.sendRedirect("./login");
+		response.sendRedirect("../login");
+		return;
 	}
 
 	ShoppingCart cart = new ShoppingCart(session);
 	NumberFormat formatter = NumberFormat.getCurrencyInstance(); // Credit: http://stackoverflow.com/questions/13791409/java-format-double-value-as-dollar-amount
-	int totalQuantity = 0;
-	double totalPrice = 0;
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,10 +73,8 @@
 						out.println("</form>");
 						out.println("</td>");
 						out.println("<td class='info'>");
-						out.println(formatter.format(current.getQuantity() * current.getPrice()));
+						out.println(formatter.format(current.getSubtotal()));
 						out.println("</td>");
-						totalQuantity += current.getQuantity();
-						totalPrice += (current.getQuantity() * current.getPrice());
 					}
 				}
 			%>
@@ -91,16 +88,14 @@
 						<th class='info'>Total Price</th>
 					</tr>
 					<tr>
-						<td class='info'><%= totalQuantity %></td>
-						<td class='info'><%= formatter.format(totalPrice) %></td>
+						<td class='info'><%= cart.getTotalQuantity() %></td>
+						<td class='info'><%= formatter.format(cart.getTotalPrice()) %></td>
 					</tr>
 				</table>			
 			</td>
 			<td>
-				<span class='checkout'><%= cart.size() == 0 ? "" : "Ready to checkout?<br><br>" %></span>
-				<form class='checkout_button' action='./checkout' method='post'>
-					<%= cart.size() == 0 ? "" : "<input name='action' type='submit' value='Proceed to Checkout'/>" %>
-				</form>
+				<center><span class='checkout'><%= cart.size() == 0 ? "" : "Ready to checkout?<br><br>" %></span></center>
+				<center><%= cart.size() == 0 ? "" : "<span class='checkout'><a class='button' href='./checkout'>Proceed to Checkout</a></span>" %></center>
 			</td>
 		</tr>
 		</table>

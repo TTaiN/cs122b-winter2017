@@ -18,17 +18,6 @@
     padding-left: 200px;
 }
 
-a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an-html-button-that-acts-like-a-link*/
-{
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-
-    text-decoration: none;
-    color: initial;
-}
-
 .checkout_button
 {
 	display: inline-block;
