@@ -30,7 +30,7 @@
 		<table class='movie_detail'>
 			<tr>
 				<!-- Source: http://stackoverflow.com/questions/3984287/how-to-show-alternate-image-if-source-image-is-not-found-onerror-working-in-ie -->
-				<td class='container'><img class='banner' alt='(Picture of <%= star.getFullName() %>)' onerror="this.onerror=null;this.src='./images/no-image.jpg'"/></td>
+				<td class='container'><img class='banner' alt='(Picture of <%= star.getFullName() %> Not Found)' onerror="this.onerror=null;this.src='./images/no-image.jpg'"/></td>
 				<td class='container'>
 					<table>
 						<caption>Star Information</caption>
