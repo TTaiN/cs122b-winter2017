@@ -1,10 +1,7 @@
 package general_helpers;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.lang.StringBuilder;
-
-// Note to Mo: We both had movie classes. To avoid duplicate I just merged it here.
 
 public class Movie
 {
@@ -41,20 +38,6 @@ public class Movie
 		this.trailer = trailer;
 		this.quantity = quantity;
 	}
-
-	@Override
-	public boolean equals(Object other) 
-	{
-		System.out.println("Called.");
-	    if (!(other instanceof Movie)) 
-	    {
-	        return false;
-	    }
-
-	    Movie comparer = (Movie) other;
-	    return this.id == comparer.id;
-	}
-
 	
 	// Begin Getters
 	public int getId()
@@ -129,13 +112,17 @@ public class Movie
 		return stars;
 	}
 	
-	public void setStars(LinkedHashMap<Integer, String> stars) {
+	public void setStars(LinkedHashMap<Integer, String> stars) 
+	{
 		this.stars = stars;
 	}
-	public LinkedHashMap<Integer, String> getGenres() {
+	public LinkedHashMap<Integer, String> getGenres() 
+	{
 		return genres;
 	}
+	
 	public void setGenres(LinkedHashMap<Integer, String> genres) {
+		
 		this.genres = genres;
 	}
 	

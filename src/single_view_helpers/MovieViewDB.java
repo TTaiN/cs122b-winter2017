@@ -32,7 +32,6 @@ public class MovieViewDB
 		movie.setStars(getStarsForMovie(movie_id));
 		movie.setGenres(getGenresForMovie(movie_id));
 		return movie;
-		
 	}
 	
 	public LinkedHashMap<Integer, String> getGenresForMovie(int movie_id) throws SQLException

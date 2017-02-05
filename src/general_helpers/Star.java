@@ -40,10 +40,12 @@ public class Star
 	{
 		return first_name;
 	}
+	
 	public void setFirstName(String first_name) 
 	{
 		this.first_name = first_name;
 	}
+	
 	public String getLastName() 
 	{
 		return last_name;

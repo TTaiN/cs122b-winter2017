@@ -9,9 +9,7 @@ public class TopMenu
 		out.println("<br><center><img src=\"./images/logo.png\" alt=\"logo\"></center><br>");
 		
 		out.println("<div class='topmenu'>");
-		//out.println("<span>Menu:</span>");
 		out.println("<table class='topmenu_table'>");
-		//out.println("<caption class='topmenu_caption'>Fabflix Menu</caption>");
 		out.println("<tr>");
 		out.println("<td class='topmenu_button'><a href='./main'>Main Page</a></td>");
 		out.println("<td class='topmenu_button'><a href='./browse'>Browse</a></td>");
