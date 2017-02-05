@@ -25,9 +25,13 @@
     <servlet-name>Search</servlet-name>
     <servlet-class>Search</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
     <servlet-name>MovieList</servlet-name>
     <servlet-class>MovieList</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>Logout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -48,5 +52,9 @@
   <servlet-mapping>
     <servlet-name>MovieList</servlet-name>
     <url-pattern>/movielist</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 </web-app>

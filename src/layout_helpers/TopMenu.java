@@ -17,6 +17,7 @@ public class TopMenu
 		out.println("<td class='topmenu_button'><a href='./browse'>Browse</a></td>");
 		out.println("<td class='topmenu_button'><a href='./search'>Search</a></td>");
 		out.println("<td class='topmenu_button'><a href='./cart'>Cart/Checkout</a></td>");
+		out.println("<td class='topmenu_button'><a href='./logout'>Logout</a></td>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</div>");

@@ -2,13 +2,14 @@
 .topmenu
 {
      margin: 0 auto;
-     width: 300px; 
+     width: 350px; 
 }
 
 .topmenu_table
 {
    border: 1px solid black;
    text-align:center;
+   width: 350px;
 }
 
 .topmenu_button
