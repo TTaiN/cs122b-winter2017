@@ -48,8 +48,9 @@ public class Checkout extends HttpServlet
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-		
-		if (username == null || cart == null || cart.isEmpty())
+		Integer userId = (Integer) session.getAttribute("userId");
+
+		if (username == null || userId == null || cart == null || cart.isEmpty())
 		{
 			response.sendRedirect("./login");
 			return;
@@ -61,12 +62,14 @@ public class Checkout extends HttpServlet
 		String lastName = request.getParameter("lastName");
 		String date = request.getParameter("date");
 		
+		System.out.println("Got here!");
 		try
 		{
 			OrderDB newOrder = new OrderDB(number, firstName, lastName, date);
 			if (newOrder.validateInfo(messages)) // if order has valid info
 			{
 				cart.setCustomerInformation(number, firstName, lastName, date);
+				newOrder.submitOrders(userId, cart);
 				session.setAttribute("confirmation", true);
 				response.sendRedirect("./orderConfirmation");
 			}
@@ -81,7 +84,10 @@ public class Checkout extends HttpServlet
 		}
 		catch (SQLException e)
 		{
-			e.printStackTrace();
+			messages.add(e.getMessage());
+			request.setAttribute("reason", "Checkout");
+			request.setAttribute("messages", messages);
+			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);	
 		}
 	}
 }

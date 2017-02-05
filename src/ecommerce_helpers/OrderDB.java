@@ -2,10 +2,12 @@ package ecommerce_helpers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import general_helpers.DatabaseHelper;
+import ecommerce_helpers.ShoppingCart;
 
 public class OrderDB 
 {
@@ -79,6 +81,26 @@ public class OrderDB
 		}
 		
 		return messages.isEmpty();
+	}
+	
+	public void submitOrders(Integer userId, ShoppingCart cart) throws SQLException
+	{
+		// Source: http://stackoverflow.com/questions/16413019/java-program-need-current-date-in-yyyy-mm-dd-format-without-time-in-date-datat
+		Date date = new Date();
+		String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+		String SQL;
+		
+		for (Integer movie : cart.getMovies())
+		{
+			for (int count = 0; count != cart.getMovie(movie).getQuantity(); count++)
+			{
+				SQL = "INSERT INTO sales (customer_id, movie_id, sale_date) VALUES ('" + userId + "', '" + cart.getMovie(movie).getId() + "', '" + formattedDate + "');";
+				if (!(db.executeInsertPS(SQL) > 0))
+				{
+					throw new SQLException("An order was not submitted to the database correctly.");
+				}
+			}
+		}
 	}
 	
 	public void close() throws SQLException

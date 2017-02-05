@@ -29,6 +29,15 @@ public class ShoppingCart
 		this.setDate(date);
 	}
 	
+	
+	public LinkedHashMap<Integer, Movie> getCart() {
+		return cart;
+	}
+
+	public void setCart(LinkedHashMap<Integer, Movie> cart) {
+		this.cart = cart;
+	}
+
 	public String getNumber() {
 		return number;
 	}

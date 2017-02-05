@@ -45,6 +45,7 @@ public class Login extends HttpServlet
     		 if (rs.next())
     		 {
     			 session.setAttribute("username", email);
+    			 session.setAttribute("userId", rs.getInt("id"));
     			 response.sendRedirect("./main");
     		 }
     		 else

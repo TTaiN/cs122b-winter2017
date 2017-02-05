@@ -40,6 +40,12 @@ public class DatabaseHelper
 		return statement.executeQuery();
 	}
 	
+	public int executeInsertPS(String SQL) throws SQLException // prefer to use this one than executeSQL, more secure
+	{
+		PreparedStatement statement = connection.prepareStatement(SQL);
+		return statement.executeUpdate();
+	}
+	
 	public void openConnection() throws SQLException
 	{
 		try
