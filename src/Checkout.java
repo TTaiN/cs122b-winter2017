@@ -59,7 +59,6 @@ public class Checkout extends HttpServlet
 		String lastName = request.getParameter("lastName");
 		String date = request.getParameter("date");
 		
-		System.out.println("Got here!");
 		try
 		{
 			OrderDB newOrder = new OrderDB(number, firstName, lastName, date);
