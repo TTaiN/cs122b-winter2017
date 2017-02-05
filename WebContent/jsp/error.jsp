@@ -21,14 +21,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<script src="./script/error.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style/error.css"/> 
 	<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
-	<script>
-	function goBack() // Source: http://www.w3schools.com/jsref/met_his_back.asp
-	{
-	    window.history.back();
-	}
-	</script>
 	<title>Cart</title>
 </head>
 <body>
