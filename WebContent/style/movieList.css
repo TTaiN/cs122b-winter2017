@@ -68,13 +68,15 @@ a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an
     -moz-appearance: button;
     appearance: button;
 
+	font-size: 16px;
+	font-weight: bold;
     text-decoration: none;
     color: initial;
 }
 
 /* Credit http://www.w3schools.com/css/css_dropdowns.asp*/
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #ed5e01;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -110,7 +112,7 @@ a.button /* Credit http://stackoverflow.com/questions/2906582/how-do-i-create-an
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: #dc5700;
 }
 
 .banner
