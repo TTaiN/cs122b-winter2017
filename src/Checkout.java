@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import java.sql.SQLException;
+import java.util.ArrayList;
 import ecommerce_helpers.ShoppingCart;
+import ecommerce_helpers.OrderDB;
 
 @WebServlet("/checkout")
 
@@ -42,7 +44,34 @@ public class Checkout extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		printParameters(request, response);
+		
+		ArrayList<String> messages = new ArrayList<String>();
+		String number = request.getParameter("number");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String date = request.getParameter("date");
+		
+		try
+		{
+			OrderDB newOrder = new OrderDB(number, firstName, lastName, date);
+			if (newOrder.validateInfo(messages)) // if order has valid info
+			{
+				printParameters(request, response);
+			}
+			else // order doesnt have valid info
+			{
+				request.setAttribute("reason", "Checkout");
+				request.setAttribute("messages", messages);
+				request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
+				return;
+			}
+			newOrder.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
 		//doGet(request, response);
 	}
 	
