@@ -30,6 +30,12 @@ public class Star
 	{
 		this.id = id;
 	}
+	
+	public String getFullName()
+	{
+		return first_name + " " + last_name;
+	}
+	
 	public String getFirstName() 
 	{
 		return first_name;

@@ -29,7 +29,8 @@
 		<h1 class='title'><%= star.getFirstName() + " " + star.getLastName() %></h1>
 		<table class='movie_detail'>
 			<tr>
-				<td class='container'><img class='banner' src='<%= star.getPhoto() %>'/></td>
+				<!-- Source: http://stackoverflow.com/questions/3984287/how-to-show-alternate-image-if-source-image-is-not-found-onerror-working-in-ie -->
+				<td class='container'><img class='banner' alt='(Picture of <%= star.getFullName() %>)' onerror="this.onerror=null;this.src='./images/no-image.jpg'"/></td>
 				<td class='container'>
 					<table>
 						<caption>Star Information</caption>
@@ -39,7 +40,7 @@
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'><span>Name</span></td>
-							<td class='info'><span><%= star.getFirstName() + " " + star.getLastName() %></span><br></td>
+							<td class='info'><span><%= star.getFullName() %></span><br></td>
 						</tr>
 						<tr class='border_bottom'>
 							<td class='field'>Date of Birth</td>

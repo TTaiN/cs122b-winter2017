@@ -32,7 +32,8 @@
 		<h1 class='title'><%= movie.getTitle() %></h1>
 		<table class='movie_detail'>
 			<tr>
-				<td class='container'><img class='banner' src='<%= movie.getBanner() %>'/></td>
+				<!-- Source: http://stackoverflow.com/questions/3984287/how-to-show-alternate-image-if-source-image-is-not-found-onerror-working-in-ie -->
+				<td class='container'><img class='banner' src='<%= movie.getBanner() %>' alt='(Picture of <%= movie.getTitle() %>)' onerror="this.onerror=null;this.src='./images/no-image.jpg'"/></td>
 				<td class='container'>
 					<table>
 						<caption>Movie Information</caption>

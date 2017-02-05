@@ -55,7 +55,7 @@ public class ShoppingCart
 	
 	public int size()
 	{
-		if (isEmpty())
+		if (!exists() || isEmpty())
 		{
 			return 0;
 		}

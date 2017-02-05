@@ -33,7 +33,7 @@
 
 	<div class="focus">
 		<h1>Cart</h1>
-		<p >Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
+		<p>Welcome to your cart, ${sessionScope.username}!</p> <!--  Change to FirstName,LastName later  -->
 		<span style='color: red;'><%= request.getAttribute("notice") != null ? request.getAttribute("notice") + "<br><br>" : "" %></span>
 		<table>
 			<tr>
@@ -58,7 +58,7 @@
 						Movie current = cart.getMovie(id);
 						out.println("<tr>");
 						out.println("<td class='info'><span>" + current.getId() + "</span></td>");
-						out.println("<td class='info'><span><img class='banner' src='" + current.getBanner() + "'/></span></td>");
+						out.println("<td class='info'><span><img class='banner' src='" + current.getBanner() + "' alt='Picture of " + current.getTitle() + "' onerror=\"this.onerror=null;this.src='./images/no-image.jpg'\"/></span></td>");
 						out.println("<td class='info'><span><a href='./movie?id=" + current.getId() + "'>" + current.getTitle() + "</a> (" + current.getYear() + ")" + "</span></td>");
 						out.println("<td class='info'><span>$" + current.getPrice() + "</span></td>");
 						out.println("<td class='info'>");
