@@ -12,7 +12,9 @@ public class PrintMovies {
 	{
 		out.println("<div class='entry'>");
 		out.println("<table class='movie_detail'>");
-		out.println("<tr> <td class='container'><img class='banner' src=" + m.getBanner() + "></td><td class='container'>");
+		out.println("<tr> <td class='container'><img class='banner' src='" + m.getBanner() + 
+				"' alt='(Picture of " + m.getTitle() + "' onerror=\"this.onerror=null;this.src='./images/no-image.jpg'\"" +
+				"></td><td class='container'>");
 		out.println("<table><caption><a href='./movie?id=" + m.getId() + "'>" + m.getTitle() + "</a></caption>");
 		
 		out.println("<tr class='border_bottom'><td class='field'><span>Movie ID</span></td>");
