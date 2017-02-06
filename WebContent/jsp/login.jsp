@@ -25,7 +25,7 @@
 		<form action="./login" method="POST">
 			E-mail: <input type="text" name="email" value="bb@netzero.net"><br>
 			Password: <input type="password" name="pwd" value="1234"><br>
-			<input type="submit">
+			<input type="submit" value="Login">
 		</form>
 	</div>
 </body>
