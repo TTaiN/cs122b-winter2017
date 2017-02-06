@@ -64,7 +64,7 @@ public class Checkout extends HttpServlet
 			OrderDB newOrder = new OrderDB(number, firstName, lastName, date);
 			if (newOrder.validateInfo(messages)) // if order has valid info
 			{
-				cart.setCustomerInformation(number, firstName, lastName, date);
+				cart.setCustomerInformation(newOrder.getDBNumber(), firstName, lastName, date);
 				newOrder.submitOrders(userId, cart);
 				session.setAttribute("confirmation", true);
 				response.sendRedirect("./orderConfirmation");

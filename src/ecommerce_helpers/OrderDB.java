@@ -27,6 +27,11 @@ public class OrderDB
 		db = new DatabaseHelper();
 	}
 	
+	public String getDBNumber()
+	{
+		return this.number;
+	}
+	
 	private boolean nullCheck(ArrayList<String> messages)
 	{
 		if (this.number.equals(""))
@@ -57,7 +62,7 @@ public class OrderDB
 			return false;
 		}
 		
-		ResultSet results = db.executePreparedStatement("SELECT * FROM creditcards WHERE id = '" + this.number + "'");
+		ResultSet results = db.executePreparedStatement("SELECT * FROM creditcards WHERE REPLACE(REPLACE(id, '-', ''), ' ', '') = REPLACE(REPLACE('" + this.number + "', '-', ''), ' ', '')");
 				//"' AND first_name = '" + this.firstName + "' AND last_name = '" + this.lastName + "' AND expiration = '" + this.date + "'");
 		
 		if (results.next())
@@ -78,6 +83,11 @@ public class OrderDB
 		else
 		{
 			messages.add("[ERROR] The Credit Card Number (" + this.number + ") was not found in our records.");
+		}
+		
+		if (messages.isEmpty())
+		{
+			this.number = results.getString("id");
 		}
 		
 		return messages.isEmpty();
