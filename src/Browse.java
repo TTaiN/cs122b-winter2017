@@ -45,6 +45,13 @@ public class Browse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if (username == null)
+		{
+            response.sendRedirect("./login");
+            return;
+		}
 		request.getRequestDispatcher("./jsp/browse.jsp").include(request, response);		
 	}
 
