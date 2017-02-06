@@ -32,20 +32,53 @@ public class OrderDB
 		return this.number;
 	}
 	
-	private boolean nullCheck(ArrayList<String> messages)
+	// Source: http://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+	public static boolean numberCheck(String s) 
+	{
+		for (int index = 0; index < s.length(); index++)
+		{
+			if (s.charAt(index) != '-' && s.charAt(index) != ' ' && Character.digit(s.charAt(index), 10) < 0)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static boolean nameCheck(String s) 
+	{
+		return s.matches("[a-zA-Z]+");
+	}
+	
+	private boolean inputCheck(ArrayList<String> messages)
 	{
 		if (this.number.equals(""))
 		{
 			messages.add("[ERROR] The Credit Card Number was not entered.");
 		}
+		else if (!numberCheck(this.number))
+		{
+			messages.add("[ERROR] The Credit Card Number can only contain numbers, spaces, and dashes.");
+		}
+		
 		if (this.firstName.equals(""))
 		{
 			messages.add("[ERROR] The Credit Card First Name was not entered.");
 		}
+		else if (!nameCheck(this.firstName))
+		{
+			messages.add("[ERROR] The Credit Card First Name can only contain letters.");
+		}
+		
 		if (this.lastName.equals(""))
 		{
 			messages.add("[ERROR] The Credit Card Last Name was not entered.");
 		}
+		else if (!nameCheck(this.lastName))
+		{
+			messages.add("[ERROR] The Credit Card Last Name can only contain letters.");
+		}
+		
 		if (this.date.equals(""))
 		{
 			messages.add("[ERROR] The Credit Card Expiration Date was not entered.");
@@ -57,7 +90,7 @@ public class OrderDB
 	public boolean validateInfo(ArrayList<String> messages) throws SQLException
 	{
 		
-		if (!nullCheck(messages))
+		if (!inputCheck(messages))
 		{
 			return false;
 		}
