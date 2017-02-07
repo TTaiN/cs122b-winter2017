@@ -45,7 +45,7 @@ public class StarView extends HttpServlet
 		catch (SQLException e)
 		{
 			ArrayList<String> messages = new ArrayList<String>();
-			messages.add(e.getMessage());
+			messages.add("The Star you were looking for was not found.");
 			request.setAttribute("reason", "Star");
 			request.setAttribute("messages", messages);
 			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);

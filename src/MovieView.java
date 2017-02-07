@@ -52,7 +52,7 @@ public class MovieView extends HttpServlet
 			catch (SQLException e)
 			{
 				ArrayList<String> messages = new ArrayList<String>();
-				messages.add(e.getMessage());
+				messages.add("The Movie you were looking for was not found.");
 				request.setAttribute("reason", "Movie");
 				request.setAttribute("messages", messages);
 				request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
