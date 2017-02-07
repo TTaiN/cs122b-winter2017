@@ -18,7 +18,6 @@
 <H2>Submission README</H2>
 
 <ul>
-<li><br/><br/></li>
 
 <li>(Note: We assume you are using Eclipse.) How to compile java sources: place all .java and package folders into /src folder for Java resources. Ensure that you add
 JDBC jar to your Java build path, since some classes require it.<br/><br/></li>
@@ -31,7 +30,9 @@ the name of your web root folder is WebContent, simply replace WebContent folder
 <li>To create the .war, after following above instructions export the classes and sources as a .war.<br/><br/></li>
 
 
-<li>To deploy the .war, login to Tomcat Application Manager, select the .war provided and deploy it.<br/><br/></li>
+<li>To deploy the .war, login to Tomcat Application Manager, select the .war provided rename it to "Fabflix.war" and 
+deploy it.<br/><br/></li>
+
 </ul>
 </body>
 </html>
