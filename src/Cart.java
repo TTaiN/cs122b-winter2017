@@ -71,6 +71,10 @@ public class Cart extends HttpServlet
 			{
 				addToCartHandler(cart, request);
 			}
+			else if (action.equals("Add More to Cart"))
+			{
+				addMoreToCartHandler(cart, request);
+			}
 			else if (action.equals("Update Quantity"))
 			{
 				updateQuantityHandler(cart, request);
@@ -107,9 +111,9 @@ public class Cart extends HttpServlet
 					return;
 				}
 				
-				if (quantity == 0)
+				if (quantity <= 0)
 				{
-					request.setAttribute("notice", "[NOTICE] You cannot add 0 of an item to your cart. You must add 1 or more quantity.");
+					request.setAttribute("notice", "[NOTICE] You cannot add 0 or negative of an item to your cart. You must add 1 or more quantity.");
 				}
 				else if (quantity > 500)
 				{
@@ -129,6 +133,39 @@ public class Cart extends HttpServlet
 		}
 	}
 	
+	protected void addMoreToCartHandler(ShoppingCart cart, HttpServletRequest request)
+	{
+		Integer movie_id = Integer.parseInt(request.getParameter("movie_id"));
+		
+		if (!cart.contains(movie_id))
+		{
+			addToCartHandler(cart, request); // adding more of nothing basically means adding something to your cart, right?
+		}
+		else
+		{
+			Integer quantity;
+			try
+			{
+				quantity = Integer.parseInt(request.getParameter("quantity"));
+			}
+			catch (NumberFormatException e)
+			{
+				request.setAttribute("notice", "[NOTICE] Please enter a valid integer from 0 to 500.");
+				return;
+			}
+			
+			Movie movie = cart.getMovie(movie_id);
+			if (quantity <= 0)
+			{
+				request.setAttribute("notice", "[NOTICE] You cannot add 0 or negative of an item to your cart. You must add 1 or more quantity.");
+			}
+			else if (((movie.getQuantity()) + quantity) > 500)
+			{
+				request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
+			}	
+			else request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> is now " + (quantity + movie.getQuantity()) + ". (Previous: " + cart.updateQuantity(movie_id, (quantity + movie.getQuantity())) + ", you added " + quantity + ").");			
+		}
+	}
 	
 	protected void removeFromCartHandler(ShoppingCart cart, HttpServletRequest request)
 	{
@@ -167,7 +204,13 @@ public class Cart extends HttpServlet
 			}
 			
 			Movie movie = cart.getMovie(movie_id);
-			if (quantity == 0)
+			
+			if (quantity < 0)
+			{
+				cart.removeMovie(movie_id);
+				request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> was set to negative, so it was removed.");
+			}
+			else if (quantity == 0)
 			{
 				cart.removeMovie(movie_id);
 				request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> was set to 0, so it was removed.");

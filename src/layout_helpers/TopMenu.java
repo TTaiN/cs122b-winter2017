@@ -6,7 +6,7 @@ public class TopMenu
 {
 	public static void print(PrintWriter out)
 	{
-		out.println("<br><center><img src=\"./images/logo.png\" alt=\"logo\"></center><br>");
+		out.println("<br><center><a href='./main'><img src=\"./images/logo.png\" alt=\"logo\"></a></center><br>");
 		out.println("<div class='topmenu'>");
 		out.println("<table class='topmenu_table'>");
 		out.println("<tr>");

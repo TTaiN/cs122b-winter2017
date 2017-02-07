@@ -73,11 +73,11 @@
 				</td>
 			</tr>
 		</table>
-		<p class='ad'><%= quantity == 0 ? "Want to purchase this item? Add it to your cart!" : "You already have this item in your cart. Want more? Update the quantity!" %></p>
+		<p class='ad'><%= quantity == 0 ? "Want to purchase this item? Add it to your cart!" : "You already have this item in your cart. Want more? Add more to your cart!" %></p>
 		<form class='quantity' action='./cart' method='post'>
 			<input type="hidden" name="movie_id" value='<%= movie_id %>'>
-			<input type='number' name='quantity' max='500' min='<%= quantity == 0 ? 1 : 0 %>' value='<%= quantity == 0 ? 1 : quantity %>'/>
-			<input class='submit' name='action' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Update Quantity" %>'/>
+			<input type='number' name='quantity' max='500' min='1' value='1'/>
+			<input class='submit' name='action' type='submit' value='<%= quantity == 0 ? "Add to Cart" : "Add More to Cart" %>'/>
 		</form>
 		<p class ='ad'>You currently have <%= quantity %> order(s) of this movie in your cart.</p>
 	</div>
