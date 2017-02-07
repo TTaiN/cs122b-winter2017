@@ -18,22 +18,20 @@
 <H2>Submission README</H2>
 
 <ul>
-<li>For genre, we noticed that many of the genres had more than one name (i.e Sci-Fi and Science Fiction), so we decided to use 
-substring matching to resolve this issue. Both "Sci" and "Fi" are substrings of both "Sci-Fi" and "Science Fiction". The like
-predicate was used to find genres that had both "Sci" and "Fi" as substrings.<br/><br/></li>
+<li><br/><br/></li>
 
-<li>For star name, first_name and last_name were combined to form the star's name. We use the like predicate to lookup names 
-that have the searched name as a substring. For example searching for "Jen" would provide a list of movies that have an
-artist with the substring "Jen" in their name (first_name + " " + last_name).<br/><br/></li>
+<li>(Note: We assume you are using Eclipse.) How to compile java sources: place all .java and package folders into /src folder for Java resources. Ensure that you add
+JDBC jar to your Java build path, since some classes require it.<br/><br/></li>
 
-<li>For title, we use the like predicate to lookup titles that have the searched title as a substring. For example, searching 
-for "Spy" would provide a list of movies that have a title with the substring "Spy".<br/><br/></li>
+<li>To link the WebContent, place all contents inside the WebContent folder into the web root folder for your project. If
+the name of your web root folder is WebContent, simply replace WebContent folder with the one provided.<br/><br/></li>
 
-<li>For year, we use the like predicate to lookup years that have the searched year as a substring. For example, searching 
-for "199" would provide a list of movies that were released in the 1990's.<br/><br/></li>
+<li>The database credentials are: (IP - 35.167.240.46) (User - cs122b) (Password - cs122bgroup42) (DB - moviedb)<br/><br/></li>
 
-<li>For director, we use the like predicate to lookup directors that have the searched name as a substring. For example searching 
-for "Mark" would provide a list of movies that have a director with the substring "Mark" in their name.<br/><br/></li>
+<li>To create the .war, after following above instructions export the classes and sources as a .war.<br/><br/></li>
+
+
+<li>To deploy the .war, login to Tomcat Application Manager, select the .war provided and deploy it.<br/><br/></li>
 </ul>
 </body>
 </html>
