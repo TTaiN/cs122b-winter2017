@@ -53,6 +53,10 @@
     <servlet-name>StarView</servlet-name>
     <servlet-class>StarView</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>LikePredicate</servlet-name>
+    <servlet-class>LikePredicate</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Browse</servlet-name>
     <url-pattern>/browse</url-pattern>
@@ -96,5 +100,9 @@
   <servlet-mapping>
     <servlet-name>StarView</servlet-name>
     <url-pattern>/star</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LikePredicate</servlet-name>
+    <url-pattern>/reports/like-predicate</url-pattern>
   </servlet-mapping>
 </web-app>
