@@ -163,7 +163,7 @@ public class Cart extends HttpServlet
 			{
 				request.setAttribute("notice", "[NOTICE] You cannot buy more than 500 copies of a single item.");
 			}	
-			else request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> is now " + (quantity + movie.getQuantity()) + ". (Previous: " + cart.updateQuantity(movie_id, (quantity + movie.getQuantity())) + ")");			
+			else request.setAttribute("notice", "[NOTICE] The quantity of <a href='./movie?id=" + movie_id + "'>\"" + movie.getTitle() + "\"</a> is now " + (quantity + movie.getQuantity()) + ". (Previous: " + cart.updateQuantity(movie_id, (quantity + movie.getQuantity())) + ", you added " + quantity + ").");			
 		}
 	}
 	
