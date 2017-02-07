@@ -14,9 +14,9 @@ public class PrintMovies {
 		out.println("<table class='movie_detail'>");
 		out.println("<tr><td class='container'><a href='./movie?id=" + m.getId() + "'><img class='banner' src='" + m.getBanner() + 
 				"' alt='(Picture of " + m.getTitle() + "' onerror=\"this.onerror=null;this.src='./images/no-image.jpg'\"" +
-				"></a><br><form action='./cart' method='post'><input type='hidden' name='movie_id' value='" + m.getId() + "'/>"
+				"></a><br><br><div style='text-align:center'><form action='./cart' method='post'><input type='hidden' name='movie_id' value='" + m.getId() + "'/>"
 						+ "<input type='hidden' name='quantity' value='1'/>" +
-				"<input class='submit' name='action' type='submit' value='Add to Cart'/></form>"
+				"<input class='submit' name='action' type='submit' value='Add to Cart'/></form></div>"
 				+ "</td><td class='container'>");
 		out.println("<table><caption><a href='./movie?id=" + m.getId() + "'>" + m.getTitle() + "</a></caption>");
 		
