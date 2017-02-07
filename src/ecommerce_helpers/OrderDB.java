@@ -20,10 +20,10 @@ public class OrderDB
 	
 	public OrderDB(String number, String firstName, String lastName, String date) throws SQLException
 	{
-		this.number = number;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.date = date;
+		this.number = number.trim();
+		this.firstName = firstName.trim();
+		this.lastName = lastName.trim();
+		this.date = date.trim();
 		db = new DatabaseHelper();
 	}
 	
