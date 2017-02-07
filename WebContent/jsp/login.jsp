@@ -23,8 +23,8 @@
 	<%= request.getAttribute("error") == null ? "" : "<center><p style='color:red;'>" + request.getAttribute("error") + "</p></center>" %>
 	<div align="center">
 		<form action="./login" method="POST">
-			E-mail: <input type="text" name="email" value="bb@netzero.net"><br>
-			Password: <input type="password" name="pwd" value="1234"><br>
+			E-mail: <input type="text" name="email" ><br>
+			Password: <input type="password" name="pwd" ><br>
 			<input type="submit" value="Login">
 		</form>
 	</div>
