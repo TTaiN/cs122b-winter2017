@@ -116,7 +116,7 @@ public class PrintMovies {
 	{
 		out.println("<div class=\"dropdown\"> <button class=\"dropbtn\">Results Per Page</button>"
 				+ "<div class=\"dropdown-content\">");
-		int[] n = {5, 10, 15, 20};
+		int[] n = {10, 25, 50, 100};
 		for(int i : n)
 		{
 			out.println("<a href=\"./movielist?genre="+genre+"&firstchar="+firstChar+

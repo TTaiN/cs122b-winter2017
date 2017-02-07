@@ -74,7 +74,7 @@ public class MovieList extends HttpServlet {
 	        String sort = request.getParameter("sort");
 	        String lim = request.getParameter("limit");
 	        if(lim == null || lim == "")
-	        	limit = 5;
+	        	limit = 10;
 	        else
 	        	limit = Integer.parseInt(lim);
 	        
