@@ -57,6 +57,10 @@
     <servlet-name>LikePredicate</servlet-name>
     <servlet-class>LikePredicate</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ReadMe</servlet-name>
+    <servlet-class>ReadMe</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Browse</servlet-name>
     <url-pattern>/browse</url-pattern>
@@ -104,5 +108,9 @@
   <servlet-mapping>
     <servlet-name>LikePredicate</servlet-name>
     <url-pattern>/reports/like-predicate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReadMe</servlet-name>
+    <url-pattern>/reports/readme</url-pattern>
   </servlet-mapping>
 </web-app>
