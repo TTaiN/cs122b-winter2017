@@ -61,7 +61,7 @@ public class OrderDB
 	{
 		for (int index = 0; index < s.length(); index++)
 		{
-			if (s.charAt(index) != '.' && s.charAt(index) != ' ' && !Character.isLetter(s.charAt(index)))
+			if (s.charAt(index) != '.' && !Character.isLetter(s.charAt(index)))
 			{
 				return false;
 			}
@@ -86,7 +86,7 @@ public class OrderDB
 		}
 		else if (!nameCheck(this.firstName))
 		{
-			messages.add("[ERROR] The Credit Card First Name can only contain letters.");
+			messages.add("[ERROR] The Credit Card First Name can only contain letters and dots.");
 		}
 		
 		if (this.lastName.equals(""))
@@ -95,7 +95,7 @@ public class OrderDB
 		}
 		else if (!nameCheck(this.lastName))
 		{
-			messages.add("[ERROR] The Credit Card Last Name can only contain letters.");
+			messages.add("[ERROR] The Credit Card Last Name can only contain letters and dots.");
 		}
 		
 		if (this.date.equals(""))
