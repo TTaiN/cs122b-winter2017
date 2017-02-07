@@ -64,7 +64,7 @@ public class Login extends HttpServlet
     	 catch (Exception e)
     	 {
  			ArrayList<String> messages = new ArrayList<String>();
- 			messages.add(e.getMessage());
+ 			messages.add("There was an error when trying to login.");
  			request.setAttribute("reason", "Login");
  			request.setAttribute("messages", messages);
  			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
