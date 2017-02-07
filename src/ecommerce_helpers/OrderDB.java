@@ -45,6 +45,18 @@ public class OrderDB
 		return true;
 	}
 	
+	public static boolean dateCheck(String s) 
+	{
+		for (int index = 0; index < s.length(); index++)
+		{
+			if (s.charAt(index) != '-' && Character.digit(s.charAt(index), 10) < 0)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public static boolean nameCheck(String s) 
 	{
 		return s.matches("[a-zA-Z]+");
@@ -83,6 +95,10 @@ public class OrderDB
 		{
 			messages.add("[ERROR] The Credit Card Expiration Date was not entered.");
 		}
+		else if (!dateCheck(this.date))
+		{
+			messages.add("[ERROR] The Credit Card Expiration Date can only contain numbers and dashes.");
+		}
 		
 		return messages.isEmpty();
 	}
@@ -102,20 +118,26 @@ public class OrderDB
 		{
 			if (!results.getString("first_name").equals(this.firstName))
 			{
-				messages.add("[ERROR] The First Name (" + this.firstName + ") did not the match the first name for the Credit Card Number (" + this.number + ") in our records.");
+				messages.add("[ERROR] The information provided did not match any entries in our records.");
+				//messages.add("[ERROR] The First Name (" + this.firstName + ") did not the match the first name for the Credit Card Number (" + this.number + ") in our records.");
 			}
-			if (!results.getString("last_name").equals(this.lastName))
+			else if (!results.getString("last_name").equals(this.lastName)) // changed to else if for now
 			{
-				messages.add("[ERROR] The Last Name (" + this.lastName + ") did not the match the last name for the Credit Card Number (" + this.number + ") in our records.");
+				messages.add("[ERROR] The information provided did not match any entries in our records.");
+
+				//messages.add("[ERROR] The Last Name (" + this.lastName + ") did not the match the last name for the Credit Card Number (" + this.number + ") in our records.");
 			}
-			if (!results.getString("expiration").equals(this.date))
+			else if (!results.getString("expiration").equals(this.date))
 			{
-				messages.add("[ERROR] The Expiration Date (" + this.date + ") did not the match the expiration date for the Credit Card Number (" + this.number + ") in our records.");
+				messages.add("[ERROR] The information provided did not match any entries in our records.");
+
+				//messages.add("[ERROR] The Expiration Date (" + this.date + ") did not the match the expiration date for the Credit Card Number (" + this.number + ") in our records.");
 			}
 		}
 		else
 		{
-			messages.add("[ERROR] The Credit Card Number (" + this.number + ") was not found in our records.");
+			messages.add("[ERROR] The information provided did not match any entries in our records.");
+			//messages.add("[ERROR] The Credit Card Number (" + this.number + ") was not found in our records.");
 		}
 		
 		if (messages.isEmpty())

@@ -70,7 +70,7 @@
 			Credit Card Number: <input type="text" name="number"/><br>
 			Credit Card First Name: <input type="text" name="firstName"/><br>
 			Credit Card Last Name: <input type="text" name="lastName"/><br>
-			Credit Card Expiration Date: <input type="date" name="date" name="firstName"/><br>
+			Credit Card Expiration Date: <input type="date" name="date" name="firstName"/> (YYYY-MM-DD)<br>
 			<center><input type="submit" name="action" value="Submit Order"/><br></center>
 		</form>		
 	</div>
