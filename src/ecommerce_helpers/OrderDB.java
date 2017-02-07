@@ -59,7 +59,14 @@ public class OrderDB
 	
 	public static boolean nameCheck(String s) 
 	{
-		return s.matches("[a-zA-Z]+");
+		for (int index = 0; index < s.length(); index++)
+		{
+			if (s.charAt(index) != '.' && s.charAt(index) != ' ' && !Character.isLetter(s.charAt(index)))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private boolean inputCheck(ArrayList<String> messages)
@@ -116,7 +123,7 @@ public class OrderDB
 		
 		if (results.next())
 		{
-			if (!results.getString("first_name").equals(this.firstName) || !results.getString("last_name").equals(this.lastName) || !results.getString("expiration").equals(this.date))
+			if (!results.getString("first_name").toLowerCase().equals(this.firstName.toLowerCase()) || !results.getString("last_name").toLowerCase().equals(this.lastName.toLowerCase()) || !results.getString("expiration").equals(this.date))
 			{
 				messages.add("[ERROR] The information provided did not match any entries in our records.");
 			}
