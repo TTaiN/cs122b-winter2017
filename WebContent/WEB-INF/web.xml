@@ -9,6 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <security-constraint>
+   <web-resource-collection>
+      <web-resource-name>HTTPSOnly</web-resource-name>
+      <url-pattern>/*</url-pattern>
+   </web-resource-collection>
+   <user-data-constraint>
+      <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+   </user-data-constraint>
+  </security-constraint>
   <servlet>
     <servlet-name>Browse</servlet-name>
     <servlet-class>Browse</servlet-class>
