@@ -4,11 +4,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import general_helpers.DatabaseHelper;
+import recaptcha_helpers.VerifyRecaptcha;
 
 public class Login extends HttpServlet
 {
@@ -42,13 +41,21 @@ public class Login extends HttpServlet
 
     		 String email = request.getParameter("email");
     		 String pwd = request.getParameter("pwd");
-
+    		 String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+    		 boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
     		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
-
-    		 if (rs.next())
+    		 if( verify == false)
+    		 {
+    			 request.setAttribute("error", "Missed Captcha.");
+    			 request.setAttribute("jsp", true);
+    			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+    		 }
+    		 else if (rs.next())
     		 {
     			 session.setAttribute("username", email);
     			 session.setAttribute("userId", rs.getInt("id"));
+        		 rs.close();
+        		 db.closeConnection();
     			 response.sendRedirect("./main");
     		 }
     		 else
