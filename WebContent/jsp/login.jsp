@@ -26,7 +26,7 @@
 		<form action="./login" method="POST">
 			E-mail: <input type="text" name="email" ><br>
 			Password: <input type="password" name="pwd" ><br>
-			<input type="submit" value="Login">
+			<input type="submit" value="Login"><br><br>
 			<div class="g-recaptcha" data-sitekey="6LelyBUUAAAAAFASK8XOU_G4y3Ke9SQAmF7dX0QC"></div>
 		</form>
 	</div>
