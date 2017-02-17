@@ -30,7 +30,7 @@ public class Main extends HttpServlet
 			PrintWriter out = response.getWriter();
 		    out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/><title>Main</title></head><body>");
 		    TopMenu.print(out);
-		    out.println("<H2 ALIGN=\"CENTER\"><a href=\"./search\">Search for movies</a>   <img src=\"./images/searchlogo.png\" style=\"height:18px\"></H2><h4 align=\"center\">- or -</h4><body>");
+		    out.println("<H2 ALIGN=\"CENTER\"><a href=\"./search\">Search for movies</a>   <a href=\"./search\"><img src=\"./images/searchlogo.png\" style=\"height:18px\"></a></H2><h4 align=\"center\">- or -</h4><body>");
 		    request.setAttribute("inMain", true);
 		    request.getRequestDispatcher("/browse").include(request, response);
 		}

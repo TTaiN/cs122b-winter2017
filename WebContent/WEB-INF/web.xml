@@ -10,13 +10,13 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <security-constraint>
-   <web-resource-collection>
+    <web-resource-collection>
       <web-resource-name>HTTPSOnly</web-resource-name>
       <url-pattern>/*</url-pattern>
-   </web-resource-collection>
-   <user-data-constraint>
+    </web-resource-collection>
+    <user-data-constraint>
       <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-   </user-data-constraint>
+    </user-data-constraint>
   </security-constraint>
   <servlet>
     <servlet-name>Browse</servlet-name>
@@ -70,6 +70,14 @@
     <servlet-name>ReadMe</servlet-name>
     <servlet-class>ReadMe</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>Dashboard</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DashboardInsertStar</servlet-name>
+    <servlet-class>DashboardInsertStar</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Browse</servlet-name>
     <url-pattern>/browse</url-pattern>
@@ -121,5 +129,13 @@
   <servlet-mapping>
     <servlet-name>ReadMe</servlet-name>
     <url-pattern>/reports/readme</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/_dashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DashboardInsertStar</servlet-name>
+    <url-pattern>/dashboardInsertStar</url-pattern>
   </servlet-mapping>
 </web-app>
