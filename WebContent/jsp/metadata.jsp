@@ -28,7 +28,7 @@
 	<div class="focus">
 		<center><h1>Metadata</h1></center>
 		<%
-			out.println("<span>-><span style='color:red;'> " + request.getAttribute("metadata") + "</span></span><br><br>");
+			out.println("<center><span><span> " + request.getAttribute("metadata") + "</span></span><br><br></center>");
 		%>
 		<center><button onclick="goBack()">Go Back To The Previous Page</button></center>
 	</div>

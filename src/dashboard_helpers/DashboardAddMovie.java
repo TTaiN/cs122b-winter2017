@@ -1,4 +1,4 @@
-package dasboard_helpers;
+package dashboard_helpers;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -14,16 +14,15 @@ import javax.servlet.http.HttpSession;
 import general_helpers.DatabaseHelper;
 
 /**
- * Servlet implementation class DashboardInsertStar
+ * Servlet implementation class DashboardAddMovie
  */
-
-public class DashboardInsertStar extends HttpServlet {
+public class DashboardAddMovie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DashboardInsertStar() {
+    public DashboardAddMovie() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,24 +38,24 @@ public class DashboardInsertStar extends HttpServlet {
 		
 		if (username == null)
 		{
-            response.sendRedirect("./login");
+            response.sendRedirect("./_dashboard");
             return;
 		}
 		DatabaseHelper db;
 		try {
 			db = new DatabaseHelper();
 
-			String query = "insert into stars values('" + request.getAttribute("id") + "','" + request.getAttribute("firstName") + "', '" + request.getAttribute("lastName")+ "', '" + request.getAttribute("dob") + "', '" + request.getAttribute("photoUrl") + "')";
-			ResultSet result = db.executeSQL(query);
-			System.out.println(result.toString());
-			request.setAttribute("insertStar", result.toString());
-    		request.getRequestDispatcher("./jsp/dashboard.jsp").include(request, response);
+			String query = "call add_movie ('" + request.getParameter("movieId") + "','" + request.getParameter("title") + "','" +request.getParameter("year") + "','" + request.getParameter("director") + "','" + request.getParameter("bannerUrl") + "','" + request.getParameter("trailerUrl") + "','" + request.getParameter("starId") + "','" + request.getParameter("firstName") + "', '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "','" + request.getParameter("genreId") + "','" + request.getParameter("genreName")+ "');";
+			System.out.println(query);	//debug
+			ResultSet rs = db.executeSQL(query);
 			
-			
-			
+			request.setAttribute("notice", "Movie inserted");
+    		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("notice", e.getMessage());
+    		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
+    		
 		}
 	}
 

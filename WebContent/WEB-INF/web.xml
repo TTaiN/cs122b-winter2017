@@ -75,8 +75,16 @@
     <servlet-class>Dashboard</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>DashboardMain</servlet-name>
+    <servlet-class>DashboardMain</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>DashboardInsertStar</servlet-name>
-    <servlet-class>DashboardInsertStar</servlet-class>
+    <servlet-class>dashboard_helpers.DashboardInsertStar</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DashboardAddMovie</servlet-name>
+    <servlet-class>dashboard_helpers.DashboardAddMovie</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Browse</servlet-name>
@@ -135,7 +143,15 @@
     <url-pattern>/_dashboard</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>DashboardMain</servlet-name>
+    <url-pattern>/dashboardMain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>DashboardInsertStar</servlet-name>
     <url-pattern>/dashboardInsertStar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DashboardAddMovie</servlet-name>
+    <url-pattern>/dashboardAddMovie</url-pattern>
   </servlet-mapping>
 </web-app>
