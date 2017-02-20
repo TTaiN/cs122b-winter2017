@@ -82,11 +82,9 @@ public class Dashboard extends HttpServlet {
 			 {
 				 System.out.println("login successful");
 				 session.setAttribute("employee", email);
-//				 session.setAttribute("fu", rs.getInt("id"));
 		   		 rs.close();
 		   		 db.closeConnection();
 				 response.sendRedirect("./dashboardMain");
-		   		//request.getRequestDispatcher("./dashboardMain").include(request, response);
 			 }
 			 else
 			 {
