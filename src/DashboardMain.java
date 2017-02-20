@@ -36,14 +36,14 @@ public class DashboardMain extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
+		String username = (String) session.getAttribute("employee");
 		if (username == null)
 		{
             response.sendRedirect("./_dashboard");
             return;
 		}
 		
-		if (request.getParameter("metadata") != null)
+		else if (request.getParameter("metadata") != null)
 		{
 			// get the metadata somehow
 			DatabaseHelper db;

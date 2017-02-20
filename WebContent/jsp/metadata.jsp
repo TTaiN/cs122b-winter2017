@@ -5,7 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 
 <%
-	if (session.getAttribute("username") == null || request.getAttribute("metadata") == null)
+	if (session.getAttribute("employee") == null || request.getAttribute("metadata") == null)
 	{
 		response.sendRedirect("../_dashboard");
 		return;

@@ -41,7 +41,7 @@ public class Dashboard extends HttpServlet {
     	response.setContentType("text/html");
         
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
+        String username = (String) session.getAttribute("employee");
         
         if (username == null)
         {
@@ -50,6 +50,7 @@ public class Dashboard extends HttpServlet {
         }
         else 
         {
+        	System.out.println(username);
         	response.sendRedirect("./dashboardMain");
         }
 	}
@@ -80,7 +81,7 @@ public class Dashboard extends HttpServlet {
 			 if (rs.next())
 			 {
 				 System.out.println("login successful");
-				 session.setAttribute("username", email);
+				 session.setAttribute("employee", email);
 //				 session.setAttribute("fu", rs.getInt("id"));
 		   		 rs.close();
 		   		 db.closeConnection();
@@ -95,7 +96,6 @@ public class Dashboard extends HttpServlet {
 				 request.getRequestDispatcher("./jsp/dashboard.jsp").include(request, response);
 			 }
 		
-			 System.out.println("all good");
 			 rs.close();
 			 db.closeConnection();
 		 }

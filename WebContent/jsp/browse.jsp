@@ -54,6 +54,43 @@
 </div>
 
 <br><H2>Browse by genre</H2>
+
+	<%
+	query = "SELECT count(*) as cnt from genres;";
+
+	rs = db.executeSQL(query);
+	rs.next();
+	long rowLimit = (rs.getLong(1) + 3) / 4;	//ceiling div w/o importing math
+	System.out.println(rowLimit);
+	
+	query = "SELECT * from genres order by name;";
+	rs = db.executeSQL(query);
+	long i = 0;
+	out.println("<div class='wrapper'>");
+
+	while (rs.next()) 
+	{
+		if (i==0) {
+			out.println("<div id='cols'>");
+			out.println("<ul style='list-style: none;'>");
+			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			i++;
+		}
+		else if (i<rowLimit-1) { 
+			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			i++;
+		} else {
+			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			out.println("</ul></div>");
+			i = 0;
+		}
+	}
+	out.println("</div>");
+	 
+	%>
+
+
+<!-- 
 <div class="wrapper">
 	<div id="cols">
 		<ul style="list-style: none;"> 
@@ -102,6 +139,6 @@
 			
 		</ul>
 	</div>
-</div>
+</div> -->
 </BODY>
 </html>

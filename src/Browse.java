@@ -47,7 +47,7 @@ public class Browse extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		if (username == null)
+		if (username == null )
 		{
             response.sendRedirect("./login");
             return;

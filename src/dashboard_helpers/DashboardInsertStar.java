@@ -35,11 +35,11 @@ public class DashboardInsertStar extends HttpServlet {
 		// TODO Auto-generated method stub
         response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
+		String username = (String) session.getAttribute("employee");
 		
 		if (username == null)
 		{
-            response.sendRedirect("./login");
+            response.sendRedirect("./_dashboard");
             return;
 		}
 		DatabaseHelper db;
@@ -47,8 +47,10 @@ public class DashboardInsertStar extends HttpServlet {
 			db = new DatabaseHelper();
 
 			String query = "insert into stars values('" + request.getParameter("id") + "','" + request.getParameter("firstName") + "', '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "')";
+			query = query.replaceAll("''", "NULL");
 			int row = db.executeInsertPS(query);
 			System.out.println(query);	//debug
+			
 			request.setAttribute("notice", "Star inserted");
     		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
 		} catch (SQLException e) {
@@ -66,5 +68,6 @@ public class DashboardInsertStar extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 
 }

@@ -22,8 +22,10 @@ public class Logout extends HttpServlet
         
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+        String employee = (String) session.getAttribute("employee");
         
-        if (username == null)
+        
+        if (username == null && employee == null)
         {
             response.sendRedirect("./login");
         }

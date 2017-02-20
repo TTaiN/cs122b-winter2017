@@ -29,6 +29,8 @@
 			<input type="submit" value="Login"><br><br>
 			<div class="g-recaptcha" data-sitekey="6LelyBUUAAAAAFASK8XOU_G4y3Ke9SQAmF7dX0QC"></div>
 		</form>
+		<br>
+		<a href="./_dashboard">Are you an employee? Click here to login</a>
 	</div>
 </body>
 </html>

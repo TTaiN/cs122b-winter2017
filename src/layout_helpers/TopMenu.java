@@ -31,4 +31,16 @@ public class TopMenu
 		out.println("</table>");
 		out.println("</div>");
 	}
+	
+	public static void dashboardPrint(PrintWriter out)
+	{
+		out.println("<br><center><a href='./main'><img src=\"./images/logo.png\" alt=\"logo\"></a></center><br>");
+		out.println("<div class='topmenu'>");
+		out.println("<table class='topmenu_table'>");
+		out.println("<tr>");
+		out.println("<td class='topmenu_button'><a href='./logout'>Log out</a></td>");
+		out.println("</tr>");
+		out.println("</table>");
+		out.println("</div>");
+	}
 }

@@ -34,7 +34,7 @@ public class DashboardAddMovie extends HttpServlet {
 		// TODO Auto-generated method stub
         response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
+		String username = (String) session.getAttribute("employee");
 		
 		if (username == null)
 		{
@@ -46,8 +46,9 @@ public class DashboardAddMovie extends HttpServlet {
 			db = new DatabaseHelper();
 
 			String query = "call add_movie ('" + request.getParameter("movieId") + "','" + request.getParameter("title") + "','" +request.getParameter("year") + "','" + request.getParameter("director") + "','" + request.getParameter("bannerUrl") + "','" + request.getParameter("trailerUrl") + "','" + request.getParameter("starId") + "','" + request.getParameter("firstName") + "', '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "','" + request.getParameter("genreId") + "','" + request.getParameter("genreName")+ "');";
+			query = query.replaceAll("''", "NULL");
 			System.out.println(query);	//debug
-			ResultSet rs = db.executeSQL(query);
+			ResultSet rs = db.executeSQL(query); 
 			
 			request.setAttribute("notice", "Movie inserted");
     		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
