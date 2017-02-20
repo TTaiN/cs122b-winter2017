@@ -78,7 +78,7 @@ public class Dashboard extends HttpServlet {
    			 	request.getRequestDispatcher("./jsp/dashboard.jsp").include(request, response);
    		 	}
    	 		
-			 if (rs.next())
+   	 		else if (rs.next())
 			 {
 				 System.out.println("login successful");
 				 session.setAttribute("employee", email);
