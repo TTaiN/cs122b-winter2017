@@ -75,7 +75,7 @@ public class Dashboard extends HttpServlet {
    		 	{
    			 	request.setAttribute("error", "Missed Captcha.");
    			 	request.setAttribute("jsp", true);
-   			 	request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+   			 	request.getRequestDispatcher("./jsp/dashboard.jsp").include(request, response);
    		 	}
    	 		
 			 if (rs.next())
