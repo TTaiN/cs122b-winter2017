@@ -1,4 +1,4 @@
-
+USE moviedb;
 
 -- Change DELIMITER to $$ 
 DELIMITER $$ 
@@ -18,9 +18,11 @@ CREATE PROCEDURE add_movie
    star_photo_url varchar(200) ,
    genre_id integer,
    genre_name varchar(32)
-) 
-BEGIN 
+)
 
+BEGIN 
+START TRANSACTION;
+	
    IF  NOT EXISTS(SELECT (1) FROM movies WHERE movies.title = title) THEN
 	  INSERT INTO movies (id, title, year, director, banner_url, trailer_url) 
       values (movie_id, title, year, director, banner_url, trailer_url);
@@ -28,38 +30,31 @@ BEGIN
       update movies
       set id = movie_id, year = year, director = director, banner_url = banner_url, trailer_url = trailer_url
       where movie.title = movie_title;
-	END IF;
+   END IF;
     
-   -- create star if not exist
+    
    IF star_last_name is not null THEN
 	  IF NOT EXISTS(SELECT (1) FROM stars WHERE stars.last_name = star_last_name and stars.first_name = star_first_name) THEN
-         INSERT INTO stars (id, first_name, last_name, dob, photo_url) 
-         VALUES (star_id, star_first_name, star_last_name, star_dob, star_photo_url);
-            -- link star and movie
-		 INSERT INTO stars_in_movies values (star_id, movie_id);
+            INSERT INTO stars (id, first_name, last_name, dob, photo_url) values (star_id, star_first_name, star_last_name, star_dob, star_photo_url);
+		    INSERT INTO stars_in_movies (star_id, movie_id) values (star_id, movie_id);
 	  ELSE
-		 SET star_id = (SELECT id from stars where stars.last_name = star_last_name and stars.first_name = star_first_name);
-         -- link star and movie
-		 INSERT INTO stars_in_movies values (star_id, movie_id);
+		    SET star_id = (SELECT id from stars where last_name = star_last_name and first_name = star_first_name);
+		    INSERT INTO stars_in_movies (star_id, movie_id) values (star_id, movie_id);
 	  END IF;
    END IF;
 
-   
-   -- create genre if not exist
+
    IF genre_name is not null THEN
 	  IF NOT EXISTS(SELECT (1) FROM genres WHERE genres.name = genre_name) THEN
-         INSERT INTO genres (id, name) values (genre_id, genre_name);
-         -- link genre and movie
-		 INSERT INTO genres_in_movies values (genre_id, movie_id);
-	  else
-		 SET genre_id = (SELECT id FROM genres WHERE genres.name = genre_name);
-		 -- link genre and movie
-		 INSERT INTO genres_in_movies values (genre_id, movie_id);
+            INSERT INTO genres (id, name) values (genre_id, genre_name);
+		    INSERT INTO genres_in_movies (genre_id, movie_id) values (genre_id, movie_id);
+	  ELSE
+		    SET genre_id = (SELECT id FROM genres WHERE genres.name = genre_name);
+		    INSERT INTO genres_in_movies (genre_id, movie_id) values (genre_id, movie_id);
 	  END IF;
    END IF;
-	-- create movie if not exist
+COMMIT;
 
-      
 END; 
 $$
 

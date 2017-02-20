@@ -80,7 +80,6 @@ public class Dashboard extends HttpServlet {
    	 		
    	 		else if (rs.next())
 			 {
-				 System.out.println("login successful");
 				 session.setAttribute("employee", email);
 		   		 rs.close();
 		   		 db.closeConnection();
@@ -88,7 +87,6 @@ public class Dashboard extends HttpServlet {
 			 }
 			 else
 			 {
-				 System.out.println("cant login");
 				 request.setAttribute("error", "Invalid e-mail and/or password.");
 				 request.setAttribute("jsp", true);
 				 request.getRequestDispatcher("./jsp/dashboard.jsp").include(request, response);

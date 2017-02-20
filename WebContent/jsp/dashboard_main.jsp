@@ -51,13 +51,13 @@ if (request.getAttribute("notice") != null) {
   		Banner URL <input type="text" name="bannerUrl"><br><br>
   		Trailer URL <input type="text" name="trailerUrl"><br><br>
   		<p>Star Information (if exists only put the name)</p>
-  		Star ID <input type="text" name="starId" placeholder="Required.."><br><br>
+  		Star ID <input type="text" name="starId"><br><br>
   		First Name <input type="text" name="firstName" placeholder="Leave blank if has one name.."><br><br>
   		Last Name <input type="text" name="lastName"><br><br>
   		Date of Birth <input type="date" name="dob" placeholder="YYYY-MM-DD"><br><br>
   		Photo URL <input type="text" name="photoUrl"><br><br>
   		<p>Genre Information (if exists only put the genre name)</p>
-  		Genre ID <input type="text" name="genreId" placeholder="Required.."><br><br>
+  		Genre ID <input type="text" name="genreId"><br><br>
   		Genre Name <input type="text" name="genreName"><br><br>
   		<input type="submit" value="Submit"><br>
 </form>
