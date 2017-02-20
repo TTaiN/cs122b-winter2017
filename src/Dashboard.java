@@ -68,15 +68,15 @@ public class Dashboard extends HttpServlet {
 
    	 		String email = request.getParameter("email");
    	 		String pwd = request.getParameter("pwd");
-   	 		//String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-   	 		//boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+   	 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+   	 		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
    	 		ResultSet rs = db.executePreparedStatement("SELECT * from employees where email = '" + email + "'" + " and password = '" + pwd + "'");
-//   		 if( verify == false)
-//   		 {
-//   			 request.setAttribute("error", "Missed Captcha.");
-//   			 request.setAttribute("jsp", true);
-//   			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
-//   		 }
+   	 		if( verify == false)
+   		 	{
+   			 	request.setAttribute("error", "Missed Captcha.");
+   			 	request.setAttribute("jsp", true);
+   			 	request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+   		 	}
    	 		
 			 if (rs.next())
 			 {

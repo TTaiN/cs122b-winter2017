@@ -13,7 +13,7 @@
 <head>
 	<title>Dashboard Login</title>
   	<link rel="stylesheet" type="text/css" href="./style/main.css"/>
-	<!--<script src='https://www.google.com/recaptcha/api.js'></script>-->
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -27,6 +27,7 @@
 			E-mail: <input type="text" name="email" ><br>
 			Password: <input type="password" name="pwd" ><br>
 			<input type="submit" value="Login"><br><br>
+			<div class="g-recaptcha" data-sitekey="6LelyBUUAAAAAFASK8XOU_G4y3Ke9SQAmF7dX0QC"></div>
 		</form>
 	</div>
 </body>
