@@ -56,14 +56,14 @@
 <br><H2>Browse by genre</H2>
 
 	<%
-	query = "SELECT count(*) as cnt from genres;";
+	query = "SELECT count(*) as cnt from genres g where exists (select (1) from genres_in_movies where genre_id = g.id);";
 
 	rs = db.executeSQL(query);
 	rs.next();
 	long rowLimit = (rs.getLong(1) + 3) / 4;	//ceiling div w/o importing math
 	System.out.println(rowLimit);
 	
-	query = "SELECT * from genres order by name;";
+	query = "SELECT * from genres g where exists (select (1) from genres_in_movies where genre_id = g.id) order by name;";
 	rs = db.executeSQL(query);
 	long i = 0;
 	out.println("<div class='wrapper'>");
@@ -73,14 +73,14 @@
 		if (i==0) {
 			out.println("<div id='cols'>");
 			out.println("<ul style='list-style: none;'>");
-			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			out.println("<li><a href='./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
 			i++;
 		}
 		else if (i<rowLimit-1) { 
-			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			out.println("<li><a href='./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
 			i++;
 		} else {
-			out.println("<li><a href=''./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
+			out.println("<li><a href='./movielist?genre=" + rs.getString(2) + "'>" + rs.getString(2) + "</a></li><br>");
 			out.println("</ul></div>");
 			i = 0;
 		}

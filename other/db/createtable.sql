@@ -32,3 +32,14 @@ CREATE TABLE customers(id INTEGER AUTO_INCREMENT NOT NULL, first_name VARCHAR(50
 
 CREATE TABLE sales(id INTEGER AUTO_INCREMENT NOT NULL, customer_id INTEGER NOT NULL, movie_id INTEGER NOT NULL, sale_date DATE NOT NULL,
   PRIMARY KEY (id), FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE, FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE);
+
+
+create table employees (
+email varchar(50),
+`password` varchar(20) not null,
+fullname varchar(100),
+primary key(email)
+);
+
+insert into employees values ('classta@email.edu', 'classta', 'TA CS122B');
+insert into employees values ('a', 'a', 'a a');	-- test

@@ -27,7 +27,7 @@ if (request.getAttribute("notice") != null) {
 <H3>1: Insert new star</H3>
 <form ACTION="./dashboardInsertStar" METHOD="POST">
   		Star ID <input type="text" name="id" placeholder="Required.."><br><br>
-  		First Name <input type="text" name="firstName" placeholder="Leave blank if has one name.."><br><br>
+  		First Name <input type="text" name="firstName" placeholder="Blank if one name.."><br><br>
   		Last Name <input type="text" name="lastName"><br><br>
   		Date of Birth <input type="date" name="dob" placeholder="YYYY-MM-DD"><br><br>
   		Photo URL <input type="text" name="photoUrl"><br><br>
@@ -52,7 +52,7 @@ if (request.getAttribute("notice") != null) {
   		Trailer URL <input type="text" name="trailerUrl"><br><br>
   		<p>Star Information (if exists only put the name)</p>
   		Star ID <input type="text" name="starId"><br><br>
-  		First Name <input type="text" name="firstName" placeholder="Leave blank if has one name.."><br><br>
+  		First Name <input type="text" name="firstName" placeholder="Blank if one name.."><br><br>
   		Last Name <input type="text" name="lastName"><br><br>
   		Date of Birth <input type="date" name="dob" placeholder="YYYY-MM-DD"><br><br>
   		Photo URL <input type="text" name="photoUrl"><br><br>
