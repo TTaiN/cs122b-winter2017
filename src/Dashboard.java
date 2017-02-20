@@ -26,9 +26,10 @@ public class Dashboard extends HttpServlet
     	response.setContentType("text/html");
         
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("employee");
+        String employee = (String) session.getAttribute("employee");
+        String username = (String) session.getAttribute("username");
         
-        if (username == null)
+        if (employee == null && username == null)
         {
 			request.setAttribute("jsp", true);
             request.getRequestDispatcher("/jsp/dashboard.jsp").include(request, response);
