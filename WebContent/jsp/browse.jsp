@@ -17,7 +17,7 @@
 <%
 	if (session.getAttribute("username") == null || request.getAttribute("movie") == null)
 	{
-		response.sendRedirect("./login");
+		response.sendRedirect("../login");
 	}
 %>
 
