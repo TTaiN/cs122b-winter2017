@@ -25,11 +25,17 @@ public class DashboardInsertStar extends HttpServlet
 	{
         response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("employee");
-		
-		if (username == null)
+        String employee = (String) session.getAttribute("employee");
+        String username = (String) session.getAttribute("username");
+        
+		if (employee == null && username == null)
 		{
             response.sendRedirect("./_dashboard");
+            return;
+		}
+		else if (employee == null && username != null)
+		{
+            response.sendRedirect("./main");
             return;
 		}
 		

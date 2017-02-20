@@ -34,6 +34,10 @@ public class Dashboard extends HttpServlet
 			request.setAttribute("jsp", true);
             request.getRequestDispatcher("/jsp/dashboard.jsp").include(request, response);
         }
+        else if (employee == null && username != null)
+        {
+        	response.sendRedirect("./main");
+        }
         else 
         {
         	response.sendRedirect("./dashboardMain");
