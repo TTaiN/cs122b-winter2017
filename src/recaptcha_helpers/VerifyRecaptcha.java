@@ -13,7 +13,7 @@ import javax.net.ssl.HttpsURLConnection;
 /* Credit: http://www.journaldev.com/7133/how-to-integrate-google-recaptcha-in-java-web-application */
 public class VerifyRecaptcha {
 	public static final String url = "https://www.google.com/recaptcha/api/siteverify";
-	public static final String secret = "6LelyBUUAAAAAFmTv7N1V1-znWIdGl5-HOq63GJU";
+	public static final String secret = "6LdaxxUUAAAAAIs_3LPgfW0WZDObfa-aL6WcquBP";
 	private final static String USER_AGENT = "Mozilla/5.0";
 
 	public static boolean verify(String gRecaptchaResponse) throws IOException 
