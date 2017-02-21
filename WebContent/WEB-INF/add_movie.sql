@@ -31,19 +31,18 @@ START TRANSACTION;
          set id = m_id, year = m_year, director = m_director, banner_url = m_banner_url, trailer_url = m_trailer_url
          where title = m_title;
       END IF;
-   ELSE IF m_title is not null THEN
+   ELSE
       SET m_id = (select id from movies where title=m_title);
    END IF;
-      
-    
+
     
    IF star_last_name is not null THEN
 	  IF NOT EXISTS(SELECT (1) FROM stars WHERE stars.last_name = star_last_name and stars.first_name = star_first_name) THEN
             INSERT INTO stars (id, first_name, last_name, dob, photo_url) values (star_id, star_first_name, star_last_name, star_dob, star_photo_url);
-		    INSERT INTO stars_in_movies (star_id, m_id) values (star_id, m_id);
+		    INSERT INTO stars_in_movies (star_id, movie_id) values (star_id, m_id);
 	  ELSE
 		    SET star_id = (SELECT id from stars where last_name = star_last_name and first_name = star_first_name);
-		    INSERT INTO stars_in_movies (star_id, m_id) values (star_id, m_id);
+		    INSERT INTO stars_in_movies (star_id, movie_id) values (star_id, m_id);
 	  END IF;
    END IF;
 
@@ -51,12 +50,13 @@ START TRANSACTION;
    IF genre_name is not null THEN
 	  IF NOT EXISTS(SELECT (1) FROM genres WHERE genres.name = genre_name) THEN
             INSERT INTO genres (id, name) values (genre_id, genre_name);
-		    INSERT INTO genres_in_movies (genre_id, m_id) values (genre_id, m_id);
+		    INSERT INTO genres_in_movies (genre_id, movie_id) values (genre_id, m_id);
 	  ELSE
 		    SET genre_id = (SELECT id FROM genres WHERE genres.name = genre_name);
-		    INSERT INTO genres_in_movies (genre_id, m_id) values (genre_id, m_id);
+		    INSERT INTO genres_in_movies (genre_id, movie_id) values (genre_id, m_id);
 	  END IF;
    END IF;
+
 COMMIT;
 
 END; 
@@ -64,4 +64,3 @@ $$
 
 -- Change back DELIMITER to ; 
 DELIMITER ; 
-
