@@ -1,3 +1,5 @@
+Note: Due to the way Eclipse exports .WAR, all sources can be found with the .class files, in WEB-INF/classes.
+
 AWS Tomcat User Credentials:
 	*URL: https://35.167.240.46:8443/
 	*USER: tomcat OR classta
@@ -5,9 +7,10 @@ AWS Tomcat User Credentials:
 
 AWS Database User Credentials:
 	*(IP - 35.167.240.46) 
-	*(User - cs122b) 
+	*(User - cs122b)
 	*(Password - cs122bgroup42) 
-	*(DB - moviedb).
+	*(DB - moviedb)
+	-> Note: testuser,testpass also exists if the above does not work.
 	
 Fabflix Employee Login Information:
 	-> insert into employees values ('classta@email.edu', 'classta', 'TA CS122B');
