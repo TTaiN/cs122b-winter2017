@@ -1,5 +1,7 @@
 Note: Due to the way Eclipse exports .WAR, all sources can be found with the .class files, in WEB-INF/classes.
 
+-> Please change .war filename to Fabflix.war.
+
 AWS Tomcat User Credentials:
 	*URL: https://35.167.240.46:8443/
 	*USER: tomcat OR classta
