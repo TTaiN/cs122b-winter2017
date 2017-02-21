@@ -22,15 +22,19 @@ CREATE PROCEDURE add_movie
 
 BEGIN 
 START TRANSACTION;
-	
-   IF  NOT EXISTS(SELECT (1) FROM movies WHERE title = m_title) THEN 
-	  INSERT INTO movies (id, title, year, director, banner_url, trailer_url) 
-      values (m_id, m_title, m_year, m_director, m_banner_url, m_trailer_url);
-   ELSE
-      update movies
-      set id = m_id, year = m_year, director = m_director, banner_url = m_banner_url, trailer_url = m_trailer_url
-      where title = m_title;
+   IF m_id is not null THEN
+      IF  NOT EXISTS(SELECT (1) FROM movies WHERE title = m_title) THEN 
+	     INSERT INTO movies (id, title, year, director, banner_url, trailer_url) 
+         values (m_id, m_title, m_year, m_director, m_banner_url, m_trailer_url);
+      ELSE
+         update movies
+         set id = m_id, year = m_year, director = m_director, banner_url = m_banner_url, trailer_url = m_trailer_url
+         where title = m_title;
+      END IF;
+   ELSE IF m_title is not null THEN
+      SET m_id = (select id from movies where title=m_title);
    END IF;
+      
     
     
    IF star_last_name is not null THEN
@@ -60,3 +64,4 @@ $$
 
 -- Change back DELIMITER to ; 
 DELIMITER ; 
+
