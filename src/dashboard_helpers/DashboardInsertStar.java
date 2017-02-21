@@ -52,6 +52,8 @@ public class DashboardInsertStar extends HttpServlet
 			
 			request.setAttribute("notice", "Star inserted");
     		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
+    		
+    		db.closeConnection();
 		} 
 		catch (SQLException e) 
 		{

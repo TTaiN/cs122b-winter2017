@@ -50,7 +50,9 @@ public class DashboardAddMovie extends HttpServlet
 			ResultSet rs = db.executeSQL(query); 
 			
 			request.setAttribute("notice", "Movie inserted");
-    		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);	
+    		request.getRequestDispatcher("./jsp/dashboard_main.jsp").include(request, response);
+    		
+    		db.closeConnection();
 		} 
 		catch (SQLException e) 
 		{
