@@ -27,10 +27,7 @@
 </head>
 <body>
 	<%
-		if (session.getAttribute("employee") == null)
-		{
-			TopMenu.print(response.getWriter());
-		}
+		TopMenu.print(response.getWriter());
 	%>
 	<div class="focus">
 		<center><h1>Oops! (<%= reason %>)</h1></center>
