@@ -45,8 +45,9 @@ public class DashboardInsertStar extends HttpServlet
 		{
 			db = new DatabaseHelper();
 
-			String query = "insert into stars values('" + request.getParameter("id") + "','" + request.getParameter("firstName") + "', '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "')";
+			String query = "insert into stars values('" + request.getParameter("id") + "',\"" + request.getParameter("firstName") + "\", '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "')";
 			query = query.replaceAll("''", "NULL");
+			
 			int row = db.executeInsertPS(query);
 			
 			request.setAttribute("notice", "Star inserted");
@@ -64,4 +65,5 @@ public class DashboardInsertStar extends HttpServlet
 	{
 		doGet(request, response);
 	}
+	
 }
