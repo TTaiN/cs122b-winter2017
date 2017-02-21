@@ -22,9 +22,6 @@
 	<title>Cart</title>
 </head>
 <body>
-	<%
-		TopMenu.print(response.getWriter());
-	%>
 	<div class="focus">
 		<center><h1>Metadata</h1></center>
 		<%

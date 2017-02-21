@@ -1,4 +1,4 @@
-Note: Due to the way Eclipse exports .WAR, all sources can be found with the .class files, in WEB-INF/classes.
+Note: Due to the way Eclipse exports .WAR, all sources (*.java files) can be found with the .class files, in WEB-INF/classes.
 
 -> Please change .war filename to Fabflix.war.
 
@@ -31,5 +31,5 @@ How to compile & run Fabflix web project:
 	
 	-> Note: It is easiest to just deploy the .war we submitted. The sources can be found in WEB-INF/src.
 	
-How to compile & run Fabflix web project:
+How to compile & run XML parser:
 	See README.txt in XML parsing zip we submitted.
