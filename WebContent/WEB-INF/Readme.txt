@@ -31,5 +31,5 @@ How to compile & run Fabflix web project:
 	
 	-> Note: It is easiest to just deploy the .war we submitted. The sources can be found in WEB-INF/src.
 	
-How to compile & run Fabflix web project:
+How to compile & run XML parser:
 	See README.txt in XML parsing zip we submitted.
