@@ -8,6 +8,9 @@ AWS Database User Credentials:
 	*(User - cs122b) 
 	*(Password - cs122bgroup42) 
 	*(DB - moviedb).
+	
+Fabflix Employee Login Information:
+	-> insert into employees values ('classta@email.edu', 'classta', 'TA CS122B');
 
 How to compile & run Fabflix web project:
 	(Note: We assume you are using Eclipse.) How to compile java sources: place all .java and package folders into /src folder for Java resources. Ensure that you add
