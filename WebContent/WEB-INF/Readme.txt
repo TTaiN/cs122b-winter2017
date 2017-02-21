@@ -1,4 +1,4 @@
-Note: Due to the way Eclipse exports .WAR, all sources can be found with the .class files, in WEB-INF/classes.
+Note: Due to the way Eclipse exports .WAR, all sources (*.java files) can be found with the .class files, in WEB-INF/classes.
 
 -> Please change .war filename to Fabflix.war.
 
