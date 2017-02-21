@@ -23,13 +23,13 @@ CREATE PROCEDURE add_movie
 BEGIN 
 START TRANSACTION;
 	
-   IF  NOT EXISTS(SELECT (1) FROM movies WHERE movies.title = title) THEN
+   IF  NOT EXISTS(SELECT (1) FROM movies WHERE title = title) THEN
 	  INSERT INTO movies (id, title, year, director, banner_url, trailer_url) 
       values (movie_id, title, year, director, banner_url, trailer_url);
    ELSE
       update movies
       set id = movie_id, year = year, director = director, banner_url = banner_url, trailer_url = trailer_url
-      where movie.title = movie_title;
+      where title = movie_title;
    END IF;
     
     

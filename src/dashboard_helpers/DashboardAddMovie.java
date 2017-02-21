@@ -46,7 +46,7 @@ public class DashboardAddMovie extends HttpServlet
 
 			String query = "call add_movie ('" + request.getParameter("movieId") + "','" + request.getParameter("title") + "','" +request.getParameter("year") + "','" + request.getParameter("director") + "','" + request.getParameter("bannerUrl") + "','" + request.getParameter("trailerUrl") + "','" + request.getParameter("starId") + "',\"" + request.getParameter("firstName") + "\", '" + request.getParameter("lastName")+ "', '" + request.getParameter("dob") + "', '" + request.getParameter("photoUrl") + "','" + request.getParameter("genreId") + "','" + request.getParameter("genreName")+ "');";
 			query = query.replaceAll("''", "NULL");
-			//System.out.println(query);	//debug
+			System.out.println(query);	//debug
 			ResultSet rs = db.executeSQL(query); 
 			
 			request.setAttribute("notice", "Movie inserted");
