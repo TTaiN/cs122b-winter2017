@@ -62,7 +62,7 @@ public class DatabaseHelper
 		{
 			e.printStackTrace();
 		}
-		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database, user, password);
+		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
 	}
 	
 	public void closeConnection() throws SQLException
