@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import general_helpers.DatabaseHelper;
 import recaptcha_helpers.VerifyRecaptcha;
@@ -35,46 +36,70 @@ public class Login extends HttpServlet
      {
     	 response.setContentType("text/html");
     	 HttpSession session = request.getSession(); 
-    	 try
+    	 
+    	 if (request.getParameter("mobile") != null) // Android Application
     	 {
-    		 DatabaseHelper db = new DatabaseHelper();
+        	 response.setContentType("application/json");
 
-    		 String email = request.getParameter("email");
-    		 String pwd = request.getParameter("pwd");
-    		 String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-    		 boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
-    		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
-    		 if( verify == false)
+    		 try
     		 {
-    			 request.setAttribute("error", "Missed Captcha.");
-    			 request.setAttribute("jsp", true);
-    			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+        		 DatabaseHelper db = new DatabaseHelper();
+        		 String email = request.getParameter("email");
+        		 String pwd = request.getParameter("pwd");
+        		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
+        		 if (rs.next())
+        		 {
+        			 response.getWriter().print("{login: true, email:\"" + email + "\"}");
+        		 }
+        		 else response.getWriter().print("{login: false, error:\"\"}");
     		 }
-    		 else if (rs.next())
+    		 catch (SQLException e)
     		 {
-    			 session.setAttribute("username", email);
-    			 session.setAttribute("userId", rs.getInt("id"));
+    			 response.getWriter().print("{login: false, error:\"" + e.getMessage() + "\"}");
+    		 }
+    	 }
+    	 else
+    	 {
+        	 try
+        	 {
+        		 DatabaseHelper db = new DatabaseHelper();
+        		 String email = request.getParameter("email");
+        		 String pwd = request.getParameter("pwd");
+        		 String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+        		 boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+        		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
+        		 if( verify == false)
+        		 {
+        			 request.setAttribute("error", "Missed Captcha.");
+        			 request.setAttribute("jsp", true);
+        			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+        		 }
+        		 else if (rs.next())
+        		 {
+        			 session.setAttribute("username", email);
+        			 session.setAttribute("userId", rs.getInt("id"));
+            		 rs.close();
+            		 db.closeConnection();
+        			 response.sendRedirect("./main");
+        		 }
+        		 else
+        		 {
+        			 request.setAttribute("error", "Invalid e-mail and/or password.");
+        			 request.setAttribute("jsp", true);
+        			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
+        		 }
+
         		 rs.close();
         		 db.closeConnection();
-    			 response.sendRedirect("./main");
-    		 }
-    		 else
-    		 {
-    			 request.setAttribute("error", "Invalid e-mail and/or password.");
-    			 request.setAttribute("jsp", true);
-    			 request.getRequestDispatcher("./jsp/login.jsp").include(request, response);
-    		 }
-
-    		 rs.close();
-    		 db.closeConnection();
-    	 }
-    	 catch (Exception e)
-    	 {
- 			ArrayList<String> messages = new ArrayList<String>();
- 			messages.add("There was an error when trying to login.");
- 			request.setAttribute("reason", "Login");
- 			request.setAttribute("messages", messages);
- 			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
+        	 }
+        	 catch (Exception e)
+        	 {
+     			ArrayList<String> messages = new ArrayList<String>();
+     			messages.add("There was an error when trying to login.");
+     			request.setAttribute("reason", "Login");
+     			request.setAttribute("messages", messages);
+     			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);
+        	 }
     	 }
 	}
 }
