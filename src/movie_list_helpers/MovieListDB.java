@@ -18,6 +18,32 @@ public class MovieListDB {
 		dbh = new DatabaseHelper();
 	}
 	
+	
+	public List<Movie> getMobileMovies(String title) throws SQLException // By Title
+	{
+		List<Movie> movieList = new ArrayList<Movie>();
+		String titleWhere = Where.getWhere(title, "title");
+		
+		System.out.println();
+
+		ResultSet rs = dbh.executePreparedStatement("select title from movies where " + titleWhere);
+		
+		while(rs.next())
+		{
+			movieList.add(getMobileMovie(rs));
+		}
+		
+		return movieList;
+	}
+	
+	public Movie getMobileMovie(ResultSet rs) throws SQLException
+	{
+		Movie m = new Movie();
+		m.setTitle(rs.getString("title"));
+		
+		return m;
+	}
+	
 	// getMovie
 	// Get one movie from current row
 	public Movie getMovie(ResultSet rs) throws SQLException
@@ -57,6 +83,7 @@ public class MovieListDB {
 	
 	// GetMovies methods
 	// Get a list of all Movies matching the search criteria
+
 	
 	// getMovies (Genre)
 	public List<Movie> getMovies(int limit, int offset, String genre, String sort)
