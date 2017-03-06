@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -91,8 +89,11 @@ public class MovieList extends HttpServlet {
 			        response.setContentType("text/html");  
 			        PrintWriter out=response.getWriter();
 					out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/>\n"
-							+ "<link rel='stylesheet' type='text/css' href='./style/movieList.css'/><title>Movie List</title></head>");
-					TopMenu.print(out);
+							+ "<link rel='stylesheet' type='text/css' href='./style/movieList.css'/>"
+							+ "<title>Movie List</title>"
+							+ "<script src = 'https://code.jquery.com/jquery-1.10.2.js'></script><script src = 'https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>"
+							+ "<script type='text/javascript' src='./script/popup.js'></script></head>");
+			        TopMenu.print(out);
 				    out.println("<BODY>");
 				    out.println("<H1 ALIGN=\"CENTER\">Movie List</H1>\n\n");
 					List<Movie> movieList = new ArrayList<Movie>();
