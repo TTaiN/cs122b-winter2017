@@ -27,7 +27,10 @@
 		<%
 			out.println("<center><span><span> " + request.getAttribute("metadata") + "</span></span><br><br></center>");
 		%>
-		<center><button onclick="goBack()">Go Back To The Previous Page</button></center>
+		<!-- <center><button onclick="goBack()">Go Back To The Previous Page</button></center> -->
+		<center></center><form action="./dashboardMain">
+    		<input type="submit" value="Go back to previous page" />
+		</form></center>
 	</div>
 </body>
 </html>

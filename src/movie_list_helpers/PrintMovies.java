@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import general_helpers.Movie;
+import general_helpers.Movie; //
 
 public class PrintMovies {
 	static private void printMovie(Movie m, PrintWriter out)
@@ -18,7 +18,9 @@ public class PrintMovies {
 						+ "<input type='hidden' name='quantity' value='1'/>" +
 				"<input class='submit' name='action' type='submit' value='Add to Cart'/></form></div>"
 				+ "</td><td class='container'>");
-		out.println("<table><caption><a href='./movie?id=" + m.getId() + "'>" + m.getTitle() + "</a></caption>");
+		out.println("<a href='./movie?id=" + m.getId() + "' class='popup' id='" + m.getId() + "' >");
+		out.println(m.getTitle());
+		out.println("</a></caption>");
 		
 		out.println("<tr class='border_bottom'><td class='field'><span>Movie ID</span></td>");
 		out.println("<td class='info'><span>" + m.getId() + "</span><br></td></tr>");
