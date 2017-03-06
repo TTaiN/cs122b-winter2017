@@ -54,11 +54,12 @@ public class MovieList extends HttpServlet {
 		if (request.getParameter("mobile") != null) // Android App
 		{
 			 response.setContentType("application/json");
-  			 String search = (String) request.getParameter("title");
+  			 String search = (String) request.getParameter("title").replace("'", "\\'");
 	   		 try
 	   		 {
 	       		 MovieListDB db = new MovieListDB();
 	       		 List<Movie> movies = db.getMobileMovies(search);
+	       		 search = search.replace("\\'", "'");
 	       		 if (movies.isEmpty())
 	       		 {
 	       			 response.getWriter().print("{results: 0, search:\"" + search + "\"}");
