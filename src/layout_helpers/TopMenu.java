@@ -68,7 +68,7 @@ public class TopMenu
 		ResultSet rs = db.executePreparedStatement(query);
 		while(rs.next())
 		{
-			result.add("<span><a href='./movie?id=" +  rs.getString("id") + "'>" + 
+			result.add("<span><a href='./movie?id=" +  rs.getString("id") + "'><br />" + 
 					rs.getString("title") + "</a></span><br>");
 		}
 		return result;

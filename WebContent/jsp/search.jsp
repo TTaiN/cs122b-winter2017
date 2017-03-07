@@ -27,10 +27,17 @@ function showResult(str) {
 	<link rel="stylesheet" type="text/css" href="./style/search.css"/> 
 </head>
 <body>
-<form>
-<input type="text" size="30" onkeyup="showResult(this.value)">
-<div id="results"></div>
-</form>
+	<div class="dropdown">
+  		<span>Mouse over me</span>
+  		<div class="dropdown-content" id="results"></div>
+	</div>
+	<section class="main">
+		<form class="search" method="get" action="./movielist" autocomplete="off">
+			<input type="text" size="30" name= 'title' onkeyup="showResult(this.value)">
+			<ul class='results' id="results"></ul>
+			<input type="submit" value="Submit"><br>
+		</form>
+	</section>
 	<%
 		TopMenu.print(response.getWriter());
 	%>
