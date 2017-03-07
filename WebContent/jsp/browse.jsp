@@ -24,8 +24,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function showResult(str) {
+	
+			$.get("./livesearch", {q:str}, function(data){
+			$("#results").html(data);
+			});
+		}
+	</script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="./style/browse.css"/>
+	<link rel="stylesheet" type="text/css" href="./style/livesearch.css"/> 
 	<title>Browse</title>
 </head>
 <BODY>

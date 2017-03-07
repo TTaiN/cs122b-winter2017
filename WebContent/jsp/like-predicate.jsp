@@ -6,9 +6,20 @@
 
 <html>
 <head>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function showResult(str) {
+	
+			$.get("./livesearch", {q:str}, function(data){
+			$("#results").html(data);
+			});
+		}
+	</script>
 	<meta charset="UTF-8">
 	<title>Like-predicate Report</title>
 	<link rel="stylesheet" type="text/css" href="../style/main.css"/> 
+	<link rel="stylesheet" type="text/css" href="./style/livesearch.css"/> 
+	
 </head>
 <body>
 	<%

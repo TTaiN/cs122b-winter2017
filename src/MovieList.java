@@ -89,8 +89,18 @@ public class MovieList extends HttpServlet {
 					MovieListDB mldb = new MovieListDB();
 			        response.setContentType("text/html");  
 			        PrintWriter out=response.getWriter();
-					out.println("<html><head><link rel='stylesheet' type='text/css' href='./style/main.css'/>\n"
+					out.println("<html><head>"
+							+"<script src='https://code.jquery.com/jquery-1.12.4.min.js'></script>"
+							+"<script type='text/javascript'>"
+							+"	function showResult(str) {"
+							+"		$.get('./livesearch', {q:str}, function(data){"
+							+"		$('#results').html(data);"
+							+"		});"
+							+"	}"
+							+"</script>"
+							+ "<link rel='stylesheet' type='text/css' href='./style/main.css'/>\n"
 							+ "<link rel='stylesheet' type='text/css' href='./style/movieList.css'/>"
+							+ "<link rel='stylesheet' type='text/css' href='./style/livesearch.css'/>"
 							+ "<title>Movie List</title>"
 							+ "<script src = 'https://code.jquery.com/jquery-1.10.2.js'></script><script src = 'https://code.jquery.com/ui/1.10.4/jquery-ui.js'></script>"
 							+ "<script type='text/javascript' src='./script/popup.js'></script></head>");
