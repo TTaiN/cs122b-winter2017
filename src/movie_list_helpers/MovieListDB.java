@@ -152,7 +152,7 @@ public class MovieListDB {
 			String yearWhere = Where.getWhere(year, "year");
 
 			ResultSet rs = dbh.executePreparedStatement("select * from movies where " +
-					titleWhere + " and " + directorWhere + " and " + yearWhere + " and id in "
+					titleWhere + directorWhere +  yearWhere + " and id in "
 					+ "(select movie_id from stars_in_movies where star_id in"
 					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
 					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + (limit+1)
