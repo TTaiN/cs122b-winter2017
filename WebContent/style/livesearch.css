@@ -88,8 +88,7 @@ input[type=submit]:active{
 .search input:focus + .results { display: block }
 
 .search .results {
-    display: none;
-    
+    /*display: none;*/
     position: absolute;
     top: 35px;
     left: 0;
