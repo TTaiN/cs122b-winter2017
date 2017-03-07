@@ -4,7 +4,11 @@ public class Where {
 	// Translate string to where statement
 	public static String getWhere( String str, String attr )
 	{
-		if(str.trim().equals("") || str == null)
+		if(attr.equals("s.name") && str.trim().equals("") || str == null)
+		{
+			return "s.id > 0";
+		}
+		if(str.trim().equals("") || str == null )
 			return "";
 		else if( attr.equals("s.name") || attr.equals("title"))
 		{
@@ -17,7 +21,7 @@ public class Where {
 				else
 					where = where + " " + attr + " like '%" + words[i] + "%' and";
 			}
-			where = where + ") OR (edth(" + attr + ", " + str + ", 2))";
+			where = where + ") OR (edth(" + attr + ", '" + str + "', 2))";
 			System.out.println(where);
 			return where;
 		}
@@ -32,7 +36,7 @@ public class Where {
 				else
 					where = where + " " + attr + " like '%" + words[i] + "%' and";
 			}
-			where = where + ") OR (edth(" + attr + ", " + str + ", 2))";
+			where = where + ") OR (edth('" + attr + ", " + str + "', 2))";
 			System.out.println(where);
 			return where;
 		}
