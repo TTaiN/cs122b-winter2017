@@ -1,3 +1,9 @@
+/*
+  Auth: Thomas T Nguyen
+  CS122B Winter 2017 Group 42 
+  Project Database Script
+*/
+
 CREATE TABLE movies(
 	id INTEGER AUTO_INCREMENT NOT NULL, 
     title VARCHAR(100) NOT NULL,
@@ -93,3 +99,6 @@ CREATE TABLE employees (
 
 insert into employees values ('classta@email.edu', 'classta', 'TA CS122B');
 insert into employees values ('a', 'a', 'a a');	-- test
+
+set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+set session sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
