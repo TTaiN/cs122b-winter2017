@@ -3,6 +3,7 @@ package movie_list_helpers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -18,15 +19,30 @@ public class MovieListDB {
 		dbh = new DatabaseHelper();
 	}
 	
+	public static String getQuery(String title)
+	{
+		ArrayList<String> keywords = new ArrayList<String>(Arrays.asList(title.split(" ")));
+		
+		String query = "SELECT title FROM movies WHERE MATCH(title) AGAINST ('";
+		int sz = keywords.size();
+		
+		for(int i = 0; i < sz; i++){
+			if(i < sz-1)
+				query += "+" + keywords.get(i) + "* ";
+			else
+				query += "+" + keywords.get(i) + "*' IN BOOLEAN MODE)";
+		}
+		return query;
+	}
 	
 	public List<Movie> getMobileMovies(String title) throws SQLException // By Title
 	{
-		List<Movie> movieList = new ArrayList<Movie>();
-		String titleWhere = Where.getWhere(title, "title");
+		List<Movie> movieList = new ArrayList<Movie>();		
+		String query = getQuery(title);
 		
 		System.out.println();
 
-		ResultSet rs = dbh.executePreparedStatement("select title from movies where " + titleWhere);
+		ResultSet rs = dbh.executePreparedStatement(query);
 		
 		while(rs.next())
 		{
