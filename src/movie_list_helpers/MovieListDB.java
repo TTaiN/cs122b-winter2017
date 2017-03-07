@@ -146,10 +146,10 @@ public class MovieListDB {
 		List<Movie> movieList = new ArrayList<Movie>();
 		try
 		{
-			String starWhere = Where.getWhere(star, "s.name");
-			String titleWhere = Where.getWhere(title, "title");
-			String directorWhere = Where.getWhere(director, "director");
-			String yearWhere = Where.getWhere(year, "year");
+			String starWhere = Where.getWhereEdth(star, "s.name");
+			String titleWhere = Where.getWhereEdth(title, "title");
+			String directorWhere = Where.getWhereEdth(director, "director");
+			String yearWhere = Where.getWhereEdth(year, "year");
 
 			ResultSet rs = dbh.executePreparedStatement("select * from movies where " +
 					titleWhere + directorWhere +  yearWhere + " and id in "
