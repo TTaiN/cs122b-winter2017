@@ -14,6 +14,10 @@
     <servlet-class>Browse</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>LiveSearch</servlet-name>
+    <servlet-class>LiveSearch</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>Cart</servlet-name>
     <servlet-class>Cart</servlet-class>
   </servlet>
@@ -80,6 +84,10 @@
   <servlet-mapping>
     <servlet-name>Browse</servlet-name>
     <url-pattern>/browse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LiveSearch</servlet-name>
+    <url-pattern>/livesearch</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Cart</servlet-name>

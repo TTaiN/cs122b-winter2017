@@ -13,11 +13,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+function showResult(str) {
+	
+	$.get("./livesearch", {q:str}, function(data){
+		$("#results").html(data);
+	});
+}
+</script>
 	<title>Search Page</title>
 	<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
 	<link rel="stylesheet" type="text/css" href="./style/search.css"/> 
 </head>
 <body>
+<form>
+<input type="text" size="30" onkeyup="showResult(this.value)">
+<div id="results"></div>
+</form>
 	<%
 		TopMenu.print(response.getWriter());
 	%>
