@@ -36,16 +36,21 @@ public class LivesearchHelper {
 		ArrayList<String> keywords = new ArrayList<String>(Arrays.asList(str.split(" ")));
 		String query = getQuery(keywords);
 		
-		if(query.equals(""))
-			return result;
-		
+
 		DatabaseHelper db = new DatabaseHelper();
 		ResultSet rs = db.executePreparedStatement(query);
+		
+		if(!rs.next())
+			return result;
+		
+		rs.beforeFirst();
+		result.add("<ul class='results' >");
 		while(rs.next())
 		{
 			result.add("<li><a href='./movie?id=" +  rs.getString("id") + "'><br /><span>" + 
 					rs.getString("title") + "</span></a></li>");
 		}
+		result.add("</ul>");
 		return result;
 	}
 	

@@ -20,7 +20,7 @@ public class TopMenu
 		out.println("</div>");
 		out.println("<form class='search' method='get' action='./movielist' autocomplete='off'>");
 		out.println("<input type='text' size='30' name= 'title' onkeyup='showResult(this.value)'>");
-		out.println("<ul class='results' id='results'></ul>");
+		out.println("<div id='results'></div>");
 		out.println("<input type='submit' value='Search'><br>");
 		out.println("</form>");
 	}
