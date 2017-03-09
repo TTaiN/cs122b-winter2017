@@ -13,7 +13,10 @@ $( function() {
          collision: "flipfit"
       },
        show: {
-           duration: 800
+           duration: 200
+       },
+       hide: {
+    	   delay: 800
        }
     });
 } );
