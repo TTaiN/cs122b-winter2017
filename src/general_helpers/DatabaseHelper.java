@@ -20,7 +20,7 @@ public class DatabaseHelper
 	final static String user = "cs122b";
     final static String password = "cs122bgroup42";
     final static String database = "moviedb";
-	
+	 
 	public DatabaseHelper() throws SQLException
 	{
 		openConnection();

@@ -13,31 +13,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-function showResult(str) {
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		function showResult(str) {
 	
-	$.get("./livesearch", {q:str}, function(data){
-		$("#results").html(data);
-	});
-}
-</script>
+			$.get("./livesearch", {q:str}, function(data){
+			$("#results").html(data);
+			});
+		}
+	</script>
 	<title>Search Page</title>
 	<link rel="stylesheet" type="text/css" href="./style/main.css"/> 
 	<link rel="stylesheet" type="text/css" href="./style/search.css"/> 
+	<link rel="stylesheet" type="text/css" href="./style/livesearch.css"/> 
+
 </head>
 <body>
-	<div class="dropdown">
-  		<span>Mouse over me</span>
-  		<div class="dropdown-content" id="results"></div>
-	</div>
-	<section class="main">
-		<form class="search" method="get" action="./movielist" autocomplete="off">
-			<input type="text" size="30" name= 'title' onkeyup="showResult(this.value)">
-			<ul class='results' id="results"></ul>
-			<input type="submit" value="Submit"><br>
-		</form>
-	</section>
 	<%
 		TopMenu.print(response.getWriter());
 	%>
