@@ -26,6 +26,11 @@ public class DatabaseHelper
 		openConnection();
 	}
 	
+	public Connection getConnection()
+	{
+		return connection;
+	}
+	
 	public ResultSet executeSQL(String SQL) throws SQLException
 	{
 		ResultSet result = null;
