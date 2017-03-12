@@ -11,6 +11,10 @@ package general_helpers;
  */
 
 import java.sql.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class DatabaseHelper 
 {
@@ -53,21 +57,31 @@ public class DatabaseHelper
 	
 	public void openConnection() throws SQLException
 	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
-		}
-		catch (ClassNotFoundException e) // highly unlikely but could still happen.
-		{
-			e.printStackTrace();
-		} catch (InstantiationException e)  // highly unlikely but could still happen.
-		{
-			e.printStackTrace();
-		} catch (IllegalAccessException e)  // highly unlikely but could still happen.
-		{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Context initContext = new InitialContext();
+			Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/MovieDB");
+			connection = ds.getConnection();
+		} catch (NamingException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
+		
+//		try
+//		{
+//			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
+//		}
+//		catch (ClassNotFoundException e) // highly unlikely but could still happen.
+//		{
+//			e.printStackTrace();
+//		} catch (InstantiationException e)  // highly unlikely but could still happen.
+//		{
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e)  // highly unlikely but could still happen.
+//		{
+//			e.printStackTrace();
+//		}
+//		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
 	}
 	
 	public void closeConnection() throws SQLException
