@@ -17,4 +17,4 @@ Our genre list on browse servlet
 https://docs.google.com/a/uci.edu/document/d/1svFNmhSmAA-4omQWKAme5WgybyK_dVHTqHNMzVCEF2I/edit?usp=sharing
 
 # Project 5 Connection Pooling Report
-https://docs.google.com/document/d/13XSRh8lfGXteyzJwM9S6A3-YqpR49HKb0ZD5P215Nw0/edit
+https://docs.google.com/a/uci.edu/document/d/13XSRh8lfGXteyzJwM9S6A3-YqpR49HKb0ZD5P215Nw0/edit?usp=sharing
