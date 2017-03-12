@@ -1,6 +1,8 @@
 package single_view_helpers;
 
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 
@@ -18,7 +20,12 @@ public class StarViewDB
 	
 	public Star getStar(int star_id) throws SQLException
 	{
-		ResultSet rs = db.executePreparedStatement("SELECT * FROM stars WHERE id = " + star_id);
+		Connection conn = db.getConnection();
+		String query = "SELECT * FROM stars WHERE id = ?;";
+	 	PreparedStatement statement = conn.prepareStatement(query);
+	 	statement.setString(1, Integer.toString(star_id));
+	 	ResultSet rs = statement.executeQuery();
+
 		if (rs.next())
 		{
 			return new Star(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("dob"), rs.getString("photo_url"));
@@ -30,8 +37,12 @@ public class StarViewDB
 	{
 		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();
 		
-		ResultSet movie_list = db.executePreparedStatement("SELECT * FROM movies WHERE movies.id IN "
-		+ "(SELECT stars_in_movies.movie_id FROM stars_in_movies WHERE star_id = "+ star_id + ");");
+		Connection conn = db.getConnection();
+		String query = "SELECT * FROM movies WHERE movies.id IN "
+				+ "(SELECT stars_in_movies.movie_id FROM stars_in_movies WHERE star_id = ?);";
+	 	PreparedStatement statement = conn.prepareStatement(query);
+	 	statement.setString(1, Integer.toString(star_id));
+	 	ResultSet movie_list = statement.executeQuery();
 		
 		while (movie_list.next())
 		{

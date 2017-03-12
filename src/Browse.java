@@ -13,9 +13,11 @@
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -52,7 +54,39 @@ public class Browse extends HttpServlet {
             response.sendRedirect("./login");
             return;
 		}
-		request.getRequestDispatcher("./jsp/browse.jsp").include(request, response);		
+		
+		DatabaseHelper db;
+		try {
+			db = new DatabaseHelper();
+			Connection conn = db.getConnection();
+			String query = "SELECT left(title,1) from movies group by left(title,1) order by title";
+			PreparedStatement statement = conn.prepareStatement(query);
+			ResultSet rs = statement.executeQuery();
+			ArrayList<String> initials = new ArrayList<String>();
+			
+			while (rs.next()) 
+			{
+				initials.add(rs.getString(1));
+			}
+			request.setAttribute("initials", initials);
+			
+			ArrayList<String> genres = new ArrayList<String>();
+			query = "SELECT * from genres g where exists (select (1) from genres_in_movies where genre_id = g.id) order by name;";
+			statement = conn.prepareStatement(query);
+			rs = statement.executeQuery();
+			
+			while (rs.next()) 
+			{
+				genres.add(rs.getString(2));
+			}
+			request.setAttribute("genres", genres);
+			request.getRequestDispatcher("./jsp/browse.jsp").include(request, response);
+			db.closeConnection();  //close before or after sending?
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

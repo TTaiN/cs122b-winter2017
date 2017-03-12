@@ -1,6 +1,8 @@
 package single_view_helpers;
 
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 
@@ -18,7 +20,11 @@ public class MovieViewDB
 	
 	public Movie getMovie(int movie_id) throws SQLException
 	{
-		ResultSet rs = db.executePreparedStatement("SELECT * FROM movies WHERE id = " + movie_id);
+		Connection conn = db.getConnection();
+		PreparedStatement statement = conn.prepareStatement("SELECT * FROM movies WHERE id = ?;");
+		statement.setString(1, Integer.toString(movie_id));
+		ResultSet rs = statement.executeQuery();
+		
 		if (rs.next())
 		{
 			return new Movie(rs.getInt("id"), rs.getString("title"), rs.getInt("year"), rs.getString("director"), rs.getString("banner_url"), rs.getString("trailer_url"), 0);
@@ -37,9 +43,11 @@ public class MovieViewDB
 	public LinkedHashMap<Integer, String> getGenresForMovie(int movie_id) throws SQLException
 	{
 		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();
-		
-		ResultSet genre_list = db.executePreparedStatement("SELECT * FROM genres WHERE genres.id IN "
-		+ "(SELECT genres_in_movies.genre_id FROM genres_in_movies WHERE movie_id = "+ movie_id + ");");
+		Connection conn = db.getConnection();
+		PreparedStatement statement = conn.prepareStatement("SELECT * FROM genres WHERE genres.id IN "
+		+ "(SELECT genres_in_movies.genre_id FROM genres_in_movies WHERE movie_id = ?);");
+		statement.setString(1, Integer.toString(movie_id));
+		ResultSet genre_list = statement.executeQuery();
 		
 		while (genre_list.next())
 		{
@@ -51,9 +59,11 @@ public class MovieViewDB
 	public LinkedHashMap<Integer, String> getStarsForMovie(int movie_id) throws SQLException
 	{
 		LinkedHashMap<Integer, String> result = new LinkedHashMap<Integer, String>();
-		
-		ResultSet star_list = db.executePreparedStatement("SELECT * FROM stars WHERE stars.id IN "
-		+ "(SELECT stars_in_movies.star_id FROM stars_in_movies WHERE movie_id = "+ movie_id + ");");
+		Connection conn = db.getConnection();
+		PreparedStatement statement = conn.prepareStatement("SELECT * FROM stars WHERE stars.id IN "
+				+ "(SELECT stars_in_movies.star_id FROM stars_in_movies WHERE movie_id = ?);");
+		statement.setString(1, Integer.toString(movie_id));
+		ResultSet star_list = statement.executeQuery();
 		
 		while (star_list.next())
 		{

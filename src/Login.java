@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,8 +49,13 @@ public class Login extends HttpServlet
         		 DatabaseHelper db = new DatabaseHelper();
         		 String email = request.getParameter("email");
         		 String pwd = request.getParameter("pwd");
-        		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
-        		 if (rs.next())
+        		 Connection conn = db.getConnection();
+        		 String query = "SELECT * from customers where email = ? and password = ?";
+        		 PreparedStatement statement = conn.prepareStatement(query);
+        	 	 statement.setString(1, email);
+        	 	 statement.setString(2, pwd);
+       	 		 ResultSet rs = statement.executeQuery();
+       	 		 if (rs.next())
         		 {
         			 response.getWriter().print("{login: true, email:\"" + email + "\"}");
         		 }
@@ -67,7 +75,14 @@ public class Login extends HttpServlet
         		 String pwd = request.getParameter("pwd");
         		 String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
         		 boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
-        		 ResultSet rs = db.executePreparedStatement("SELECT * from customers where email = '" + email + "'" + " and password = '" + pwd + "'");
+        		 
+        		 Connection conn = db.getConnection();
+        		 String query = "SELECT * from customers where email = ? and password = ?";
+        		 PreparedStatement statement = conn.prepareStatement(query);
+        	 	 statement.setString(1, email);
+        	 	 statement.setString(2, pwd);
+       	 		 ResultSet rs = statement.executeQuery();
+        		 
         		 if( verify == false)
         		 {
         			 request.setAttribute("error", "Missed Captcha.");

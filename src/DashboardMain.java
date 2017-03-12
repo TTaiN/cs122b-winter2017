@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,9 +49,10 @@ public class DashboardMain extends HttpServlet
 			try 
 			{
 				db = new DatabaseHelper();
-
+				Connection conn = db.getConnection();
 				String query = "Select table_name from information_schema.tables where table_schema = 'moviedb'";
-				ResultSet result = db.executeSQL(query);
+				PreparedStatement statement = conn.prepareStatement(query);
+				ResultSet result = statement.executeQuery();
 				
 				StringBuilder sb = new StringBuilder();
 				
@@ -57,7 +60,7 @@ public class DashboardMain extends HttpServlet
 	        	while (result.next())
 	        	{
 	            		String table = result.getString(1);            
-	            		ResultSet result2 = db.executeSQL("Select * from " + table);
+	            		ResultSet result2 = db.executePreparedStatement("Select * from " + table); //ok?
 	            
 	            		sb.append("Table " + j++ + ": " + table + "<br>");
 	            

@@ -58,19 +58,26 @@ public class Where {
 			return where;
 		}
 	}
+	
 	// Translate string to where statement
-	public static String getWhere( String str, String attr )
+//	public static String getWhere( String str)
+//	{
+//		String words[] = str.split(" ");
+//		String where = "";
+//		for( int i = 0; i < words.length; i++)
+//		{
+//			if( i == words.length - 1)
+//				where = where + "%" + words[i] + "%";
+//			else
+//				where = where + "%" + words[i] + "%' and '";
+//		}
+//		return where;
+//	}
+	
+	public static String addPercent( String str)
 	{
-		String words[] = str.split(" ");
-		String where = "";
-		for( int i = 0; i < words.length; i++)
-		{
-			if( i == words.length - 1)
-				where = where + " " + attr + " like '%" + words[i] + "%'";
-			else
-				where = where + " " + attr + " like '%" + words[i] + "%' and";
-		}
-		return where;
+
+		return "%" + str + "%";
 	}
 
 }

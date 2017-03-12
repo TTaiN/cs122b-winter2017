@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +58,13 @@ public class Dashboard extends HttpServlet
    	 		String pwd = request.getParameter("pwd");
    	 		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
    	 		boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
-   	 		ResultSet rs = db.executePreparedStatement("SELECT * from employees where email = '" + email + "'" + " and password = '" + pwd + "'");
+   	 		
+   	 		Connection conn = db.getConnection();
+   	 		String query = "SELECT * from employees where email = ? and password = ?;";
+   	 		PreparedStatement statement = conn.prepareStatement(query);
+   	 		statement.setString(1, email);
+   	 		statement.setString(2, pwd);
+   	 		ResultSet rs = statement.executeQuery();
    	 		
    	 		if (verify == false)
    		 	{

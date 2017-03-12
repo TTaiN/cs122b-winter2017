@@ -26,7 +26,7 @@ if (request.getAttribute("notice") != null) {
 
 <H3>1: Insert new star</H3>
 <form ACTION="./dashboardInsertStar" METHOD="POST">
-  		Star ID <input type="text" name="id" placeholder="Required.."><br><br>
+  		Star ID <input type="text" name="id"><br><br>
   		First Name <input type="text" name="firstName" placeholder="Blank if one name.."><br><br>
   		Last Name <input type="text" name="lastName" placeholder="Required.."><br><br>
   		Date of Birth <input type="date" name="dob" placeholder="YYYY-MM-DD"><br><br>

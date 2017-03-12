@@ -1,6 +1,8 @@
 package livesearch_helper;
 
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,9 +11,9 @@ import java.util.Arrays;
 import general_helpers.DatabaseHelper;
 
 public class LivesearchHelper {
-	private static String getQuery(ArrayList<String> keywords)
+	private static String prepareSearchWord(ArrayList<String> keywords)
 	{
-		String query = "SELECT id, title FROM movies WHERE MATCH(title) AGAINST ('";
+		String query = "";
 		int sz = keywords.size();
 		
 		if(sz == 0)
@@ -21,24 +23,25 @@ public class LivesearchHelper {
 			if(i < sz-1)
 				query += "+" + keywords.get(i) + " ";
 			else
-				query += "+" + keywords.get(i) + "*' IN BOOLEAN MODE)";
+				query += "+" + keywords.get(i) + "*";
 		}
 		return query;
 	}
 	
 	private static ArrayList<String> showResult(String str) throws SQLException
 	{
+		DatabaseHelper db = new DatabaseHelper();
+		Connection conn = db.getConnection();
+		PreparedStatement statement = conn.prepareStatement("SELECT id, title FROM movies WHERE MATCH(title) AGAINST (? in boolean mode);");
 		
 		ArrayList<String>  result = new ArrayList<String>();
 		if(str == null)
 			return result;
 		
 		ArrayList<String> keywords = new ArrayList<String>(Arrays.asList(str.split(" ")));
-		String query = getQuery(keywords);
 		
-
-		DatabaseHelper db = new DatabaseHelper();
-		ResultSet rs = db.executePreparedStatement(query);
+		statement.setString(1,  prepareSearchWord(keywords));
+		ResultSet rs = statement.executeQuery();
 		
 		if(!rs.next())
 			return result;
