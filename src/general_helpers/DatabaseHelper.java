@@ -20,7 +20,7 @@ public class DatabaseHelper
 {
 	Connection connection;
 
-	final static String ip = "35.167.240.46";
+	final static String ip = "localhost";
 	final static String user = "cs122b";
     final static String password = "cs122bgroup42";
     final static String database = "moviedb";
