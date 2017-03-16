@@ -87,7 +87,7 @@ public class Portal extends HttpServlet
         		 {
         			 request.setAttribute("error", "Missed Captcha.");
         			 request.setAttribute("jsp", true);
-        			 request.getRequestDispatcher("/jsp/login.jsp").include(request, response);
+        			 request.getRequestDispatcher("/jsp/portal.jsp").include(request, response);
         		 }
         		 else if (rs.next())
         		 {
@@ -101,7 +101,7 @@ public class Portal extends HttpServlet
         		 {
         			 request.setAttribute("error", "Invalid e-mail and/or password.");
         			 request.setAttribute("jsp", true);
-        			 request.getRequestDispatcher("/jsp/login.jsp").include(request, response);
+        			 request.getRequestDispatcher("/jsp/portal.jsp").include(request, response);
         		 }
 
         		 rs.close();
