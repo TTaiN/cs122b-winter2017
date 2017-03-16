@@ -1,3 +1,4 @@
+INSERT INTO movies VALUES(1, 'The Adventures of Pupcorn', 2017, 'Thomas T Nguyen', 'http://i.imgur.com/TYH2qa2.jpg', 'https://www.youtube.com/watch?v=MaEeSJZYkpY'); /* Testing Entry */
 INSERT INTO movies VALUES(135001, '12 Monkeys', 1995, 'Terry Gilliam', 'https://images-na.ssl-images-amazon.com/images/M/MV5BN2Y2OWU4MWMtNmIyMy00YzMyLWI0Y2ItMTcyZDc3MTdmZDU4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SY1000_CR0,0,671,1000_AL_.jpg', 'https://www.youtube.com/watch?v=15s4Y9ffW_o');
 INSERT INTO movies VALUES(907003, '2001: A Space Odyssey', 1968, 'Stanley Kubrick', 'https://images-na.ssl-images-amazon.com/images/M/MV5BMTZkZTBhYmUtMTIzNy00YTViLTg1OWItNGUwMmVlN2FjZTVkXkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SY1000_SX675_AL_.jpg', 'https://www.youtube.com/watch?v=Z2UWOeBcsJI');
 INSERT INTO movies VALUES(907002, '24 Hour Party People', 2002, 'Michael Winterbottom', 'https://images-na.ssl-images-amazon.com/images/M/MV5BM2YxZDgyNzMtODVmNi00NDE2LWI0MTQtNDIzMWQ0MmEzMmZjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SY1000_CR0,0,666,1000_AL_.jpg', 'https://www.youtube.com/watch?v=MyinarfzXUE&t=16s');
@@ -1587,6 +1588,7 @@ INSERT INTO genres_in_movies VALUES(907003, 788017);
 INSERT INTO genres_in_movies VALUES(907002, 788017);
 INSERT INTO genres_in_movies VALUES(907008, 788017);
 INSERT INTO genres_in_movies VALUES(907003, 135005);
+INSERT INTO creditcards VALUES('1', 'a', 'b', '1111/11/11'); /* Testing Entry */
 INSERT INTO creditcards VALUES('490001', 'James', 'Brown', '2007/09/20');
 INSERT INTO creditcards VALUES('490002', 'Margaret', 'Black', '2006/05/20');
 INSERT INTO creditcards VALUES('490003', 'Keith', 'Black', '2006/06/25');
@@ -2104,6 +2106,7 @@ INSERT INTO creditcards VALUES('7788 9988 7766 5544', 'Amanda', 'Smith', '2007/0
 INSERT INTO creditcards VALUES('8899 8877 6655 4433', 'Lindsey', 'Hunter', '2005/07/04');
 INSERT INTO creditcards VALUES('9988 7766 5544 3322', 'Mike', 'Lee', '2006/01/01');
 INSERT INTO creditcards VALUES('0011 2233 4455 6677', 'Bill', 'Wang', '2009/09/07');
+INSERT INTO customers VALUES(1, 'Testing', 'User', '1', '1234 Irvine Ave., Irvine, CA 12345', 'a', 'b'); /* Testing Entry */
 INSERT INTO customers VALUES(490001, 'James', 'Brown', '490001', '530 White Ave., Los Angeles, CA 91701', 'jbrown@ics185.edu', 'keyboard');
 INSERT INTO customers VALUES(490002, 'John', 'Black', '490002', '531 Green Ave., Anaheim, CA 92456', 'jblack@ics185.edu', 'paper');
 INSERT INTO customers VALUES(490003, 'Keith', 'White', '490003', '532 Yale Ave., Irvine, CA 92617', 'kwhite@ics185.edu', 'book');

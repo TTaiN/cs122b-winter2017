@@ -45,7 +45,7 @@ public class DashboardInsertStar extends HttpServlet
 		
 		try 
 		{
-			db = new DatabaseHelper();
+			db = new DatabaseHelper(true);
 			Connection conn = db.getConnection();
 			String id = request.getParameter("id");
 			String firstName = request.getParameter("firstName");

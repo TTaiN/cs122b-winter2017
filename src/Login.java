@@ -46,7 +46,7 @@ public class Login extends HttpServlet
 
     		 try
     		 {
-        		 DatabaseHelper db = new DatabaseHelper();
+        		 DatabaseHelper db = new DatabaseHelper(false);
         		 String email = request.getParameter("email");
         		 String pwd = request.getParameter("pwd");
         		 Connection conn = db.getConnection();
@@ -70,7 +70,7 @@ public class Login extends HttpServlet
     	 {
         	 try
         	 {
-        		 DatabaseHelper db = new DatabaseHelper();
+        		 DatabaseHelper db = new DatabaseHelper(false);
         		 String email = request.getParameter("email");
         		 String pwd = request.getParameter("pwd");
         		 String gRecaptchaResponse = request.getParameter("g-recaptcha-response");

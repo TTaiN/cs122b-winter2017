@@ -1,7 +1,13 @@
-<Context path="/Fabflix" reloadble="true">
+<Context path="/fabflix" reloadble="true">
 
 	<Resource name="jdbc/MovieDB" auth="Container" type="javax.sql.DataSource"
 		maxTotal="100" maxIdle="30" maxWaitMillis="10000" username="cs122b"
 		password="cs122bgroup42" driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://35.167.240.46:3306/moviedb?autoReconnect=true&amp;useSSL=false" />
+		url="jdbc:mysql://localhost:3306/moviedb?autoReconnect=true&amp;useSSL=false" />
+		
+	<Resource name="jdbc/MovieDBMaster" auth="Container" type="javax.sql.DataSource"
+		maxTotal="100" maxIdle="30" maxWaitMillis="10000" username="cs122b"
+		password="cs122bgroup42" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://52.39.247.33:3306/moviedb?autoReconnect=true&amp;useSSL=false" />
+		
 </Context>

@@ -41,7 +41,7 @@ public class Popup extends HttpServlet {
 			StringBuilder sb = new StringBuilder();
 			DatabaseHelper db;
 			try {
-				db = new DatabaseHelper();
+				db = new DatabaseHelper(false);
 				
 				Connection conn = db.getConnection();
 	   	 		String query = "select * from movies where id = ?;";

@@ -26,7 +26,7 @@ public class OrderDB
 		this.firstName = firstName.trim();
 		this.lastName = lastName.trim();
 		this.date = date.trim();
-		db = new DatabaseHelper();
+		db = new DatabaseHelper(true);
 	}
 	
 	public String getDBNumber()

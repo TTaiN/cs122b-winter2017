@@ -19,7 +19,7 @@ public class MovieListDB {
 	
 	public MovieListDB() throws SQLException
 	{
-		dbh = new DatabaseHelper();
+		dbh = new DatabaseHelper(false);
 		conn = dbh.getConnection();
 	}
 	

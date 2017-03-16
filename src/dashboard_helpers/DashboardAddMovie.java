@@ -44,7 +44,7 @@ public class DashboardAddMovie extends HttpServlet
 		DatabaseHelper db;
 		try 
 		{
-			db = new DatabaseHelper();
+			db = new DatabaseHelper(true);
 			Connection conn = db.getConnection();
 
 			String movieId = request.getParameter("movieId");

@@ -15,7 +15,7 @@ public class StarViewDB
 	
 	public StarViewDB() throws SQLException
 	{
-		this.db = new DatabaseHelper();
+		this.db = new DatabaseHelper(false);
 	}
 	
 	public Star getStar(int star_id) throws SQLException

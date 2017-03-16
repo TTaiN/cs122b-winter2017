@@ -19,15 +19,10 @@ import javax.sql.DataSource;
 public class DatabaseHelper 
 {
 	Connection connection;
-
-	final static String ip = "localhost";
-	final static String user = "cs122b";
-    final static String password = "cs122bgroup42";
-    final static String database = "moviedb";
 	 
-	public DatabaseHelper() throws SQLException
+	public DatabaseHelper(boolean master) throws SQLException
 	{
-		openConnection();
+		openConnection(getDataSource(master));
 	}
 	
 	public Connection getConnection()
@@ -55,33 +50,25 @@ public class DatabaseHelper
 		return statement.executeUpdate();
 	}
 	
-	public void openConnection() throws SQLException
+	public void openConnection(String dataSource) throws SQLException
 	{
-		try {
+		try 
+		{
 			Class.forName("com.mysql.jdbc.Driver");
 			Context initContext = new InitialContext();
-			Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource)envContext.lookup("jdbc/MovieDB");
+			Context envContext  = (Context) initContext.lookup("java:/comp/env");
+			DataSource ds = (DataSource) envContext.lookup(dataSource);
 			connection = ds.getConnection();
-		} catch (NamingException | ClassNotFoundException e) {
+		} 
+		catch (NamingException | ClassNotFoundException e) 
+		{
 			e.printStackTrace();
 		}
-		
-//		try
-//		{
-//			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
-//		}
-//		catch (ClassNotFoundException e) // highly unlikely but could still happen.
-//		{
-//			e.printStackTrace();
-//		} catch (InstantiationException e)  // highly unlikely but could still happen.
-//		{
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e)  // highly unlikely but could still happen.
-//		{
-//			e.printStackTrace();
-//		}
-//		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
+	}
+	
+	public String getDataSource(boolean master)
+	{
+		return master ? "jdbc/MovieDBMaster" : "jdbc/MovieDB";
 	}
 	
 	public void closeConnection() throws SQLException

@@ -15,7 +15,7 @@ public class MovieViewDB
 	
 	public MovieViewDB() throws SQLException
 	{
-		db = new DatabaseHelper();
+		db = new DatabaseHelper(false);
 	}
 	
 	public Movie getMovie(int movie_id) throws SQLException

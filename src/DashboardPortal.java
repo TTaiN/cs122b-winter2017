@@ -52,7 +52,7 @@ public class DashboardPortal extends HttpServlet
    	 	HttpSession session = request.getSession(); 
    	 	try
    	 	{
-   	 		DatabaseHelper db = new DatabaseHelper();
+   	 		DatabaseHelper db = new DatabaseHelper(false);
 
    	 		String email = request.getParameter("email");
    	 		String pwd = request.getParameter("pwd");

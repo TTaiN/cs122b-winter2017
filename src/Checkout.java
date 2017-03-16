@@ -81,6 +81,7 @@ public class Checkout extends HttpServlet
 		catch (SQLException e)
 		{
 			messages.add("There was an error with one of your inputs and/or the database.");
+			messages.add(e.getMessage());
 			request.setAttribute("reason", "Checkout");
 			request.setAttribute("messages", messages);
 			request.getRequestDispatcher("./jsp/error.jsp").include(request, response);	

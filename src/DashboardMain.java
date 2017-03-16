@@ -48,7 +48,7 @@ public class DashboardMain extends HttpServlet
 			DatabaseHelper db;
 			try 
 			{
-				db = new DatabaseHelper();
+				db = new DatabaseHelper(false);
 				Connection conn = db.getConnection();
 				String query = "Select table_name from information_schema.tables where table_schema = 'moviedb'";
 				PreparedStatement statement = conn.prepareStatement(query);

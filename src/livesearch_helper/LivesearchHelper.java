@@ -30,7 +30,7 @@ public class LivesearchHelper {
 	
 	private static ArrayList<String> showResult(String str) throws SQLException
 	{
-		DatabaseHelper db = new DatabaseHelper();
+		DatabaseHelper db = new DatabaseHelper(false);
 		Connection conn = db.getConnection();
 		PreparedStatement statement = conn.prepareStatement("SELECT id, title FROM movies WHERE MATCH(title) AGAINST (? in boolean mode);");
 		
