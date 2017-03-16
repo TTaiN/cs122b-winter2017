@@ -57,7 +57,7 @@ public class Browse extends HttpServlet {
 		
 		DatabaseHelper db;
 		try {
-			db = new DatabaseHelper();
+			db = new DatabaseHelper(false);
 			Connection conn = db.getConnection();
 			String query = "SELECT left(title,1) from movies group by left(title,1) order by title";
 			PreparedStatement statement = conn.prepareStatement(query);
