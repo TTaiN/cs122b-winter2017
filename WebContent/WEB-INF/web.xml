@@ -141,6 +141,10 @@
     <url-pattern>/reports/readme</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>DashboardPortal</servlet-name>
+    <url-pattern>/_dashboard/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Dashboard</servlet-name>
     <url-pattern>/_dashboard</url-pattern>
   </servlet-mapping>
