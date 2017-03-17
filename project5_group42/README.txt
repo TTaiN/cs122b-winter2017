@@ -1,5 +1,7 @@
 --- CS122B | Group 42: Project 5 README ---
 
+***** IMPORTANT: Please rename "fabflix_webapp.war" to "fabflix.war" before deploying or else it will not work correctly. *****
+
 -> Original AWS Instance (#1): http://35.167.240.46/fabflix
 	-> This instance is the load balancer.
 		Public IP: 35.167.240.46
