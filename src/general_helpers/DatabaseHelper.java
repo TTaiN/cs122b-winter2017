@@ -19,7 +19,11 @@ import javax.sql.DataSource;
 public class DatabaseHelper 
 {
 	Connection connection;
-	 
+	final static String ip = "35.167.240.46";
+	final static String user = "cs122b";
+    final static String password = "cs122bgroup42";
+    final static String database = "moviedb";
+
 	public DatabaseHelper(boolean master) throws SQLException
 	{
 		openConnection(getDataSource(master));
@@ -52,6 +56,26 @@ public class DatabaseHelper
 	
 	public void openConnection(String dataSource) throws SQLException
 	{
+		
+		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
+		}
+		catch (ClassNotFoundException e) // highly unlikely but could still happen.
+		{
+			e.printStackTrace();
+		} catch (InstantiationException e)  // highly unlikely but could still happen.
+		{
+			e.printStackTrace();
+		} catch (IllegalAccessException e)  // highly unlikely but could still happen.
+		{
+			e.printStackTrace();
+		}
+		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
+		
+		// Connection Pooling
+		/*
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -64,6 +88,7 @@ public class DatabaseHelper
 		{
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	public String getDataSource(boolean master)
