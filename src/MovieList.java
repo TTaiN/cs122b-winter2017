@@ -192,6 +192,7 @@ public class MovieList extends HttpServlet {
 				}
 				catch(Exception e)
 				{
+					e.printStackTrace();
 					response.sendRedirect("./main");
 				}
 				long TJendTime = System.nanoTime();
