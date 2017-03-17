@@ -203,8 +203,6 @@ public class MovieList extends HttpServlet {
 				String text = "" + TSelapsedTime + "\t" + TJelapsedTime + "\n";
 				SearchLogger.log(text, path);
 				System.out.println("\nTS: " + TSelapsedTime + " TJ: " + TJelapsedTime);
-				
-
 			}
 		}
 	}
