@@ -82,10 +82,17 @@ public class MovieListDB {
 		// Get stars of the movie
 		LinkedHashMap <Integer, String> stars = new LinkedHashMap<Integer, String>();
 		
+		// Prepared Statement
+		/*
 		PreparedStatement statement = conn.prepareStatement("select id, first_name, last_name from stars where id in "
 				+ "(select star_id from stars_in_movies where movie_id= ?)");
 		statement.setInt(1, m.getId());
 		ResultSet rs2 = statement.executeQuery();
+		*/
+		
+		// SQL Statement
+		ResultSet rs2 = dbh.executeSQL("select id, first_name, last_name from stars where id in "
+				+ "(select star_id from stars_in_movies where movie_id= " + m.getId() + ")");
 		
 		while(rs2.next())
 		{
@@ -95,10 +102,19 @@ public class MovieListDB {
 		
 		// Get genres of the movie
 		LinkedHashMap <Integer, String> genres = new LinkedHashMap<Integer, String>();
+		
+		// Prepared Statement
+		/*
 		statement = conn.prepareStatement("select id, name from genres where id in "
 				+ "(select genre_id from genres_in_movies where movie_id= ?)");
 		statement.setInt(1, m.getId());
 		ResultSet rs3 = statement.executeQuery();
+		*/
+		
+		// SQL Statement
+		ResultSet rs3 = dbh.executeSQL("select id, name from genres where id in "
+				+ "(select genre_id from genres_in_movies where movie_id= " + m.getId() + ")");
+		
 		while(rs3.next())
 		{
 			genres.put(rs3.getInt(1), rs3.getString(2));
@@ -118,15 +134,21 @@ public class MovieListDB {
 		try
 		{
 			String where = Where.addPercent(genre);
-			
+			// Prepared Statement
+			/*
 			PreparedStatement statement = conn.prepareStatement("select * from movies where id in (select movie_id from genres_in_movies where genre_id in (select id from genres where name like ?)) order by ? limit ? offset ?;");
 			statement.setString(1, where);
 			statement.setString(2, sort);
 			statement.setInt(3, limit+1);
 			statement.setInt(4, offset);
-	
 			ResultSet rs = statement.executeQuery();
-
+			*/
+			
+			// SQL Statement
+			ResultSet rs = dbh.executeSQL("select * from movies where id in"
+					+ " (select movie_id from genres_in_movies where genre_id in"
+					+ " (select id from genres where name like '" + where + "' )) "
+					+ " order by " + sort + " limit " + (limit+1) + " offset " + offset);
 			while(rs.next())
 			{
 				System.out.println(getMovie(rs).toString());
@@ -143,6 +165,8 @@ public class MovieListDB {
 		List<Movie> movieList = new ArrayList<Movie>();
 		try
 		{
+			// Prepared Statement
+			/*
 			PreparedStatement statement = conn.prepareStatement("select * from movies where left(title, 1) = ? order by ? limit ? offset ?;");
 			statement.setString(1, Character.toString(firstChar));
 			statement.setString(2, sort);
@@ -150,6 +174,11 @@ public class MovieListDB {
 			statement.setInt(4, offset);
 			System.out.println(statement);
 			ResultSet rs = statement.executeQuery();
+			*/
+			
+			// SQL Statement
+			ResultSet rs = dbh.executeSQL("select * from movies where left(title, 1) = '" + 
+					firstChar + "' order by " + sort + " limit " + (limit+1) + " offset " + offset);
 			
 			while(rs.next())
 			{
@@ -177,6 +206,8 @@ public class MovieListDB {
 //			String directorWhere = Where.getWhereEdth(director, "director");
 //			String yearWhere = Where.getWhereEdth(year, "year");
 			
+			// Prepared Statement
+			/*
 			PreparedStatement statement = conn.prepareStatement("select * from movies where "
 						+ "title like ? and director like ? and year like ? and id in "
 						+ "(select movie_id from stars_in_movies where star_id in"
@@ -193,13 +224,16 @@ public class MovieListDB {
 
 			System.out.println(statement);
 			ResultSet rs = statement.executeQuery();
-
-//			ResultSet rs = dbh.executePreparedStatement("select * from movies where " +
-//					titleWhere + directorWhere +  yearWhere + " and id in "
-//					+ "(select movie_id from stars_in_movies where star_id in"
-//					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
-//					+ "stars) as s where " + starWhere + ")) order by " + sort + " limit " + (limit+1)
-//					+ " offset " + offset);
+			*/
+			
+			// SQL Statement
+			ResultSet rs = dbh.executeSQL("select * from movies where "
+					+ "title like '" + titleWhere + "' and director like '" + directorWhere 
+					+ "' and year like '" + yearWhere + "' and id in "
+					+ "(select movie_id from stars_in_movies where star_id in"
+					+ "(select s.id from (select id, concat(first_name, ' ', last_name) as name from "
+					+ "stars) as s where s.name like '" + starWhere + "')) order by " + sort + " limit " + (limit+1)
+					+ " offset " + offset);
 			while(rs.next())
 			{
 				movieList.add(getMovie(rs));
