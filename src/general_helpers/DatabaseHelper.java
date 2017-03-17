@@ -57,7 +57,7 @@ public class DatabaseHelper
 	public void openConnection(String dataSource) throws SQLException
 	{
 		
-		
+		/*
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance(); //newInstance()?
@@ -73,9 +73,9 @@ public class DatabaseHelper
 			e.printStackTrace();
 		}
 		connection = DriverManager.getConnection("jdbc:mysql://" + ip + "/" + database + "?autoReconnect=true&useSSL=false", user, password);
-		
+		*/
 		// Connection Pooling
-		/*
+		
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -88,7 +88,7 @@ public class DatabaseHelper
 		{
 			e.printStackTrace();
 		}
-		*/
+		
 	}
 	
 	public String getDataSource(boolean master)
