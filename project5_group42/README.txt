@@ -30,9 +30,6 @@
 	-> SSH Credentials
 		ID: ubuntu
 		PW: (The included private key .pem inside the ZIP)
-		
-		ID: classta
-		PW: cs122bgroup42
 	
 	-> Tomcat Manager Information
 		ID: tomcat (OR) classta
