@@ -20,6 +20,10 @@
 
 -> For Master/Slave instances, you can tail the request logs of tomcat by running the following command:
 	tail -f /opt/tomcat/logs/*.txt
+	
+	* Please note that because tail follows more than one file, updates to the log files are slow.
+		-> You can get a realtime update of the files by just CTRL+C, then re-running the command. It will reload the file and show the latest updates.
+		-> I do not know why it behaves like this. Thank you for your understanding.
 
 -> For Original instance, you can view the configuration of Apache2 load balancer at the following file:
 	/etc/apache2/sites-available/000-default.conf
