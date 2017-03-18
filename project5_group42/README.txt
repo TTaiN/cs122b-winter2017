@@ -54,4 +54,19 @@
 		-> Mainly, fabflix_webapp.war\WEB-INF\classes\general_helpers\DatabaseHelper.java, in the constructor function, and in openConnection()/getDataSource()!
 			-> getDataSource(), if given true, returns the pool for the Master DB for writes. Otherwise it returns the localhost DB pool for reads. 
 				-> Pretty simple.
+
+--- Notes Related To Performance Measurement in Task 3 ---
+
+	The python script "GetTimeAvgs.py" located in "python-script" opens the log file "log.txt" and appends the averages to 
+	"log_avgs.txt". It also empties "log.txt". The script must be placed in the same directory as "log.txt". 
+	To run the script, simply type the following command:
+											
+											python GetTimeAvgs.py "Comment"
+	
+	where "Comment" is the comment associated with the time averages. The script appends two lines to "log_avgs.txt". 
+	The first is "Comment:" and the second is the averages (TS avg: ## TJ avg: ##).
+	
+	The script is used after running queries in the search servelet ("/fabflix/movielist?..."). The search servlet appends the
+	values of TS and TJ of each query to "log.txt". Running the script produces the averages and resets log.txt by emptying the
+	file.
 	
