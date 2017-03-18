@@ -91,46 +91,55 @@ td {
   </tr>
   <tr>
     <td>Case 1: HTTP/1 thread</td>
-    <td><img src="../images/2-1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td><img src="./images/2-1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
     <td>62</td>
     <td>2.75</td>
     <td>2.71</td>
     <td>A thread ran 2600 HTTP requests. The average query time of those requests was 62ms.
     The average search servlet time was around 2.75ms and the average JDBC time was around 2.71ms. Both connection pooling
-    and prepared statements were enabled for this case.</td>
+    and prepared statements were enabled for this case. In these cases, we have a MySQL master and slave. Although the read throughput
+    should have been increased, we actually see similar times to single instances. This is because of the design architecture of Project 5.
+    With sticky sessions, the load balancer selects one physical server to serve all requests from a single session. Each physical server talks
+    to its own MySQL for reads. Because one physical server is assigned to handle all these requests, these times are expected to be similar to single instance.</td>
   </tr>
   <tr>
     <td>Case 2: HTTP/10 threads</td>
-    <td><img src="../images/2-2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td><img src="./images/2-2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
     <td>64</td>
     <td>6.41</td>
     <td>6.39</td>
     <td>Ten threads ran a total of 2600 HTTP requests (260 per thread). The average query time of those requests was 64ms.
     The average search servlet time was around 6.41ms and the average JDBC time was around 6.39ms. Both connection pooling
-    and prepared statements were enabled for this case.</td>
+    and prepared statements were enabled for this case. Again we find similar times to single instances, although they were a bit slower.
+    This is likely due to Apache2's load balancing. Each time a thread makes a request, Apache must route them back to the correct physical location
+    (since sticky sessions were enabled) costing a bit of overhead for the search servlet time when it returns results.</td>
   </tr>
   <tr>
     <td>Case 3: HTTP/10 threads/No prepared statements</td>
-    <td><img src="../images/2-3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
+    <td><img src="./images/2-3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
     <td>62</td>
     <td>5.39</td>
     <td>5.37</td>
     <td>Ten threads ran a total of 2600 HTTP requests (260 per thread). The average query time of those requests was 62ms.
     The average search servlet time was around 5.39ms and the average JDBC time was around 5.37ms. Connection pooling
-    was enabled and prepared statements were disabled for this case.</td>
+    was enabled and prepared statements were disabled for this case. This result was surprising: this was a bit faster than our previous case,
+    where prepared statements were enabled. However, further inquiry into our code from Project 4 reveals we did a lot of caching. With the prepared
+    statement implemenations, we did not do caching. This is like why this was faster.</td>
   </tr>
   <tr>
     <td>Case 4: HTTP/10 threads/No connection pooling</td>
-    <td><img src="../images/2-4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td><img src="./images/2-4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
     <td>4304</td>
     <td>4002.72</td>
     <td>4002.69</td>
     <td>Ten threads ran a total of 2600 HTTP requests (260 per thread). The average query time of those requests was 4304ms.
     The average search servlet time was around 4002.72ms and the average JDBC time was around 4002.69ms. Connection pooling
-    was disabled and prepared statements were enabled for this case.</td>
+    was disabled and prepared statements were enabled for this case. Again, similar to single instance, it is no surprise why this
+    is so slow. Not even backend scaling would have helped much, because each time a SINGLE thread makes a request, again,
+    even with or without sticky sessions enabled, a connection would have to be established, which makes an immense amount of time.</td>
   </tr>
 
-</table> 
+</table>
 
 </body>
 </html>
