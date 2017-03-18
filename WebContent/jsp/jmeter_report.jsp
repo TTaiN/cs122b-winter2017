@@ -125,7 +125,7 @@ td {
     <td>4304</td>
     <td>4002.72</td>
     <td>4002.69</td>
-    <td>Ten threads ran a total of 2600 HTTP requests (260 per thread). The average query time of those requests was 4293ms.
+    <td>Ten threads ran a total of 2600 HTTP requests (260 per thread). The average query time of those requests was 4304ms.
     The average search servlet time was around 4002.72ms and the average JDBC time was around 4002.69ms. Connection pooling
     was disabled and prepared statements were enabled for this case.</td>
   </tr>
