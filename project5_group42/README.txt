@@ -57,6 +57,8 @@
 
 --- Notes Related To Performance Measurement in Task 3 ---
 
+	Report can be found at http://35.167.240.46:8080/fabflix/jsp/jmeter_report.jsp
+	
 	The python script "GetTimeAvgs.py" located in "python-script" opens the log file "log.txt" and appends the averages to 
 	"log_avgs.txt". It also empties "log.txt". The script must be placed in the same directory as "log.txt". 
 	To run the script, simply type the following command:
