@@ -97,7 +97,7 @@ td {
   </tr>
   <tr>
     <td>Case 1: HTTP/1 thread</td>
-    <td><img src="./images/2-1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td><img src="../images/2-1.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
     <td>62</td>
     <td>2.75</td>
     <td>2.71</td>
@@ -110,7 +110,7 @@ td {
   </tr>
   <tr>
     <td>Case 2: HTTP/10 threads</td>
-    <td><img src="./images/2-2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td><img src="../images/2-2.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
     <td>64</td>
     <td>6.41</td>
     <td>6.39</td>
@@ -122,7 +122,7 @@ td {
   </tr>
   <tr>
     <td>Case 3: HTTP/10 threads/No prepared statements</td>
-    <td><img src="./images/2-3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
+    <td><img src="../images/2-3.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
     <td>62</td>
     <td>5.39</td>
     <td>5.37</td>
@@ -134,7 +134,7 @@ td {
   </tr>
   <tr>
     <td>Case 4: HTTP/10 threads/No connection pooling</td>
-    <td><img src="./images/2-4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td><img src="../images/2-4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
     <td>4304</td>
     <td>4002.72</td>
     <td>4002.69</td>
