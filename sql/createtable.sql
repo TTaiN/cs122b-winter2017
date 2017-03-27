@@ -1,9 +1,3 @@
-/*
-  Auth: Thomas T Nguyen
-  CS122B Winter 2017 Group 42 
-  Project Database Script
-*/
-
 CREATE TABLE movies(
 	id INTEGER AUTO_INCREMENT NOT NULL, 
     title VARCHAR(100) NOT NULL,
