@@ -6,5 +6,7 @@ Fabflix is a movie rental website developed for University of California, Irvine
 
 # Team Members
 https://github.com/TTaiN
+
 https://github.com/yolienic
+
 https://github.com/Moe202
