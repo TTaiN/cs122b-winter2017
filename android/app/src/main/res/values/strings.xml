@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Fabflix</string>
+    <string name="setting_preferences">Settings</string>
+    <string name="preferences">tk.cs122bgroup42.Fabflix</string>
+    <string name="url_default">http://IP:8080/Fabflix/</string>
+    <string name="about_us">About</string>
+
+    <string name="login_label">Fabflix</string>
+    <string name="login_username_hint">Enter your e-mail...</string>
+    <string name="login_password_hint">Enter your password...</string>
+    <string name="login_button">Login</string>
+    <string name="login_settings_title">Login</string>
+    <string name="login_url_default">http://IP:8080/Fabflix/login</string>
+    <string name="logout">Logout</string>
+
+    <string name="search_result_label">Fabflix Search Results</string>
+    <string name="search_url_default">http://IP:8080/Fabflix/movielist?mobile=true&amp;title=</string>
+
+    <string name="welcome_label">Fabflix Portal</string>
+    <string name="welcome_search_hint">Enter movie title to search...</string>
+</resources>

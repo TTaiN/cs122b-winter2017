@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="tk.cs122bgroup42.fabflix.SearchResult">
+    <item
+        android:id="@+id/about_us"
+        android:orderInCategory="100"
+        android:title="@string/about_us"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="100"
+        android:title="@string/logout"
+        app:showAsAction="always" />
+</menu>
